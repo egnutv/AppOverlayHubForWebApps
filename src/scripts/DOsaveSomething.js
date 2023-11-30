@@ -1,5 +1,5 @@
 
-
+//TESTING
 class DOsaveSomething {
 
     constructor(saveMode, theStorage, saveVariable) {
