@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/input/buttons.css">
+    
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/events.js"></script>
+    <script src="src/scripts/cookie.js"></script>
+    <script src="src/scripts/changeTheme.js"></script>
+    <script src="src/scripts/changeStyleDirect.js"></script>
+
+
+    </script>
+    <meta charset="UTF-8">
+    <style>
+        /* layout */
+        * {
+            padding: 0%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            padding: 0%;
+            margin: 0%;
+        }
+        .container#main_grid, #window_grid {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            display: grid;
+            grid-template-areas:
+                "header"
+                "main"
+                "footer";
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 1fr;
+            align-content: space-between;
+        }
+
+        menu {
+    box-sizing: content-box;
+    padding: 0;
+    padding-left: 4vw; 
+    padding-right: 4vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+
+        .quickmenu {
+            grid-area: header;
+        }
+
+        menu.quickmenu, footer, #window_header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(0.5rem, 1fr));
+            height: auto;
+            max-height: auto;
+            align-content: space-between;
+            justify-content: space-evenly;
+            align-content: stretch;
+            align-items: stretch;
+        }
+
+        menu.quickmenu :first-child {
+            justify-self: start;
+        }
+
+        menu.quickmenu :last-child {
+            justify-self: end;
+        }
+
+        main {
+            grid-area: main;
+        }
+
+        footer {
+            overflow: visible;
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+            padding-left: 4vw;
+            padding-right: 4vw;
+            grid-area: footer !important;
+            margin: 0%;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer > div:first-child {
+            justify-self: start;
+        }
+
+        footer > div:last-child {
+            justify-self: end;
+        }
+        #mainMenuHolder, #infoBoxHolder {
+            background-color: var(--half-transparency-color);
+        }
+        .mainMenu{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: inline-block;
+            margin: 0;
+            overflow: visible;
+
+            height: auto !important;
+            width: 40vw;
+            height: 55vh !important;
+            
+        }
+
+        #window_main {
+            overflow: visible !important;
+        }
+        .container.active {
+    overflow: visible;
+}
+.mainMenu input[type="button"] {
+    top: 0.5rem; /* Passen Sie diesen Wert an die Größe Ihres Schattens an */
+    right: 0.5rem; /* Passen Sie diesen Wert an die Größe Ihres Schattens an */
+}
+.window_header {
+    padding:0.5rem;
+}
+
+
+
+
+    </style>
+</head>
+
+<body id="darkmode" style="transition: 0.5s;">
+    <div class="container" id="main_grid">
+        
+        <menu class="quickmenu" id="notingame">
+            <input type="button" value="Ändere Farbschema" onclick="changeTheme()" style=" box-sizing: content-box;">
+
+<input type="button" value="Mehr Optionen" style=" box-sizing: content-box;" onclick="applyChanges(['style.top=', '-100%', 'style.width=', '100%', 'style.height=', '100%'], 'mainMenuHolder')">
+
+
+        </menu>
+        <main>
+
+        </main>
+        <footer>
+            <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="toggleChanges(['style.bottom=', '100%', 'style.width=', '100%', 'style.height=', '100%'], 'infoBoxHolder')"></div>
+            <!-- Hier kannst du weitere mittige Elemente hinzufügen -->
+            <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick="testMemory()"></div>
+        </footer>
+    </div>
+    <!-- Main Menu -->
+    <div class="container" id="mainMenuHolder" style="position: relative; top: -200%; width: 100%; height: 100%; background-color: aqua;">
+    <menu class="mainMenu" overflow="visible">
+        <div class="container" id="main_grid" style="width: 100%; height: 100%">
+            <div class="window_header" style="grid-area: header; height: auto; text-align: right;">
+                <input type="button" style=" box-sizing: content-box;" value="Schließen" onclick="resetChanges('mainMenuHolder')">
+            </div>
+            <div class="window_main" style="grid-area: main; overflow-y: scroll;">
+                <div style="background-color: blue; height: 1000%; width: 100%; ">
+
+                </div>
+            </div>
+        </div>
+    </menu>
+</div>
+
+            </div>
+        </menu>
+    </div>
+    <div class="container" id="infoBoxHolder" style="position: relative; bottom: 100%; width: 100%; height: 100%; background-color: aqua;">
+        <menu class="infoBox">
+
+        </menu>
+    </div>
+</body>
+
+
+</html>
