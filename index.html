@@ -2,8 +2,14 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/main/main.css">
+    <link rel="stylesheet" href="src/styles/main/fonts.css">
+    <link rel="stylesheet" href="src/styles/main/container.css">
+
     <link rel="stylesheet" href="src/styles/input/buttons.css">
+    
+    
+    
     
     <script src="src/scripts/events/events.js"></script>
     
@@ -148,43 +154,45 @@
 </head>
 
 <body id="darkmode" style="transition: 0.5s;">
+
+    <!-- Main content -->
     <div class="container" id="main_grid">
         
         <menu class="quickmenu" id="notingame">
             <input type="button" value="Ändere Farbschema" onclick="changeTheme()" style=" box-sizing: content-box;">
 
-<input type="button" value="Mehr Optionen" style=" box-sizing: content-box;" onclick="applyChanges(['style.top=', '-100%', 'style.width=', '100%', 'style.height=', '100%'], 'mainMenuHolder')">
-
-
+            <input type="button" value="Mehr Optionen" style=" box-sizing: content-box;" onclick="applyChanges(['style.top=', '-100%', 'style.width=', '100%', 'style.height=', '100%'], 'mainMenuHolder')">
         </menu>
         <main>
 
         </main>
         <footer>
             <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="toggleChanges(['style.bottom=', '100%', 'style.width=', '100%', 'style.height=', '100%'], 'infoBoxHolder')"></div>
-            <!-- Hier kannst du weitere mittige Elemente hinzufügen -->
             <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick="testMemory()"></div>
         </footer>
     </div>
-    <!-- Main Menu -->
+
+
+
+    <!-- Slidemenu1 - layout -->
     <div class="container" id="mainMenuHolder" style="position: relative; top: -200%; width: 100%; height: 100%; background-color: aqua;">
-    <menu class="mainMenu" overflow="visible">
-        <div class="container" id="main_grid" style="width: 100%; height: 100%">
-            <div class="window_header" style="grid-area: header; height: auto; text-align: right;">
-                <input type="button" style=" box-sizing: content-box;" value="Schließen" onclick="resetChanges('mainMenuHolder')">
-            </div>
-            <div class="window_main" style="grid-area: main; overflow-y: scroll;">
-                <div style="background-color: blue; height: 1000%; width: 100%; ">
-
+        <menu class="mainMenu" overflow="visible">
+            <div class="container" id="main_grid" style="width: 100%; height: 100%">
+                <div class="window_header" style="grid-area: header; height: auto; text-align: right;">
+                    <input type="button" style=" box-sizing: content-box;" value="Schließen" onclick="resetChanges('mainMenuHolder')">
                 </div>
-            </div>
-        </div>
-    </menu>
-</div>
+                <div class="window_main" style="grid-area: main; overflow-y: scroll;">
+                    <div style="background-color: blue; height: 1000%; width: 100%; ">
 
+                    </div>
+                </div>
             </div>
         </menu>
     </div>
+
+
+
+    <!-- Slideinfotext1 - layout -->
     <div class="container" id="infoBoxHolder" style="position: relative; bottom: 100%; width: 100%; height: 100%; background-color: aqua;">
         <menu class="infoBox">
 
