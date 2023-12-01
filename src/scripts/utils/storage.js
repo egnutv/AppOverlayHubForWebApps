@@ -1,6 +1,6 @@
 //Test32
 //TESTING 2
-class DOsaveSomething {
+class StorageSystem {
 
     constructor(saveMode, theStorage, saveVariable) {
          //saveMode ist der Modus der die Ein/Ausgabeart von saveVariabeln bestimmt.
