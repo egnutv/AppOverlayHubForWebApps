@@ -1,12 +1,28 @@
-//Test32
-//TESTING 2
+//Hier ein paar Gedanken dazu:
+
+function testAufruf() {
+    const storageSystem = new StorageSystem("read", "localStorage", exampleKey);
+
+    return storageSystem;
+
+    console.log(storageSystem("exampleKey"));
+    
+}
+
+function testSpeichern() {
+    exampleKey = "level = 0"
+    const storageSystem = new StorageSystem("save", "localStorage", exampleKey);
+}
+
+function testLöschen() {
+    const storageSystem = new StorageSystem("delete", "localStorage", exampleKey);
+}
+
+//Gedanken Ende
+
 class StorageSystem {
 
     constructor(saveMode, theStorage, saveVariable) {
-         //saveMode ist der Modus der die Ein/Ausgabeart von saveVariabeln bestimmt.
-         //theStorage ist die Art des Speicherzugriffs zB Local, Session oder Cookie
-         //saveVariable ist die Variabel, die im jeweiligen Storagesystem gespeichert wird.
-        
         switch (saveMode) {
             case "save":
                 this.setStorage(theStorage, saveVariable);
@@ -17,56 +33,41 @@ class StorageSystem {
             case "delete":
                 this.delStorage(theStorage, saveVariable);
                 break;
-
         }
     }
 
-    setStorage(theStorage, saveVariable) {
+    storageConst(theStorage) {
         switch (theStorage) {
             case "sessionStorage":
-                sessionStorage.setItem(saveVariable);
-                break;
+                return sessionStorage;
             case "localStorage":
-                localStorage.setItem(saveVariable);
-                break;
+                return localStorage;
             case "tempCookie":
-
+                // Implementierung für temporäre Cookies
                 break;
             case "durationCookie":
-
+                // Implementierung für Cookies mit bestimmter Dauer
                 break;
+            default:
+                throw new Error("Ungültiger Speichertyp: " + theStorage);
         }
     }
+
+    setStorage(theStorage, saveVariable, value) {
+        const storage = this.storageConst(theStorage);
+        storage.setItem(saveVariable, value);
+    }
+
     getStorage(theStorage, saveVariable) {
-        switch (theStorage) {
-            case "sessionStorage":
-                sessionStorage.getItem(saveVariable);
-                break;
-            case "localStorage":
-                localStorage.getItem(saveVariable);
-                break;
-            case "tempCookie":
-
-                break;
-            case "durationCookie":
-
-                break;
-        }
+        const storage = this.storageConst(theStorage);
+        return storage.getItem(saveVariable);
     }
+
     delStorage(theStorage, saveVariable) {
-        switch (theStorage) {
-            case "sessionStorage":
-                sessionStorage.removeItem(saveVariable);
-                break;
-            case "localStorage":
-                localStorage.removeItem(saveVariable);
-                break;
-            case "tempCookie":
-
-                break;
-            case "durationCookie":
-
-                break;
-        }
+        const storage = this.storageConst(theStorage);
+        storage.removeItem(saveVariable);
     }
 }
+
+// Beispiel-Nutzung
+
