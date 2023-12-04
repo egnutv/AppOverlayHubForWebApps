@@ -1,25 +1,45 @@
-//Hier ein paar Gedanken dazu:
-
+// Hier ein paar Gedanken dazu:
+var testStep;
+testStep = 0;
+function testAuslöser() {
+    if (testStep < 2) {
+        switch (testStep) {
+            case 0:
+                testLöschen();
+                break;
+            case 1:
+                testSpeichern();
+                break;
+        }
+        testStep++;
+    } else if (testAufruf = 2){
+        testAufruf();
+        testStep = 0;
+    }
+}
 function testAufruf() {
     const storageSystem = new StorageSystem("read", "localStorage", exampleKey);
 
-    return storageSystem;
+    console.log(storageSystem.getStorage("localStorage", exampleKey)); // Änderung hier
 
-    console.log(storageSystem("exampleKey"));
-    
+    return storageSystem;
 }
 
 function testSpeichern() {
-    exampleKey = "level = 0"
+    let exampleKey = "level";
     const storageSystem = new StorageSystem("save", "localStorage", exampleKey);
+
+    let currentLevel = storageSystem.getStorage("localStorage", exampleKey) || 0;
+    storageSystem.setStorage("localStorage", exampleKey, parseInt(currentLevel) + 1);
 }
 
 function testLöschen() {
+    let exampleKey = "level";
     const storageSystem = new StorageSystem("delete", "localStorage", exampleKey);
 }
 
-//Gedanken Ende
-
+/* Gedanken Ende ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+*/
 class StorageSystem {
 
     constructor(saveMode, theStorage, saveVariable) {
