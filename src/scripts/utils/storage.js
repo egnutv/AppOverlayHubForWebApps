@@ -69,5 +69,4 @@ class StorageSystem {
     }
 }
 
-// Beispiel-Nutzung
 
