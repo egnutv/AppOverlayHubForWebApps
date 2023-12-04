@@ -18,24 +18,24 @@ function testAuslöser() {
     }
 }
 function testAufruf() {
-    const storageSystem = new StorageSystem("read", "localStorage", exampleKey);
+    const storageSystem = new StorageSystem("read", "sessionStorage", exampleKey);
 
-    console.log(storageSystem.getStorage("localStorage", exampleKey)); // Änderung hier
+    console.log(storageSystem.getStorage("sessionStorage", exampleKey)); // Änderung hier
 
     return storageSystem;
 }
 
 function testSpeichern() {
     let exampleKey = "level";
-    const storageSystem = new StorageSystem("save", "localStorage", exampleKey);
+    const storageSystem = new StorageSystem("save", "sessionStorage", exampleKey);
 
-    let currentLevel = storageSystem.getStorage("localStorage", exampleKey) || 0;
-    storageSystem.setStorage("localStorage", exampleKey, parseInt(currentLevel) + 1);
+    let currentLevel = storageSystem.getStorage("sessionStorage", exampleKey) || 0;
+    storageSystem.setStorage("sessionStorage", exampleKey, parseInt(currentLevel) + 1);
 }
 
 function testLöschen() {
     let exampleKey = "level";
-    const storageSystem = new StorageSystem("delete", "localStorage", exampleKey);
+    const storageSystem = new StorageSystem("delete", "sessionStorage", exampleKey);
 }
 
 /* Gedanken Ende ----------------------------------------------------------------------------------------------------------------------------------------------------------------
