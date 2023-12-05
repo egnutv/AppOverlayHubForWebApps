@@ -12,7 +12,7 @@ function testAuslöser() {
                 break;
         }
         testStep++;
-    } else if (testAufruf = 2){
+    } else if (testStep = 2){
         testAufruf();
         testStep = 0;
     }
