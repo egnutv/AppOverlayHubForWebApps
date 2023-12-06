@@ -1,5 +1,7 @@
 # germanTranslation
-# IndexPage is the landingPage its actually a startMenu
+# IndexPage ist die Startseite. Sie ist aufgebaut wie ein Menü. Sie vereint mehrere Funktionen.
+format:
+  - UTF: 'UTF-8'
 indexPage:
   - license: 'Lizenz'
   - imprint: 'Impressum und Datenschutz'
