@@ -31,28 +31,78 @@ function testStorageSystem() {
             break;
     }
 }
+
 class StorageSystem {
+    constructor() {
+        this.SaveAuthorization = 0; // Standardmäßig auf sessionStorage setzen
+    }
+
+    updateSaveAuthorization(saveCookies, saveForEver){
+        const oldAuthorization = this.SaveAuthorization;
+        const oldStorage = this.storageConst(oldAuthorization);
     
-
-
-    storageConst(theStorage) {
-        if (!(saveCookies && saveForEver)){
-            if (!(theStorage = "sessionStorage")) {
-                theStorage = "sessionStorage";
-            }
-        } else if (saveCookies && !saveForEver) {
-            if (theStorage = "localStorage") {
-                theStorage = "durationCookie";
-            }
+        this.saveCookies = saveCookies;
+        this.saveForEver = saveForEver;
+    
+        if (!(this.saveCookies && this.saveForEver)){
+            this.SaveAuthorization = 0;
+        } else if (this.saveCookies && (!this.saveForEver)) {
+            this.SaveAuthorization = 1;
+        } else if ((!this.saveCookies) && this.saveForEver) {
+            this.SaveAuthorization = 0;
+        } else {
+            this.SaveAuthorization = 2;
         }
+    
+        const newAuthorization = this.SaveAuthorization;
+        const newStorage = this.storageConst(newAuthorization);
+    
+        if (oldAuthorization !== newAuthorization) {
+            this.transferData(oldStorage, newStorage);
+        }
+    }
+    
+    transferData(oldStorage, newStorage) {
+        const oldStore = this.storageConst(oldStorage);
+        const newStore = this.storageConst(newStorage);
+    
+        for (let i = 0; i < oldStore.length; i++) {
+            let key = oldStore.key(i);
+            let value = oldStore.getItem(key);
+            newStore.setItem(key, value);
+        }
+    
+         for (let i = 0; i < oldStore.length; i++) {
+             let key = oldStore.key(i);
+             oldStore.removeItem(key);
+         }
+    }
+    
+    storageConst(SaveAuthorization) {
+        let theStorage;
+        switch (SaveAuthorization) {
+            case 0:
+                theStorage = "sessionStorage";
+                break;
+            case 1:
+                theStorage = "durationCookie";
+                break;
+            case 2:
+                theStorage = "localStorage";
+                break;
+            default:
+                theStorage = "sessionStorage";
+                break;
+        }
+        return this.getStorageType(theStorage);
+    }
+
+    getStorageType(theStorage) {
         switch (theStorage) {
             case "sessionStorage":
                 return sessionStorage;
             case "localStorage":
                 return localStorage;
-            case "tempCookie":
-                // Implementierung für temporäre Cookies
-                break;
             case "durationCookie":
                 // Implementierung für Cookies mit bestimmter Dauer
                 break;
@@ -61,14 +111,14 @@ class StorageSystem {
         }
     }
 
-    setStorage(theStorage, saveVariable, value) {
-        const storage = this.storageConst(theStorage);
+    setStorage(saveVariable, value) {
+        const storage = this.storageConst(this.SaveAuthorization);
         value = JSON.stringify(value);
         storage.setItem(saveVariable, value);
     }
 
-    getStorage(theStorage, saveVariable) {
-        const storage = this.storageConst(theStorage);
+    getStorage(saveVariable) {
+        const storage = this.storageConst(this.SaveAuthorization);
         let value = storage.getItem(saveVariable);
         try {
             value = JSON.parse(value);
@@ -78,11 +128,8 @@ class StorageSystem {
         return value;
     }
 
-    delStorage(theStorage, saveVariable) {
-        const storage = this.storageConst(theStorage);
+    delStorage(saveVariable) {
+        const storage = this.storageConst(this.SaveAuthorization);
         storage.removeItem(saveVariable);
     }
 }
-
-
-
