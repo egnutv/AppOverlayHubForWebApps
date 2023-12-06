@@ -1,1 +1,7 @@
-
+#germanTranslation
+#indexPage is the landingPage its actually a startMenu
+indexPage:
+  - license: Lizenz
+  - imprint: Impressum und Datenschutz
+  - changeTheme: Ändere Farbschema
+  - moreOptions: Mehr Optionen
