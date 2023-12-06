@@ -72,10 +72,10 @@ class StorageSystem {
             newStore.setItem(key, value);
         }
     
-         for (let i = 0; i < oldStore.length; i++) {
-             let key = oldStore.key(i);
-             oldStore.removeItem(key);
-         }
+        for (let i = 0; i < oldStore.length; i++) {
+            let key = oldStore.key(i);
+            oldStore.removeItem(key);
+        }
     }
     
     storageConst(SaveAuthorization) {
