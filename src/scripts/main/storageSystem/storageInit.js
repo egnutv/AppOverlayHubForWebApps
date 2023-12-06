@@ -1,6 +1,6 @@
-import { Authorization } from './authorization.js';
-import { StorageSystem } from './storageSystem.js';
-import { StorageType } from './storageType.js';
+import { Authorization } from '/authorization.js';
+import { StorageSystem } from '/storageSystem.js';
+import { StorageType } from '/storageType.js';
 
 class StorageInit {
     constructor() {
