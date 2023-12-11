@@ -115,9 +115,53 @@ var initNum = 0;
 class Main {
 
     checkLink() {
-        
+
     }
     initialization(){
         
     }
 }
+
+/*
+function executeAction(codeString) {
+    switch(codeString) {
+        case 'loadScript1':
+            import('./script1.js')
+            .then(module => {
+                // Führen Sie hier die gewünschten Aktionen mit dem geladenen Modul aus
+            })
+            .catch(err => {
+                console.error('Fehler beim Laden des Moduls:', err);
+            });
+            break;
+        case 'loadScript2':
+            import('./script2.js')
+            .then(module => {
+                // Führen Sie hier die gewünschten Aktionen mit dem geladenen Modul aus
+            })
+            .catch(err => {
+                console.error('Fehler beim Laden des Moduls:', err);
+            });
+            break;
+        // Fügen Sie hier weitere Fälle hinzu, je nachdem, welche Aktionen Sie ausführen möchten
+        default:
+            console.log('Unbekannter Code-String: ' + codeString);
+    }
+}
+*/
+
+window.onload = function() {
+    setMainScripts()
+}
+
+function setMainScripts() {
+    var scripts = ['storageSysten/storageSystem.js']
+ // Schleife durch die Liste und füge jedes Skript zum <head> hinzu
+ for (var i = 0; i < scripts.length; i++) {
+    var script = document.createElement('script');
+    script.src = scripts[i];
+    document.head.appendChild(script);
+}
+
+console.log("Die Skripte wurden hinzugefügt!");
+};
