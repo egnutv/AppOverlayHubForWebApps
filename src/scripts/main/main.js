@@ -15,7 +15,7 @@ window.onload = function() {
 
 
 
-
+/*
 //SetCookie
 function setCookie(name, value, days) {
     var expires = "";
@@ -102,4 +102,22 @@ function readSessionStorage() {
             resolve(storedData);
         }, 0);
     });
+}
+*/
+document.addEventListener('DOMContentLoaded', function() {
+    userVisitation;
+});
+
+function userVisitation() {
+
+}
+var initNum = 0;
+class Main {
+
+    checkLink() {
+        
+    }
+    initialization(){
+        
+    }
 }
