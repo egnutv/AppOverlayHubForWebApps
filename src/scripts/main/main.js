@@ -149,19 +149,3 @@ function executeAction(codeString) {
     }
 }
 */
-
-window.onload = function() {
-    setMainScripts()
-}
-
-function setMainScripts() {
-    var scripts = ['storageSysten/storageSystem.js']
- // Schleife durch die Liste und füge jedes Skript zum <head> hinzu
- for (var i = 0; i < scripts.length; i++) {
-    var script = document.createElement('script');
-    script.src = scripts[i];
-    document.head.appendChild(script);
-}
-
-console.log("Die Skripte wurden hinzugefügt!");
-};
