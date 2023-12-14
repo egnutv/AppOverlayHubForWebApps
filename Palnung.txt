@@ -1,0 +1,21 @@
+Derzeit wird im Backend das Folgende getan:
+    1. Ein Bereitstellungsservice ethabliert, dass
+        1. Inhalte aus xml Dateien ausliest und im Anschuluss
+        2. in die HTML bei gewissen, gewollten, einstiegspunkten einbindet.
+    2. Ein weiterer Service, der das Importieren von Skripten erleichtert indem
+        1.  es Pfade, nach bestimmten AKtionen im Head-Bereich setzt.
+    3. Das lokale Speichersystem wird optimiert indem das Autorisatzionssystem ausgelagert wird und zu den im Punkt 4 beschriebenen
+    
+    4. Rechtesystem wandert. Das Rechtesystem bestimmt über Berchtigungen zum Zugriff auf bestimmte Aspekte.
+
+    5. EIn Commandsystem wird ethabliert, um leichter zu debuggen und Prozesse zu optimieren. [ggf. mit einbinden.]
+
+    6. Nach Abschluss dieser elementaren Geschichten, is angedacht, dass das Programm eine Ladeanimation erhält.
+
+    7. Eine GUI mit Einstellungsoptionen erstellen.
+
+    8. Ein Menü für Spracheinstellungen auf Basis von XML erstellen.
+
+    9. Dann kann die Spiellogik implementiert werrden, nachdem dieses "Engine" erstellt wurde.
+
+    10. GGF. Das Speichersystem erweitern indem auch Datenbanken genutzt werden können.
