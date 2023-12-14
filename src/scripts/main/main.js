@@ -3,15 +3,10 @@ window.onload = function() {
 }
 
 
+class Main {
 
-
-
-
-
-
-
-
-
+    
+}
 
 
 
