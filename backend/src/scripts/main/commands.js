@@ -1,6 +1,12 @@
 var command = Null;
-function commands(command, args) {
-    
+var test = false;
+function commands(/*command, args*/ test) {
+
+    if (test) {
+        
+    }
+
+    /*
     switch (command) {
         case system:
             break;
@@ -8,5 +14,5 @@ function commands(command, args) {
             break;
         default:
             break;
-    }
+    }*/
 }
