@@ -13,15 +13,15 @@
     <script src="src/scripts/main/main.js"></script>
 
     <script src="GUI/src/scripts/events/events.js"></script>
-    <script src="backend/src/scripts/main/scriptImportHeandler.js"></script>
+    <script src="background/src/scripts/main/scriptImportHeandler.js"></script>
     
     <script src="GUI/src/scripts/utils/changeTheme.js"></script>
     <script src="GUI/src/scripts/utils/changePropertiesHtml.js"></script>
-    <script src="backend/src/scripts/utils/storageSystem.js"></script>
+    <script src="background/src/scripts/utils/storageSystem.js"></script>
 
-    <script src="backend/src/scripts/main/inputSystem/inputControl.js"></script>
+    <script src="background/src/scripts/main/inputSystem/inputControl.js"></script>
 
-    <script src="backend/src/scripts/events/events.js"></script>
+    <script src="background/src/scripts/events/events.js"></script>
 
     <script>
         
@@ -162,9 +162,12 @@
 </head>
 
 <body id="darkmode" style="transition: 0.5s;">
-
+    
     <!-- Main content -->
-    <div class="container" id="main_grid">
+    <div style="background-color: aqua; width: 100%; height: 100%; position: relative; bottom: 100%;">
+
+    </div>
+    <div class="container" id="main_grid" style="position: relative; bottom: 100%">
         
         <menu class="quickmenu" id="notingame">
             <input type="button" value="Ändere Farbschema" onclick="changeTheme()" style=" box-sizing: content-box;">
@@ -182,10 +185,16 @@
             <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick=""></div>
         </footer>
     </div>
+    
+    
+    <div style="background-color: red; width: 100%; height: 100%; position: relative; bottom: 100%;">
+
+    </div>
+    
 
 
 
-    <!-- Slidemenu1 - layout -->
+    <!-- Slidemenu1 - layout --><!--
     <div class="container" id="mainMenuHolder" style="position: relative; top: -200%; width: 100%; height: 100%; background-color: aqua;">
         <menu class="mainMenu" overflow="visible">
             <div class="container" id="main_grid" style="width: 100%; height: 100%">
@@ -200,17 +209,21 @@
             </div>
         </menu>
     </div>
+    //-->
 
 
 
-    <!-- Slideinfotext1 - layout -->
+    <!-- Slideinfotext1 - layout --><!--
     <div class="container" id="infoBoxHolder" style="position: relative; bottom: 100%; width: 100%; height: 100%; background-color: aqua;">
         <menu class="infoBox">
 
         </menu>
     </div>
+    //-->
 </body>
+
 <script>
+    
     
 
 
