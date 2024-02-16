@@ -1,0 +1,6 @@
+{
+  "add": {
+    "Script1": ["GUI/src/scripts/load/transition/slide.js", "GUI/src/scripts/main/input/inputControl.js"],
+    "Script2": ["GUI/src/scripts/utils/changeLink.js"]
+  }
+}
