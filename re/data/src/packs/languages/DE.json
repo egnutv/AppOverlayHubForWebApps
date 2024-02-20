@@ -1,0 +1,16 @@
+{
+  "Everywhere": {
+    "changeColorTheme": ["Ändere Farbschema"],
+    "moreOptions": ["Mehr Optionen"],
+    "license": ["Lizenz"],
+    "impressAndDataProtection": ["Impressum und Datenschutz"],
+    "close": ["Schließen"]
+  },
+  "sites": {
+    "moreOptions": {
+      "headline": ["Mehr Optionen"],
+      "subheading": ["Hier findest du mehr Optionen"]
+    }
+  }
+    
+}

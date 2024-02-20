@@ -1,0 +1,8 @@
+{
+    "contents": {
+        "start": ["start"],
+        "impressAndDataProtection": ["impressAndDataProtection"],
+        "moreOptions": ["MoreOptions"],
+        "license": ["license"]
+    }
+}

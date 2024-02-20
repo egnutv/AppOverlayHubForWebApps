@@ -8,7 +8,7 @@ function getScript(name) {
             }
         })
         .catch(error => console.error('Error:', error));
-}
+} //Example execute: getScript('Script1'). If you are execute then you are place a path in the head.
 
 function setScript(paths, name) {
     var count = document.head.getElementsByClassName(name).length;
@@ -19,8 +19,13 @@ function setScript(paths, name) {
             script.className = name;
             document.head.appendChild(script);
         }
+        if (document.head.getElementsByClassName(name).length != paths.length) {
+            console.error("a path wasn't set")
+        } else {
+            console.warn("The paths was placed")
+        }
     }
-}
+} 
 
 
 function delScript(name) {
@@ -29,23 +34,3 @@ function delScript(name) {
         scripts[0].parentNode.removeChild(scripts[0]);
     }
 }
-
-/*function getScript(name) {
-    //Hier soll eine Config ausgelesen werden
-}
-function setScript(path, name) {
-    let script = document.createElement(script);
-
-    script.src = path;
-    script.id = name;
-
-}
-
-function delScript(name) {
-    let script = document.getElementById(name)
-    document.head.removeChild(script);
-}*/
-// Verwenden Sie eine Bibliothek wie js-yaml, um die YML-Datei zu lesen
-// Verwenden Sie eine Bibliothek wie js-yaml, um die YML-Datei zu lesen
-
-
