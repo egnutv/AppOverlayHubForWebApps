@@ -1,4 +1,4 @@
-function jsonRead(pathToFile, keyPath) {
+async function jsonRead(pathToFile, keyPath) {
     return fetch(pathToFile)
         .then(response => response.json())
         .then(data => {
