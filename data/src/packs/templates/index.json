@@ -1,0 +1,8 @@
+{
+    "index":
+        {
+            "moreOptions": ["onlyText"],
+            "license": ["onlyText"],
+            "imprintAndPrivacyPolicy": ["onlyText"]
+        }
+}
