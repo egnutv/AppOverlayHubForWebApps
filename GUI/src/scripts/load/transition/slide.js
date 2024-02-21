@@ -1,21 +1,21 @@
-function slide(toPosition) {
+function slide(toPosition, area) {
     
-    let body = document.querySelector("body");
+    let body = document.querySelector(area);
     let children = body.children;
     var toBottom = 0;
     var toLeft = 0;
 
     switch (toPosition) {
-        case "up":
+        case "down":
             toBottom += 100;
             break;
-        case "down":
+        case "up":
             toBottom -= 100;
             break;
-        case "left":
+        case "right":
             toLeft -= 100;
             break;
-        case "right":
+        case "left":
             toLeft += 100;
             break;
     }
@@ -38,6 +38,7 @@ function slide(toPosition) {
 
         child.style.bottom = (currentBottom + toBottom) + "%";
         child.style.left = (currentLeft + toLeft) + "%";
+        child.style.transition = "750ms";
     }
     
 }

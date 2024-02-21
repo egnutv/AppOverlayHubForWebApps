@@ -1,14 +1,14 @@
+
 function getScript(name) {
-    fetch('data/src/configs/addScripts.json')
-        .then(response => response.json())
-        .then(data => {
-            let paths = data.add[name];
+    jsonRead('data/src/configs/addScripts.json', 'add.' + name)
+        .then(paths => {
             if (paths) {
                 setScript(paths, name);
             }
         })
         .catch(error => console.error('Error:', error));
-} //Example execute: getScript('Script1'). If you are execute then you are place a path in the head.
+}
+ //Example execute: getScript('Script1'). If you are execute then you are place a path in the head.
 
 function setScript(paths, name) {
     var count = document.head.getElementsByClassName(name).length;
