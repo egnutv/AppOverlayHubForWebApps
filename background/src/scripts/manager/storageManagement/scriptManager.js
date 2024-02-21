@@ -1,6 +1,7 @@
+import { readJson } from "./reader/readJSON.js";
 
 function getScript(name) {
-    jsonRead('data/src/configs/addScripts.json', 'add.' + name)
+    readJson('data/src/configs/addScripts.json', 'add.' + name)
         .then(paths => {
             if (paths) {
                 setScript(paths, name);
@@ -34,3 +35,5 @@ function delScript(name) {
         scripts[0].parentNode.removeChild(scripts[0]);
     }
 }
+
+export { getScript, setScript, delScript};

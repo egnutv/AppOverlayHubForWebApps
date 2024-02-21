@@ -1,4 +1,4 @@
-async function jsonRead(pathToFile, keyPath) {
+async function readJson(pathToFile, keyPath) {
     return fetch(pathToFile)
         .then(response => response.json())
         .then(data => {
@@ -16,3 +16,5 @@ async function jsonRead(pathToFile, keyPath) {
         })
         .catch(error => console.error('Error:', error));
 }
+
+export { readJson }
