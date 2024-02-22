@@ -1,7 +1,8 @@
 {
     "index":
         {
-            "moreOptions": ["onlyText"],
+            "start": ["start"],
+            "moreOptions": ["options"],
             "license": ["onlyText"],
             "imprintAndPrivacyPolicy": ["onlyText"]
         }

@@ -1,6 +1,7 @@
 {
   "default": {
     "lang": ["DE"],
+    "lang-support": ["DE"],
     "theme": ["darkmode"],
     "lengthOfAnimation": ["250", "500ms", "750"]
   }

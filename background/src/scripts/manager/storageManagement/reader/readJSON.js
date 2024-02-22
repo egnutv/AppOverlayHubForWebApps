@@ -1,4 +1,6 @@
 async function readJson(pathToFile, keyPath) {
+    console.log('Requested path:', pathToFile); // Ausgabe des angeforderten Pfades
+    console.log('Requested key path:', keyPath); // Ausgabe des angeforderten Schlüsselpfades
     return fetch(pathToFile)
         .then(response => response.json())
         .then(data => {
@@ -14,7 +16,9 @@ async function readJson(pathToFile, keyPath) {
             }
             return value;
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 export { readJson }

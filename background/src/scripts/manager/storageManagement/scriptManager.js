@@ -29,11 +29,11 @@ function setScript(paths, name) {
 } 
 
 
-function delScript(name) {
+function rmScript(name) {
     let scripts = document.getElementsByClassName(name);
     while(scripts[0]) {
         scripts[0].parentNode.removeChild(scripts[0]);
     }
 }
 
-export { getScript, setScript, delScript};
+export { getScript, setScript, rmScript};
