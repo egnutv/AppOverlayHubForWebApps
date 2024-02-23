@@ -4,6 +4,10 @@
             "start": ["start"],
             "moreOptions": ["options"],
             "license": ["onlyText"],
-            "imprintAndPrivacyPolicy": ["onlyText"]
+            "imprintAndPrivacyPolicy": ["onlyText"],
+            "testCardRed": ["testCardRed"],
+            "testCardYellow": ["testCardYellow"],
+            "testCardGreen": ["testCardGreen"],
+            "testCardBlue": ["testCardBlue"]
         }
 }

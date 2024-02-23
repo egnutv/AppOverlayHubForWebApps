@@ -1,8 +1,8 @@
-import { readHTML } from "../reader/readHTML.js";
-import { readJson } from "../reader/readJSON.js";
+import { readHTML } from "../storageManagement/reader/readHTML.js";
+import { readJson } from "../storageManagement/reader/readJSON.js"
 
 
-async function getTemplate(name, pasteTarget) {
+async function copyTemplate(name, pasteTarget) {
     let target;
     switch (pasteTarget[0]) {
         case '.':
@@ -35,7 +35,7 @@ async function getTemplate(name, pasteTarget) {
     }
 }
 
-async function setTemplate(name, value, pasteTarget, target) {
+async function pasteTemplate(name, value, pasteTarget, target) {
     var count = target.getElementsByClassName('tempDiv').length;
     if (count === 0) {
         let tempDiv = document.createElement('div');
@@ -61,11 +61,11 @@ async function setTemplate(name, value, pasteTarget, target) {
 }
 
 
-function rmTemplate() {
+function removeTemplate() {
     let scripts = document.getElementsByClassName(name);
     while(scripts[0]) {
         scripts[0].parentNode.removeChild(scripts[0]);
     }
 }
 
-export { getTemplate, setTemplate, rmTemplate};
+export { copyTemplate, pasteTemplate, removeTemplate};

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     //ActiveEvent();
-    AutoZIndex();
+    //AutoZIndex();
     removeFocusEvent();
     addTransition();
 

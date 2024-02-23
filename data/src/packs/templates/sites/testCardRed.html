@@ -1,0 +1,17 @@
+<div style="background-color: red; width: 100%; height: 100%; position: absolute; bottom: 100%;" class="container">
+    <input type="button" value="CREATE A Test Card" onclick="(function() {
+        var random = Math.random();
+        var testCard;
+        if (random <= 0.25) {
+            testCard = 'testCardYellow';
+        } else if (random > 0.25 && random <= 0.5) {
+            testCard = 'testCardGreen';
+        } else if (random > 0.5 && random <= 0.75) {
+            testCard = 'testCardRed';
+        } else {
+            testCard = 'testCardBlue';
+        }
+        getTemplate(testCard , 'body');
+    })()">
+
+</div>

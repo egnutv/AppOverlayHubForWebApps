@@ -1,6 +1,6 @@
-import { readJson } from "./reader/readJSON.js";
+import { readJson } from "../storageManagement/reader/readJSON";
 
-function getScript(name) {
+function copyScript(name) {
     readJson('data/src/configs/addScripts.json', 'add.' + name)
         .then(paths => {
             if (paths) {
@@ -11,7 +11,7 @@ function getScript(name) {
 }
  //Example execute: getScript('Script1'). If you are execute then you are place a path in the head.
 
-function setScript(paths, name) {
+function pasteScript(paths, name) {
     var count = document.head.getElementsByClassName(name).length;
     if (count == 0) {
         for (let path of paths) {
@@ -29,11 +29,11 @@ function setScript(paths, name) {
 } 
 
 
-function rmScript(name) {
+function removeScript(name) {
     let scripts = document.getElementsByClassName(name);
     while(scripts[0]) {
         scripts[0].parentNode.removeChild(scripts[0]);
     }
 }
 
-export { getScript, setScript, rmScript};
+export { copyScript, pasteScript, removeScript};
