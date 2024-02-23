@@ -1,4 +1,4 @@
-function slide(toPosition, area) {
+function slide(toPosition, area, targets) {
     
     let body = document.querySelector(area);
     let children = body.children;
@@ -18,6 +18,19 @@ function slide(toPosition, area) {
         case "left":
             toLeft += 100;
             break;
+            case "random":
+                var random = Math.random();
+                if (random <= 0.25) {
+                    toPosition = "down";
+                } else if (random > 0.25 && random <= 0.5) {
+                    toPosition = "up";
+                } else if (random > 0.5 && random <= 0.75) {
+                    toPosition = "right";
+                } else {
+                    toPosition = "left";
+                }
+                slide(toPosition, area, targets)
+                break;
     }
 
     for (let i = 0; i < children.length; i++) {

@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-    ActiveEvent();
+    //ActiveEvent();
     AutoZIndex();
+    removeFocusEvent();
+    addTransition();
 
 });
 var stepCounter = 0;
@@ -16,6 +18,25 @@ function AutoZIndex() {
 
         children[i].style.zIndex = i + 1;
     }
+}
+
+function addTransition() {
+    let buttons = document.querySelectorAll("input[type='button']");
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].style.transition = "500ms";
+    }
+};
+
+function removeFocusEvent() {
+    let buttons = document.querySelectorAll("input[type='button']");
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            setTimeout(() => {
+                this.blur();
+            }, 500);
+        });
+    });
 }
 
 

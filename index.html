@@ -18,7 +18,7 @@
     <script src="GUI/src/scripts/utils/changePropertiesHtml.js"></script>
 
     <script src="background/src/scripts/events/events.js"></script>
-    <script src="GUI\src\scripts\load\transition\slide.js"></script>
+    <script src="GUI\src\scripts\animations\transitions\slides\slide.js"></script>
     <script type="module" src="background\src\scripts\manager\storageManagement\index.js" defer></script>
     
 
@@ -160,7 +160,7 @@
     </style>
 </head>
 
-<body id="darkmode" style="transition: 0.5s;">
+<body id="darkmode">
     
     <!--- TEST CYAN AREA -->
     <div style="background-color: aqua; width: 100%; height: 100%; position: relative; bottom: 100%;">
@@ -182,7 +182,7 @@
 
         </main>
         <footer>
-            <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="slide('up', 'body')"></div>
+            <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="slide('random', 'body')"></div>
             <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick="getTemplate('license', '#darkmode')"></div>
         </footer>
     </div>

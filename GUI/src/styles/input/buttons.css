@@ -8,15 +8,14 @@ input[type="button"]:not(.link){
     border-radius: 3rem;
     box-sizing: border-box;
     border: 1rem solid transparent !important;
-    transition: 0.5s;
     max-width: auto !important;
     min-width: auto !important;
     
     cursor: pointer !important;
-     /* Ändere die Werte nach Bedarf */
+    transform: scale(1);
 }
 
-#activate_hovered:not(.link){
+input[type="button"]:not(.link):hover{
     transition: 0.5s;
     background-color: var(--inactive-color);
     color: var(--activate-color);
@@ -24,7 +23,7 @@ input[type="button"]:not(.link){
     box-shadow: 0 0 0.5rem var(--activate-color);
     cursor: pointer;
 }
-#active_clicked:not(.link){
+input[type="button"]:not(.link):focus{
     transition: 0.5s;
     background-color: var(--activate-color);
     color: var(--text-color);
@@ -40,17 +39,17 @@ input[type="button"].link {
     width: auto !important;
     height: auto !important;
     padding: 0%;
-    transition: 0.5s;
     max-width: auto !important;
     min-width: auto !important;
     border: 0 solid transparent !important;
     cursor: pointer;
+    transform: scale(1);
 }
-input[type="button"].link#activate_hovered {
+input[type="button"].link:hover {
     text-decoration: underline solid var(--text-color);
     transition: 0.5s;
 }
-input[type="button"].link#active_clicked{
+input[type="button"].link:focus{
     color: var(--activate-color);
     text-decoration: underline solid var(--activate-color);
     transition: 0.5s;
