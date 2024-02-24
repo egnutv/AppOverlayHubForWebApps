@@ -1,5 +1,5 @@
 import { copyScript, pasteScript, removeScript } from './scriptManager.js';
-import { copyTemplate,pasteTemplate, removeTemplate } from './siteManager.js';
+import { copyTemplate, pasteTemplate, removeTemplate } from './siteManager.js';
 
 
 window.copyScript = copyScript;

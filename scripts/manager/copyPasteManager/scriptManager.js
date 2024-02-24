@@ -1,10 +1,10 @@
-import { readJson } from "../storageManagement/reader/readJSON";
+import { readJson } from "../storageManagement/reader/readJSON.js";
 
 function copyScript(name) {
     readJson('data/src/configs/addScripts.json', 'add.' + name)
         .then(paths => {
             if (paths) {
-                setScript(paths, name);
+                pasteScript(paths, name);
             }
         })
         .catch(error => console.error('Error:', error));

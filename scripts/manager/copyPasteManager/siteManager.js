@@ -1,32 +1,37 @@
 import { readHTML } from "../storageManagement/reader/readHTML.js";
 import { readJson } from "../storageManagement/reader/readJSON.js"
 
-
-async function copyTemplate(name, pasteTarget) {
+async function copyPasteTemplate(name, destination) {
+    await copyTemplate(name, destination);
+    
+    await pasteTemplate(name, destination);
+}
+async function copyTemplate(name, destination) {
     let target;
-    switch (pasteTarget[0]) {
+    switch (destination[0]) {
         case '.':
-            target = document.getElementsByClassName(pasteTarget.substring(1))[0]; 
+            target = document.getElementsByClassName(destination.substring(1))[0]; 
         break;
         case '#':
-            target = document.getElementById(pasteTarget.substring(1));
+            target = document.getElementById(destination.substring(1));
         break;
         default:
-            target = document.querySelector(pasteTarget); 
+            target = document.querySelector(destination); 
         break;
     }
     var tempDivCount = target.getElementsByClassName('tempDiv').length;
     var nameCount = target.getElementsByClassName(name).length;
     if (tempDivCount === 0 && nameCount === 0) {
 
-        readJson('data/src/packs/templates/sites/index.json', 'index.' + name)
+        await readJson('data/src/packs/templates/sites/index.json', 'index.' + name)
         .then(pathArray => {
             if (pathArray && pathArray.length > 0) {
                 let path = pathArray[0];
                 readHTML('data/src/packs/templates/sites/' + path + '.html')
                 .then(data => {
                     let value = data;
-                    setTemplate(name, value, pasteTarget, target);
+                    pasteTemplate(name, value, destination, target);
+                    console.log("Angegebener Name: " + name + " | Wert des Template: " + value + " | Einfügeziel: " + target); 
                 })
                 .catch(error => console.error('Error:', error));
             }
@@ -35,7 +40,7 @@ async function copyTemplate(name, pasteTarget) {
     }
 }
 
-async function pasteTemplate(name, value, pasteTarget, target) {
+async function pasteTemplate(name, value, destination, target) {
     var count = target.getElementsByClassName('tempDiv').length;
     if (count === 0) {
         let tempDiv = document.createElement('div');
