@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
     //ActiveEvent();
     //AutoZIndex();
-    removeFocusEvent();
-    addTransition();
+    triggerEvents();
 
 });
+
+function triggerEvents() {
+    removeFocusEvent();
+    addTransition();
+}
 var stepCounter = 0;
     
 

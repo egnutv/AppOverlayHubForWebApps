@@ -1,6 +1,6 @@
 {
   "add": {
-    "Script1": ["scripts/cookie.js"],
-    "Script2": ["scripts/utils/changeLink.js"]
+    "Script1": ["scripts/cookie.js" , "scripts/cookie"],
+    "events": ["scripts/events/events.js"]
   }
 }

@@ -4,7 +4,8 @@ async function slide(toPosition, area, targets) {
     let children = body.children;
     var toBottom = 0;
     var toLeft = 0;
-
+    
+    
     switch (toPosition) {
         case "down":
             toBottom += 100;
@@ -51,13 +52,15 @@ async function slide(toPosition, area, targets) {
 
         const newBottomValue = CurrentBottomValue + toBottom;
         const newLeftValue = CurrentLeftValue + toLeft;
-
+        
         child.style.bottom = newBottomValue + "%";
         child.style.left = newLeftValue + "%";
         child.style.transition = "750ms";
-    
+        
+        
         console.warn(child + " " + "Nummer " + i + " Bottom: " + CurrentBottomValue + " Left: " + CurrentLeftValue);
     }
+    
     
 }
 
