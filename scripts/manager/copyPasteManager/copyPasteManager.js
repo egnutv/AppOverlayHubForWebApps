@@ -1,46 +1,72 @@
 import { readServerFile } from "../storageManagement/reader/readServerFile.js";
 import { selectDomElement } from "../../utils/selectDomElement.js";
-class CopyPasteFromTemplate {
-    async copy(source) {
+class CopyPasteTemplate {
+    async copy(source, innerPathToEntry) {
+
+        var sourceFormat = source.split(".");
+        var format = sourceFormat[sourceFormat.length - 1];
+        if (innerPathToEntry === "") {
+            console.error("No inner path was set");
+        }
+        
         let value
         await readServerFile(source) 
             .then(result => {
                 console.log(result);
                 value = result;
                 
-            })
+            });
+        if (innerPathToEntry != "") {
+
+        }
+        switch (format) {
+            case ("json"):
+                console.warn("The format is " + format);
+                value = await this.#findValueOfJson(innerPathToEntry, value);
+                console.log("Der Wert dieses Elements ist: " + value);
+            break;
+            case ("html"):
+                
+            break;
+            default:
+                console.error("Not supported Format is: " + format);
+            break;
+            }   
+    
+        /*switch (format) {
+            case ("JSON"):
+                console.warn("Es ist eine: " + format);
+                //const rawValue = value .then( rawValue => this.#copyJsonValue(pathToEntry));
+                console.log ("The RawVaue: " + rawValue)
+            break;
+            default:
+                if ("" || "all" || "null"){
+                    console.warn("Es ist eine: " + format);
+                    
+                } else {
+                    console.error("Is not a Format to use");
+                }
+            break;
+            
+        }*/
         return value;
     }
 
-    async copyJsonValue (source, pathToEntry) {
-        let Avalue;
-        await this.copy(source) 
-            .then(rawValue => {
-                // Konvertieren Sie die rohen Daten in ein JSON-Objekt und lesen Sie daraus
-                const theValue = JSON.parse(rawValue);
-                let keys = pathToEntry.split('/');
-                let value = theValue
-                for (let entry of keys) {
-                    if (value[entry] !== undefined) {
-                        value = value[entry];
-                    } else {
-                        console.log(entry + ' not found');
-                        return null;
-                    }
-                }
-                Avalue = value;
-            })
-        ;
-        console.log(Avalue);
-        
-        return Avalue;
+
+    async #findValueOfJson (pathToEntry, value) {
+        const rawValue = JSON.parse(value);
+        console.log(rawValue);
+       
     }
     
     
     
     
+    
+    
+    
 
-    async paste(value, destination) {
+    paste(value, destination) {
         const aDestination = selectDomElement(destination);
         if (!aDestination) {
             console.log('Destination not found');
@@ -56,13 +82,14 @@ class CopyPasteFromTemplate {
         tempDiv = document.getElementsByClassName('tempDiv')[0];
         tempDiv.insertAdjacentHTML('beforeend', value);
     }
-    
 }
+    
+
 
 async function siteCopyPaste() {
-    const index = new CopyPasteFromTemplate;
+    const index = new CopyPasteTemplate;
     
-    const fileValue = await index.copyJsonValue("data/packs/templates/sites/index.json", "index/start");
+    const fileValue = await index.copy("data/packs/templates/sites/index.json", "index/start");
 
     console.log("X " + fileValue);
 
