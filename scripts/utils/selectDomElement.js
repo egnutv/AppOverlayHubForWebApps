@@ -15,6 +15,7 @@ function selectDomElement(aDestination) {
             destination = document.querySelector(destination);
             break;
     }
+    
     console.warn("INPUT: " + aDestination);
     console.warn("DESTINATION IN DOM SELECTOR: " + destination);
     return destination;

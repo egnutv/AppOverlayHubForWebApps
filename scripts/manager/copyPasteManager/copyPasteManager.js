@@ -62,7 +62,7 @@ class copyPasteRemoveFromTemplate {
     
     
 
-    paste(value, className, destination) {
+    async paste(value, className, destination) {
         const aDestination = selectDomElement(destination);
         if (!aDestination) {
             console.log('Destination not found');
@@ -99,6 +99,13 @@ class copyPasteRemoveFromTemplate {
 
         
     }
+
+    remove(className) {
+        const aDestination = selectDomElement(className);
+
+        aDestination.remove;
+
+    }
 }
     
 
@@ -114,11 +121,19 @@ async function siteCopyPaste(indexEntry, destination) {
     entry.paste(valueOfEntry, indexEntry, destination);
 }
 async function scriptCopyPaste() {
+    const destination = "head";
     const scriptEntry = "Script1";
     const entry = new copyPasteRemoveFromTemplate;
     let valueOfEntry = await entry.copy("data/configs/addScripts.json", "add/" + scriptEntry);
     //Muss noch weiter geschrieben werden
     console.log("Der Eintrag " + valueOfEntry);
+    for (let i = 0; i < valueOfEntry.length; i++) {
+        console.warn(i + " Nummer");
+        let wantedEntry = valueOfEntry[i].toString();
+        console.log("Der gesuchte Eintrag ist der hier und ist nun ein Strang " + wantedEntry);
+        entry.paste(wantedEntry, scriptEntry, destination)
+    }
+
 
 } 
 async function textCopyPaste() {
