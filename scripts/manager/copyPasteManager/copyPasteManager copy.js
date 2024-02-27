@@ -29,8 +29,7 @@ class CopyPasteTemplate {
                     }
                 }
                 Avalue = value;
-            })
-        ;
+            });
         console.log(Avalue);
         
         return Avalue;

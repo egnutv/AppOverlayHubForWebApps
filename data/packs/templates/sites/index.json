@@ -1,13 +1,13 @@
 {
     "index":
         {
-            "start": ["start"],
-            "moreOptions": ["options"],
-            "license": ["onlyText"],
-            "imprintAndPrivacyPolicy": ["onlyText"],
-            "testCardRed": ["testCardRed"],
-            "testCardYellow": ["testCardYellow"],
-            "testCardGreen": ["testCardGreen"],
-            "testCardBlue": ["testCardBlue"]
+            "start": ["start.html"],
+            "moreOptions": ["options.html"],
+            "license": ["onlyText.html"],
+            "imprintAndPrivacyPolicy": ["onlyText.html"],
+            "testCardRed": ["testCardRed.html"],
+            "testCardYellow": ["testCardYellow.html"],
+            "testCardGreen": ["testCardGreen.html"],
+            "testCardBlue": ["testCardBlue.html"]
         }
 }
