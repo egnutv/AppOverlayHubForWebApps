@@ -1,25 +1,26 @@
-import { readServerFile } from "../storageManagement/reader/readServerFile.js";
 import { selectDomElement } from "../../utils/selectDomElement.js";
-class copyPasteRemoveFromTemplate {
+import { readServerFile } from "../../manager/storageManagement/reader/readServerFile.js";
+
+class CopyPasteRemoveFromTemplate {
     async copy(source, innerPathToEntry) {
 
         var sourceFormat = source.split(".");
         var format = sourceFormat[sourceFormat.length - 1];
         if (innerPathToEntry === "") {
-            console.error("No inner path was set");
+            console.warn("No inner path was set");
         }
         
         let value
         await readServerFile(source) 
             .then(result => {
-                console.log(result);
+                //console.log(result);
                 value = result;
                 
             });
         if (innerPathToEntry !== "") {
             switch (format) {
                 case ("json"):
-                    console.warn("The format is " + format);
+                    //console.warn("The format is " + format);
                     value = await this.#findValueOfJson(innerPathToEntry, value);
                 break;
                 case ("html"):
@@ -36,38 +37,56 @@ class copyPasteRemoveFromTemplate {
 
     async #findValueOfJson (pathToEntry, value) {
         let rawValue = JSON.parse(value);
-        console.log(rawValue);
+        //console.log(rawValue);
         let keys = pathToEntry.split('/');
         for (let entry of keys) {
             if (rawValue[entry] !== undefined){
                 rawValue = rawValue[entry];
             } else {
-                console.log(entry + " not found");
+                console.error(entry + " not found");
                 return null;
             }
         }
         let theValue = rawValue;
-        console.log("Der gesuchte Wert ist: " + theValue);
+        //console.log("Der gesuchte Wert ist: " + theValue);
 
         return theValue;
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
 
-    async paste(value, className, destination) {
-        const aDestination = selectDomElement(destination);
+    async paste(value, pasteAs, className, destination) {
+        let aDestination = selectDomElement(destination);
         if (!aDestination) {
-            console.log('Destination not found');
+            //console.log('Destination not found');
             return;
+        } else {
+            switch (pasteAs) {
+                case ("container"):
+                    this.#pasteAsContainer(value, className, aDestination);
+                break;
+                case ("script"):
+                    this.#pasteAsScript(value, className, aDestination);
+                break;
+                case ("scriptModule"):
+                    this.#pasteAsScriptModule(value, className, aDestination);
+                break;
+                case ("text"):
+                break;
+                default:
+                    console.error("This pasteAs is not supported. Please use the parameter: container for divs or script for scripts or text for set texts.")
+                break;
+            }
+
+            triggerEvents();
         }
+        
+        
+
+        
+    }
+
+    async #pasteAsContainer(value, className, aDestination){
         let tempDiv;
         let tempDivCount = document.getElementsByClassName('tempDiv');
         if (tempDivCount.length === 0) {
@@ -92,13 +111,25 @@ class copyPasteRemoveFromTemplate {
 
             aDestination.removeChild(tempDiv);
 
-            triggerEvents();
             
         } 
-        
-
-        
     }
+
+    async #pasteAsScript(value, className, aDestination) {
+        let script = document.createElement('script');
+        script.classList.add(className);
+        script.src = value;
+        aDestination.appendChild(script);
+    }
+    
+    
+    
+    async #pasteAsScriptModule(value, className, aDestination){
+        await this.#pasteAsScript(value, className, aDestination);
+        let script = selectDomElement(className);
+        script.type = "module"; script.defer;
+    }
+    
 
     remove(className) {
         const aDestination = selectDomElement(className);
@@ -107,48 +138,14 @@ class copyPasteRemoveFromTemplate {
 
     }
 }
+
+export { CopyPasteRemoveFromTemplate };
     
 
 
-async function siteCopyPaste(indexEntry, destination) {
-    const index = new copyPasteRemoveFromTemplate;
-    let valueOfIndex = await index.copy("data/packs/templates/sites/index.json", "index/" + indexEntry);
-    valueOfIndex = valueOfIndex.toString();
-    console.log("Der Wert im Index: " + valueOfIndex);
-    const entry = new copyPasteRemoveFromTemplate;
-    let valueOfEntry = await entry.copy("data/packs/templates/sites/" + valueOfIndex,  "");
-    console.log("Der Wert des Eintrags: " + valueOfEntry);
-    entry.paste(valueOfEntry, indexEntry, destination);
-}
-async function scriptCopyPaste() {
-    const destination = "head";
-    const scriptEntry = "Script1";
-    const entry = new copyPasteRemoveFromTemplate;
-    let valueOfEntry = await entry.copy("data/configs/addScripts.json", "add/" + scriptEntry);
-    //Muss noch weiter geschrieben werden
-    console.log("Der Eintrag " + valueOfEntry);
-    for (let i = 0; i < valueOfEntry.length; i++) {
-        console.warn(i + " Nummer");
-        let wantedEntry = valueOfEntry[i].toString();
-        console.log("Der gesuchte Eintrag ist der hier und ist nun ein Strang " + wantedEntry);
-        entry.paste(wantedEntry, scriptEntry, destination)
-    }
-
-
-} 
-async function textCopyPaste() {
-    //Muss alternativerweise default-Einstellungen auslesen können
-    //Muss getroffene Einstellungen durch Cookie von Usern auslesen können
-    //setzt Text einfügen
-}
-async function cookieCopyPaste(){
-    //Muss Cookies erstellen und localSpeicher
-    //AUßerdem 
-}
 
 
 
-export  {siteCopyPaste, scriptCopyPaste};
 
-window.siteCopyPaste = siteCopyPaste;
-window.scriptCopyPaste = scriptCopyPaste;
+
+

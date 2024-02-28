@@ -19,7 +19,7 @@
 
     <script class="events" src="scripts/events/events.js"></script>
     <script src="scripts/animations/transitions/slides/slide.js"></script>
-    <script type="module" src="scripts/manager/copyPasteManager/index.js" defer></script>
+    <script onError="console.log('Fehler beim Laden von index.js')" type="module" src="scripts/controller/storageController/copyPasteRemoveController/index.js" defer ></script>
     
 
     <script>
@@ -175,7 +175,7 @@
         </main>
         <footer>
             <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="slide('up', 'body')"></div>
-            <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick="copyPasteTemplate('testCardBlue', 'body')"></div>
+            <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick="siteCopyPaste('testCardBlue', 'body')"></div>
         </footer>
     </div>
     

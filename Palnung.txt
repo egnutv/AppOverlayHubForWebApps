@@ -1,0 +1,10 @@
+Note:
+animations: Dieser Ordner könnte Animationen enthalten, die in Ihrem Projekt verwendet werden. Diese könnten CSS- oder JavaScript-Dateien sein, die Animationen definieren.
+controller: In diesem Ordner könnten sich Dateien befinden, die die Logik zur Steuerung der Datenflüsse in Ihrer Anwendung enthalten. In einem MVC (Model-View-Controller)-Framework würde dies die Funktionen enthalten, die bestimmen, was passiert, wenn ein Benutzer eine bestimmte Aktion ausführt.
+cookie.js: Diese Datei könnte Funktionen enthalten, die zum Setzen, Abrufen oder Löschen von Cookies in Ihrem Webprojekt verwendet werden.
+events: Dieser Ordner könnte Event-Handler enthalten, also Funktionen, die ausgeführt werden, wenn bestimmte Ereignisse eintreten (wie Benutzerklicks oder Datenänderungen).
+handler: Dieser Ordner könnte ähnlich wie der events-Ordner sein und Funktionen enthalten, die auf bestimmte Ereignisse reagieren. Der genaue Unterschied zwischen handler und events hängt von der spezifischen Struktur und den Konventionen Ihres Projekts ab.
+helper: Hier könnten sich Hilfsfunktionen befinden, also kleinere Funktionen, die bestimmte Aufgaben ausführen und von anderen Teilen Ihrer Anwendung wiederverwendet werden.
+main: Dieser Ordner könnte den Hauptcode Ihrer Anwendung enthalten, also den Code, der beim Starten Ihrer Anwendung ausgeführt wird.
+manager: Dieser Ordner könnte Funktionen enthalten, die Ressourcen verwalten, z.B. das Erstellen und Zerstören von Objekten oder das Verwalten von Verbindungen zu Datenbanken oder anderen Diensten.
+utils: In diesem Ordner könnten sich “Dienstprogramme” oder “Hilfsprogramme” befinden, also Code, der allgemeine Aufgaben ausführt und in vielen verschiedenen Teilen Ihrer Anwendung wiederverwendet werden kann.
