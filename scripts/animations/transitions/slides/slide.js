@@ -34,7 +34,7 @@ async function slide(toPosition, area, targets) {
                 break;
     }
 
-    for (let i = 0; i < children.length; i++) {
+    for (let i = children.length - 1; i >= -1; i--) {
         console.warn("Und die Zahl der Kinder ist: " + children.length);
         let child = children[i];
         

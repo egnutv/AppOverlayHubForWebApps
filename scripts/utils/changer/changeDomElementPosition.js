@@ -1,25 +1,28 @@
-import { selectDomElement } from "../selectDomElement";
+import { selectDomElement } from "../selectDomElement.js";
 
-function changeDomElementPosition(destination, toPosition) {
-    const element = selectDomElement(destination);
+
+function changeDomElementPosition(aDestination, toPosition) {
+
+    var toBottom = 0; var toLeft = 0;
+    var element = selectDomElement(aDestination);
     switch (toPosition) {
-        case "down":
+        case "up":
             toBottom += 100;
             break;
-        case "up":
+        case "down":
             toBottom -= 100;
             break;
-        case "right":
+        case "left":
             toLeft -= 100;
             break;
-        case "left":
+        case "right":
             toLeft += 100;
             break;
     }
 
         
-        let currentBottomValue = destination.style.bottom;
-        let currentLeftValue = destination.style.left;
+        let currentBottomValue = element.style.bottom;
+        let currentLeftValue = element.style.left;
     
         // Wenn die Werte leer sind, setzen Sie sie auf '0'
         currentBottomValue = currentBottomValue ? currentBottomValue : '0';
@@ -33,13 +36,14 @@ function changeDomElementPosition(destination, toPosition) {
         const newBottomValue = CurrentBottomValue + toBottom;
         const newLeftValue = CurrentLeftValue + toLeft;
         
-        destination.style.bottom = newBottomValue + "%";
-        destination.style.left = newLeftValue + "%";
-        destination.style.transition = "750ms";
+        element.style.bottom = newBottomValue + "%";
+        element.style.left = newLeftValue + "%";
+        element.style.transition = "750ms";
         
         
-        console.warn(destination + " Bottom: " + CurrentBottomValue + " Left: " + CurrentLeftValue);
+        
+        console.warn(element + " Bottom: " + CurrentBottomValue + " Left: " + CurrentLeftValue);
 
 }
-window.changeDomElementPosition = changeDomElementPosition;
+
 export { changeDomElementPosition };
