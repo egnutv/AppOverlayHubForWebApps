@@ -12,7 +12,7 @@ function triggerEvents() {
 var stepCounter = 0;
     
 
-function AutoZIndex() {
+/*function AutoZIndex() {
 
     let body = document.querySelector("body");
 
@@ -22,7 +22,7 @@ function AutoZIndex() {
 
         children[i].style.zIndex = i + 1;
     }
-}
+}*/
 
 function addTransition() {
     let buttons = document.querySelectorAll("input[type='button']");
@@ -44,7 +44,7 @@ function removeFocusEvent() {
 }
 
 
-function ActiveEvent() {
+/*function ActiveEvent() {
     let buttons = document.querySelectorAll("input[type='button']");
 
     buttons.forEach(button => {
@@ -65,4 +65,4 @@ function ActiveEvent() {
             this.id = '';
         })
     });
-}
+}*/

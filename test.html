@@ -14,19 +14,21 @@
 
     <script src="/scripts/events/events.js"></script>
     
-    <script src="/scripts/utils/changeTheme.js"></script>
-    <script src="/scripts/utils/changePropertiesHtml.js"></script>
+    <script src="/scripts/utils/changer/changeTheme.js"></script>
+    <script src="/scripts/utils/changer/changePropertiesHtml.js"></script>
 
     <script class="events" src="scripts/events/events.js"></script>
     <script src="scripts/animations/transitions/slides/slide.js"></script>
+    <script src="scripts\utils\changer\changeDomElementPosition.js" defer></script>
     
     <script type="module" defer>
         import {siteCopyPaste} from "./scripts/manager/copyPasteManager/copyPasteManager.js";
-    
+        import {changeDomElementPosition}
         window.siteCopyPaste = siteCopyPaste;
     
         function initialize() {
             document.querySelector('input[type="button"]').addEventListener('click', scriptCopyPaste);
+            document.querySelector('input[type="button"]').addEventListener('click', changeDomElementPosition);
         }
     
         window.onload = initialize;
@@ -173,9 +175,14 @@
 </head>
 
 <body id="darkmode">
-    <div style="background-color: lightskyblue; width: 100%; height: 100%; position: absolute; bottom: 0%;" class="container">
+    <div style="background-color: greenyellow; width: 100%; height: 100%; position: absolute; bottom: 0%;" class="container1">
         <input type="button" value="CREATE A Test Card" style="margin: auto; margin-top: 40%;">
         <input type="button" value="Kein">
+    
+    </div>
+    <div style="background-color: lightskyblue; width: 100%; height: 100%; position: absolute; bottom: 0%;" class="container2">
+        <input type="button" value="CREATE A Test Card" style="margin: auto; margin-top: 40%;">
+        <input type="button" value="Teste Sachen 1." onclick="changeDomElementPosition('.container1', 'left')">
     
     </div>
 </body>
