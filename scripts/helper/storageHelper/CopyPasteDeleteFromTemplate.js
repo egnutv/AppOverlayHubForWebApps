@@ -65,6 +65,9 @@ class CopyPasteRemoveFromTemplate {
                 case ("container"):
                     this.#pasteAsContainer(value, className, aDestination);
                 break;
+                case ("hiddenContainer"):
+                    this.#pasteAsHiddenContainer(value, className, aDestination);
+                break;
                 case ("script"):
                     this.#pasteAsScript(value, className, aDestination);
                 break;
@@ -72,6 +75,7 @@ class CopyPasteRemoveFromTemplate {
                     this.#pasteAsScriptModule(value, className, aDestination);
                 break;
                 case ("text"):
+                    this.#pasteAsText(value, className, aDestination);
                 break;
                 default:
                     console.error("This pasteAs is not supported. Please use the parameter: container for divs or script for scripts or text for set texts.")
@@ -87,6 +91,8 @@ class CopyPasteRemoveFromTemplate {
     }
 
     async #pasteAsContainer(value, className, aDestination){
+        let countDestinationElements = aDestination.childlength;
+        console.log("Das ist die Anzahl: " + countDestinationElements + " mit dem Ziel: " + aDestination);
         let tempDiv;
         let tempDivCount = document.getElementsByClassName('tempDiv');
         if (tempDivCount.length === 0) {
@@ -114,6 +120,12 @@ class CopyPasteRemoveFromTemplate {
             
         } 
     }
+    async #pasteAsHiddenContainer(value, className, aDestination) {
+        await this.#pasteAsContainer(value, className, aDestination);
+        let element = selectDomElement("." + className);
+        element.style.display = 'none';
+
+    }
 
     async #pasteAsScript(value, className, aDestination) {
         let script = document.createElement('script');
@@ -128,6 +140,10 @@ class CopyPasteRemoveFromTemplate {
         await this.#pasteAsScript(value, className, aDestination);
         let script = selectDomElement(className);
         script.type = "module"; script.defer;
+    }
+
+    async #pasteAsText(value, className, aDestination) {
+        
     }
     
 

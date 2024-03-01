@@ -7,31 +7,29 @@
                 height: 100%;
                 width: 100%;
             }
-
-            .testGrid {
-                height: 200%;
-                background-color: black;
-                display: grid;
-                grid-template-rows: 1fr 1fr;
-                grid-template-columns: 1fr 1fr;
-                grid-template-areas: 
-                "to to" 
-                "from from"; /* Nutze grid-template-areas */
-            }
-            .Element1 {
-                background-color: blueviolet;
-                grid-area: to;
-            }
-            .Element2 {
-                background-color: yellowgreen;
-                grid-area: from;
-            }
         </style>
     </head>
     <body>
-        <div class="testGrid">
-            <div class="Element1"></div>
-            <div class="Element2"></div>
+        <div id="testGrid">
+            <div id="Element1"></div>
+            <div id="Element2"></div>
         </div>
+        <script>
+            var grid = document.getElementById("testGrid");
+            grid.style.height = "200%";
+            grid.style.backgroundColor = "black";
+            grid.style.display = "grid";
+            grid.style.gridTemplateRows = "1fr 1fr";
+            grid.style.gridTemplateColumns = "1fr 1fr";
+            grid.style.gridTemplateAreas = '"to to" "from from"';
+            
+            var element1 = document.getElementById("Element1");
+            element1.style.backgroundColor = "blueviolet";
+            element1.style.gridArea = "to";
+            
+            var element2 = document.getElementById("Element2");
+            element2.style.backgroundColor = "yellowgreen";
+            element2.style.gridArea = "from";
+        </script>
     </body>
 </html>

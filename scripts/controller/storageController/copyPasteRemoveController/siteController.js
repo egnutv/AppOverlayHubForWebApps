@@ -1,6 +1,7 @@
 import { CopyPasteRemoveFromTemplate } from "../../../helper/storageHelper/CopyPasteDeleteFromTemplate.js";
 
-async function siteCopyPaste(indexEntry, destination) {
+async function siteCopyPaste(indexEntry, destination, hidden) {
+    let pasteMode;
     //example:
     //const indexEntry = "imprintAndPrivacyPolicy";
     //const destination = "body";
@@ -11,7 +12,14 @@ async function siteCopyPaste(indexEntry, destination) {
     const entry = new CopyPasteRemoveFromTemplate;
     let valueOfEntry = await entry.copy("data/packs/templates/sites/" + valueOfIndex,  "");
     //console.log("Der Wert des Eintrags: " + valueOfEntry);
-    entry.paste(valueOfEntry, "container", indexEntry, destination);
+    if (hidden === 'true') {
+        pasteMode = "hiddenContainer";
+    } else {
+        pasteMode = "container";
+    }
+
+    entry.paste(valueOfEntry, pasteMode, indexEntry, destination);
+    
 }
 
 export { siteCopyPaste };
