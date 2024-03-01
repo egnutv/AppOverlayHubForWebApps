@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <style>
+            * {
+                margin: 0;
+                border: 0;
+                height: 100%;
+                width: 100%;
+            }
+
+            .testGrid {
+                height: 200%;
+                background-color: black;
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: 
+                "to to" 
+                "from from"; /* Nutze grid-template-areas */
+            }
+            .Element1 {
+                background-color: blueviolet;
+                grid-area: to;
+            }
+            .Element2 {
+                background-color: yellowgreen;
+                grid-area: from;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="testGrid">
+            <div class="Element1"></div>
+            <div class="Element2"></div>
+        </div>
+    </body>
+</html>

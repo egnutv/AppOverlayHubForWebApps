@@ -18,7 +18,7 @@
     <script src="/scripts/utils/changer/changePropertiesHtml.js"></script>
 
     <script class="events" src="scripts/events/events.js"></script>
-    <script src="scripts/animations/transitions/slides/slide.js"></script>
+    <script src="scripts/animations/transitions/slides/index.js" type="module" defer></script>
     <script onError="console.log('Fehler beim Laden von index.js')" type="module" src="scripts/controller/storageController/copyPasteRemoveController/index.js" defer ></script>
     
 
@@ -162,7 +162,7 @@
 
 <body id="darkmode">
     <div class="content_holder">
-        <div class="container" id="main_grid" style="position: absolute; bottom: 0%">
+        <div class="container presentElement" id="main_grid" style="position: absolute; bottom: 0%">
             
             <menu class="quickmenu" id="notingame">
                 <input type="button" value="Ändere Farbschema" onclick="changeTheme()" style=" box-sizing: content-box;">
@@ -175,7 +175,7 @@
         
             </main>
             <footer>
-                <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="slide('up', '.content_holder')"></div>
+                <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="slide('.presentElement', '.testCardBlue', 'right')"></div>
                 <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick="siteCopyPaste('testCardBlue', '.content_holder')"></div>
             </footer>
         </div>
