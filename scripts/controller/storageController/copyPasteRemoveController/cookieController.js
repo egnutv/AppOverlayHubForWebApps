@@ -1,4 +1,4 @@
-import { CopyPasteRemoveFromTemplate } from "../../../helper/storageHelper/CopyPasteDeleteFromTemplate.js";
+import { GetSetRemoveTemplateHelper } from "../../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
 
 async function cookieCopyPaste(){
     //Muss Cookies erstellen und localSpeicher

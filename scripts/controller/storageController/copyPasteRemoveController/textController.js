@@ -1,9 +1,9 @@
-import { CopyPasteRemoveFromTemplate } from "../../../helper/storageHelper/CopyPasteDeleteFromTemplate.js";
+import { GetSetRemoveTemplateHelper } from "../../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
 
 async function textCopyPaste() {
-    //Muss alternativerweise default-Einstellungen auslesen können
-    //Muss getroffene Einstellungen durch Cookie von Usern auslesen können
-    //setzt Text einfügen
+    const language = new GetSetRemoveTemplateHelper;
+    
+
 }
 
 export { textCopyPaste };

@@ -1,7 +1,7 @@
 import { selectDomElement } from "../../utils/selectDomElement.js";
 import { readServerFile } from "../../manager/storageManagement/reader/readServerFile.js";
 
-class CopyPasteRemoveFromTemplate {
+class GetSetRemoveTemplateHelper {
     async getTemplate(source, innerPathToEntry) {
 
         var sourceFormat = source.split(".");
@@ -155,7 +155,7 @@ class CopyPasteRemoveFromTemplate {
     }
 }
 
-export { CopyPasteRemoveFromTemplate };
+export { GetSetRemoveTemplateHelper };
     
 
 

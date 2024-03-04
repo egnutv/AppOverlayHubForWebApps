@@ -1,15 +1,15 @@
-import { CopyPasteRemoveFromTemplate } from "../../../helper/storageHelper/CopyPasteDeleteFromTemplate.js";
+import { GetSetRemoveTemplateHelper } from "../../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
 
 async function siteCopyPaste(indexEntry, destination, hidden) {
     let pasteMode;
     //example:
     //const indexEntry = "imprintAndPrivacyPolicy";
     //const destination = "body";
-    const index = new CopyPasteRemoveFromTemplate;
+    const index = new GetSetRemoveTemplateHelper;
     let valueOfIndex = await index.getTemplate("data/packs/templates/sites/index.json", "index/" + indexEntry);
     valueOfIndex = valueOfIndex.toString();
     //console.log("Der Wert im Index: " + valueOfIndex);
-    const entry = new CopyPasteRemoveFromTemplate;
+    const entry = new GetSetRemoveTemplateHelper;
     let valueOfEntry = await entry.getTemplate("data/packs/templates/sites/" + valueOfIndex,  "");
     //console.log("Der Wert des Eintrags: " + valueOfEntry);
     if (hidden === 'true') {

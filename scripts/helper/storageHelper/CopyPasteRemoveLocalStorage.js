@@ -1,4 +1,4 @@
-import { CopyPasteRemoveFromTemplate } from "./CopyPasteDeleteFromTemplate.js";
+import { CopyPasteRemoveFromTemplate } from "./GetSetRemoveTemplateHelper.js";
 
 class CopyPasteRemoveLocalStorage extends CopyPasteRemoveFromTemplate {
     async copy(source, innerPathToEntry){
