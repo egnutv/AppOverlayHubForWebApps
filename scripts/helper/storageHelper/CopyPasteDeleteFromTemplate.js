@@ -2,7 +2,7 @@ import { selectDomElement } from "../../utils/selectDomElement.js";
 import { readServerFile } from "../../manager/storageManagement/reader/readServerFile.js";
 
 class CopyPasteRemoveFromTemplate {
-    async copy(source, innerPathToEntry) {
+    async getTemplate(source, innerPathToEntry) {
 
         var sourceFormat = source.split(".");
         var format = sourceFormat[sourceFormat.length - 1];
@@ -21,7 +21,7 @@ class CopyPasteRemoveFromTemplate {
             switch (format) {
                 case ("json"):
                     //console.warn("The format is " + format);
-                    value = await this.#findValueOfJson(innerPathToEntry, value);
+                    value = await this.#getJsonValue(innerPathToEntry, value);
                 break;
                 case ("html"):
                 break;
@@ -35,7 +35,7 @@ class CopyPasteRemoveFromTemplate {
     }
 
 
-    async #findValueOfJson (pathToEntry, value) {
+    async #getJsonValue (pathToEntry, value) {
         let rawValue = JSON.parse(value);
         //console.log(rawValue);
         let keys = pathToEntry.split('/');
@@ -55,27 +55,27 @@ class CopyPasteRemoveFromTemplate {
     }
     
 
-    async paste(value, pasteAs, className, destination) {
+    async setTemplate(value, setAs, className, destination) {
         let aDestination = selectDomElement(destination);
         if (!aDestination) {
             //console.log('Destination not found');
             return;
         } else {
-            switch (pasteAs) {
+            switch (setAs) {
                 case ("container"):
-                    this.#pasteAsContainer(value, className, aDestination);
+                    this.#setContainer(value, className, aDestination);
                 break;
                 case ("hiddenContainer"):
-                    this.#pasteAsHiddenContainer(value, className, aDestination);
+                    this.#setHiddenContainer(value, className, aDestination);
                 break;
                 case ("script"):
-                    this.#pasteAsScript(value, className, aDestination);
+                    this.#setScript(value, className, aDestination);
                 break;
                 case ("scriptModule"):
-                    this.#pasteAsScriptModule(value, className, aDestination);
+                    this.#setScriptModule(value, className, aDestination);
                 break;
                 case ("text"):
-                    this.#pasteAsText(value, className, aDestination);
+                    this.#setText(value, className, aDestination);
                 break;
                 default:
                     console.error("This pasteAs is not supported. Please use the parameter: container for divs or script for scripts or text for set texts.")
@@ -90,7 +90,7 @@ class CopyPasteRemoveFromTemplate {
         
     }
 
-    async #pasteAsContainer(value, className, aDestination){
+    async #setContainer(value, className, aDestination){
         let countDestinationElements = aDestination.childlength;
         console.log("Das ist die Anzahl: " + countDestinationElements + " mit dem Ziel: " + aDestination);
         let tempDiv;
@@ -120,14 +120,14 @@ class CopyPasteRemoveFromTemplate {
             
         } 
     }
-    async #pasteAsHiddenContainer(value, className, aDestination) {
-        await this.#pasteAsContainer(value, className, aDestination);
+    async #setHiddenContainer(value, className, aDestination) {
+        await this.#setContainer(value, className, aDestination);
         let element = selectDomElement("." + className);
         element.style.display = 'none';
 
     }
 
-    async #pasteAsScript(value, className, aDestination) {
+    async #setScript(value, className, aDestination) {
         let script = document.createElement('script');
         script.classList.add(className);
         script.src = value;
@@ -136,13 +136,13 @@ class CopyPasteRemoveFromTemplate {
     
     
     
-    async #pasteAsScriptModule(value, className, aDestination){
-        await this.#pasteAsScript(value, className, aDestination);
+    async #setScriptModule(value, className, aDestination){
+        await this.#setScript(value, className, aDestination);
         let script = selectDomElement(className);
         script.type = "module"; script.defer;
     }
 
-    async #pasteAsText(value, className, aDestination) {
+    async #setText(value, className, aDestination) {
         
     }
     

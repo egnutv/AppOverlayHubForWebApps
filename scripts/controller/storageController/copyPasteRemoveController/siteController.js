@@ -6,11 +6,11 @@ async function siteCopyPaste(indexEntry, destination, hidden) {
     //const indexEntry = "imprintAndPrivacyPolicy";
     //const destination = "body";
     const index = new CopyPasteRemoveFromTemplate;
-    let valueOfIndex = await index.copy("data/packs/templates/sites/index.json", "index/" + indexEntry);
+    let valueOfIndex = await index.getTemplate("data/packs/templates/sites/index.json", "index/" + indexEntry);
     valueOfIndex = valueOfIndex.toString();
     //console.log("Der Wert im Index: " + valueOfIndex);
     const entry = new CopyPasteRemoveFromTemplate;
-    let valueOfEntry = await entry.copy("data/packs/templates/sites/" + valueOfIndex,  "");
+    let valueOfEntry = await entry.getTemplate("data/packs/templates/sites/" + valueOfIndex,  "");
     //console.log("Der Wert des Eintrags: " + valueOfEntry);
     if (hidden === 'true') {
         pasteMode = "hiddenContainer";
@@ -18,7 +18,7 @@ async function siteCopyPaste(indexEntry, destination, hidden) {
         pasteMode = "container";
     }
 
-    entry.paste(valueOfEntry, pasteMode, indexEntry, destination);
+    entry.setTemplate(valueOfEntry, pasteMode, indexEntry, destination);
     
 }
 

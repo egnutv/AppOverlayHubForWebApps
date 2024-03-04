@@ -5,13 +5,13 @@ async function scriptCopyPaste(scriptEntry, pasteAs, destination) {
     //const scriptEntry = "Script1";
     //const pasteAs = "script";
     const entry = new CopyPasteRemoveFromTemplate;
-    let valueOfEntry = await entry.copy("data/configs/addScripts.json", "add/" + scriptEntry);
+    let valueOfEntry = await entry.getTemplate("data/configs/addScripts.json", "add/" + scriptEntry);
     //console.log("Der Eintrag " + valueOfEntry);
     for (let i = 0; i < valueOfEntry.length; i++) {
         console.warn(i + " Nummer");
         let script = valueOfEntry[i].toString();
         console.log("Der gesuchte Eintrag ist der hier und ist nun ein Strang " + script);
-        await entry.paste(script, pasteAs, scriptEntry, destination);
+        await entry.setTemplate(script, pasteAs, scriptEntry, destination);
     }
 
 
