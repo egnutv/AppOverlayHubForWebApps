@@ -1,5 +1,8 @@
 import { selectDomElement } from "../../utils/selectDomElement.js";
 
+
+//Muss gemacht werden wenn Zeit da ist...
+
 selectDomElement
 class Transition {
 
@@ -9,7 +12,7 @@ class Transition {
         let toElement = selectDomElement(to);
         switch (selector) {
             case "single":
-                await this.#prepareItems(fromElement, selector);
+                await this.#prepareElements(selector, fromElement, toElement);
             break;
             case "all":
             break;
@@ -18,11 +21,27 @@ class Transition {
         }
     }
 
-    async #prepareItems(fromElement, selector) {
+    async #prepareElements(selector, fromElement, toElement) {
 
         
 
         tempDiv = document.createElement("div");
         tempDiv.className = "tempDiv";
+
+        let destinationName = fromElement.parentElement.className;
+        destinationName = "." + destinationName;
+        destinationName.toString();
+        let destination = selectDomElement(destinationName);
+        destination.appendChild(tempDiv);
+        tempDiv.appendChild(fromELement);
+
+        if (toElement !== null | toElement !== undefined | toElement !== "" | toElement !== "null") {
+            tempDiv.appendChild(toElement);
+        } else {
+            let destinationElements = Array.from(destination.children);
+            
+        }
+        
+        
     }
 }
