@@ -1,40 +1,43 @@
 import { GetSetRemoveTemplateHelper } from "../../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
 import { selectDomElement } from "../../../utils/selectDomElement.js";
 
-async function textCopyPaste() {
+async function textCopyPaste(area, file) {
     const language = new GetSetRemoveTemplateHelper;
-
-    const usedLang = "EN";
-    //^^^^^^^^^^^^^^^^^^^^ - Dieser Wert soll aus Cookie gelesen werden
-    const area = ".x"
-    //^^^^^^^^^^^^^^^^^^^^ - Dieser Wert wird aus dem HTML gelesen werden
+    //let area = "body"
+    //let file = ".moreOptions";
+    if (file === "") {
+        file = area;
+    }
+    //lang wird aus verschiedenen Quellen gelesen: 1x aus head. 1x aus der main.js
+    // example: try textCopyPaste("area", LANGfilename)
 
     let supportedLang = await language.getTemplate("data/configs/main.json", "default/lang-support");
+    let docLang = document.getElementsByTagName("html")[0].getAttribute("lang");
     let defaultLang = await language.getTemplate("data/configs/main.json", "default/lang");
 
     defaultLang = defaultLang.toString();
-    let findSupportedLang = supportedLang.find(lang => lang === usedLang);
+    let findSupportedLang = supportedLang.find(lang => lang === docLang);
 
     let lang;
-    if (findSupportedLang !== usedLang){
+    if (findSupportedLang !== docLang){
         console.error("Not supported lang. We use the default.");
         lang = defaultLang;
     } else {
         
-        lang = usedLang;
+        lang = docLang;
     }
 
     
     console.warn("We set: " + lang);
 
-    let docLang = document.getElementsByTagName("html")[0].getAttribute("lang");
-    if (docLang !== usedLang) {
+    if (docLang !== lang) {
         console.error("Not supported lang in header. We replace that.");
 
         lang = lang.toLowerCase();
 
         document.documentElement.lang = lang;
     }
+    
 
     const text = new GetSetRemoveTemplateHelper;
 
@@ -57,7 +60,6 @@ async function textCopyPaste() {
 
     }
 
-    console.log("Unsere Elmente sind: " + destinations + " Und die Länmge unseres Array: " + destinations.length)
 
     for (let i = 0; i < destinations.length; i++) {
         let aDestination = destinations[i];
@@ -65,23 +67,42 @@ async function textCopyPaste() {
         textEntry = textEntry.replace(startMarker, '');
         textEntry = textEntry.replace(endMarker, '')
         
-        console.log(textEntry);
+        let middleMarker = textEntry.indexOf(":");
         let valueOfText;
-        valueOfText = await text.getTemplate("data/packs/texts/DE/config.json", "interaction/changeColor");
-        let x = "x";
+    
+        if (middleMarker !== -1){
+            textEntry = textEntry.replace(':', '/');
+            try {
+                valueOfText = await text.getTemplate("data/packs/texts/" + lang + "/config.json", textEntry);
+            } catch (error) {
+                valueOfText = await text.getTemplate("data/packs/texts/" + defaultLang + "/config.json", textEntry);
+            }
+            
+        } else {
+
+            try {
+                file = file.replace('.', '');
+            } catch (error) {}
+            try {
+                file = file.replace('#', '');
+            } catch (error) {}
+            try {
+                valueOfText = await text.getTemplate("data/packs/texts/"  + lang + "/specific/" + file + ".json", textEntry);
+            } catch (error) {
+                valueOfText = await text.getTemplate("data/packs/texts/"  + defaultLang + "/specific/" + file + ".json", textEntry);
+            }
+        }
+        console.log(textEntry);
+            if (aDestination.nodeName === "INPUT"){
+                aDestination.value = valueOfText;
+            } else {
+                aDestination.innerHTML = valueOfText;
+            }
+            
+            
         
-        aDestination.innerHTML = valueOfText;
     }
     
-    
-
-
-
-   /* for (let i = 0; i < selectAll.length; i++) {
-
-    }
-    //let entry = await text.getTemplate
-*/
 
 }
 

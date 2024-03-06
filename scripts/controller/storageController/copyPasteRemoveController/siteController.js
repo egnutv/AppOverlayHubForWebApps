@@ -5,6 +5,12 @@ async function siteCopyPaste(indexEntry, destination, hidden) {
     //example:
     //const indexEntry = "imprintAndPrivacyPolicy";
     //const destination = "body";
+    try {
+        indexEntry = indexEntry.replace('.', '');
+    } catch (error) {}
+    try {
+        indexEntry = indexEntry.replace('#', '');
+    } catch (error) {}
     const index = new GetSetRemoveTemplateHelper;
     let valueOfIndex = await index.getTemplate("data/packs/templates/sites/index.json", "index/" + indexEntry);
     valueOfIndex = valueOfIndex.toString();

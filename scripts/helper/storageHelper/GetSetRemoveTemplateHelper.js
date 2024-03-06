@@ -82,7 +82,7 @@ class GetSetRemoveTemplateHelper {
                 break;
             }
 
-            triggerEvents();
+            
         }
         
         
@@ -148,10 +148,10 @@ class GetSetRemoveTemplateHelper {
     
 
     remove(className) {
-        const aDestination = selectDomElement(className);
-
-        aDestination.remove;
-
+        let element = selectDomElement(className);
+        if(element){
+            element.parentNode.removeChild(element);
+        }
     }
 }
 

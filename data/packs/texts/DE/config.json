@@ -8,7 +8,7 @@
     "interaction":
         {
             "changeColor": ["Ändere Farbschema"],
-            "moreOptions": ["Meher Optionen"],
+            "moreOptions": ["Mehr Optionen"],
             "imprintAndPrivacyPolicy": ["Impressum und Datenschutz"],
             "license": ["Lizenz"],
             "close": ["Schließen"]
