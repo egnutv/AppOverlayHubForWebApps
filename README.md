@@ -13,11 +13,10 @@ So, here we are at this point, and hopefully, we'll make even more progress next
 ## Status:
 
 **Progress:** 
-
-- [■■■■■■■■■############] 40% create some input-visualizations
-- [■■■■■■■■■■■■#########] 60% GUI with background controling and diffrent files for this
+- [############---------] 40% create some input-visualizations
+- [#########------------] 60% GUI with background controling and diffrent files for this
 - [#####################] 0% Code a testApp
 - [#####################] 0% Code a the Timetravel Snakegame
 
-**Used languages:** JavaScript, CSS, HTML
-
+**Used languages:** 
+JavaScript, CSS, HTML
