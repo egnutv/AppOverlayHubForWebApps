@@ -1,10 +1,9 @@
-<div class="container" id="main_grid" style="position: relative; bottom: 100%">
-        
+<div class="container start" id="main_grid" style="position: absolute; bottom: 0%">
+            
     <menu class="quickmenu" id="notingame">
-        <input type="button" value="Ändere Farbschema" onclick="changeTheme()" style=" box-sizing: content-box;">
+        <input type="button" class="bigButton ++_$_interaction:changeColor_$_++" onclick="changeTheme()" style=" box-sizing: content-box;">
 
- 
-        <input type="button" value="Mehr Optionen" style=" box-sizing: content-box;" onclick="getScript('Script1')">
+        <input type="button" class="bigButton ++_$_interaction:moreOptions_$_++" style=" box-sizing: content-box;" onclick="createNewSite('body', '.start', '.moreOptions', 'up', true)">
 
 
     </menu>
@@ -12,7 +11,7 @@
 
     </main>
     <footer>
-        <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="slide('random', 'body')"></div>
-        <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick="getTemplate('license', '#darkmode')"></div>
+        <div style="text-align: left;"><input type="button" class="link ++_$_interaction:license_$_++" onclick="createNewSite('body', '.start', '.license', 'down', true)"></div>
+        <div style="text-align: right;"><input type="button" class="link ++_$_interaction:imprintAndPrivacyPolicy_$_++"  onclick="createNewSite('body', '.start', '.imprintAndPrivacyPolicy', 'down', true)"></div>
     </footer>
 </div>

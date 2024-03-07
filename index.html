@@ -17,9 +17,8 @@
     <script src="/scripts/utils/changer/changeTheme.js"></script>
     <script src="/scripts/utils/changer/changePropertiesHtml.js"></script>
 
-    <script class="events" src="scripts/events/events.js"></script>
-    <script src="scripts/animations/transitions/slides/index.js" type="module" defer></script>
-    <script onError="console.log('Fehler beim Laden von index.js')" type="module" src="scripts/controller/storageController/copyPasteRemoveController/index.js" defer ></script>
+    <script type="module" class="events" src="scripts/events/events.js" defer></script>
+    <script type="module" src="scripts\controller\loadController\index.js" defer></script>
     
 
     <script>
@@ -51,6 +50,7 @@
             margin: 0%;
         }
         .container#main_grid, #window_grid {
+
             margin: 0;
             height: 100%;
             width: 100%;
@@ -59,7 +59,7 @@
                 "header"
                 "main"
                 "footer";
-            grid-template-rows: auto 1fr auto;
+            grid-template-rows: auto 1fr 5%;
             grid-template-columns: 1fr;
             align-content: space-between;
         }
@@ -110,7 +110,7 @@
             grid-area: footer !important;
             margin: 0%;
             display: grid;
-            grid-template-columns: auto 1fr auto;
+            grid-template-columns: auto auto-fit auto;
             justify-content: space-between;
             align-items: center;
         }
@@ -153,6 +153,10 @@
 .window_header {
     padding:0.5rem;
 }
+.content_holder {
+    height: 100%;
+    width: 100%;
+}
 
 
 
@@ -162,12 +166,12 @@
 
 <body id="darkmode">
     <div class="content_holder">
-        <div class="container presentElement" id="main_grid" style="position: absolute; bottom: 0%">
+        <div class="container start" id="main_grid" style="position: absolute; bottom: 0%">
             
             <menu class="quickmenu" id="notingame">
-                <input type="button" value="Ändere Farbschema" onclick="changeTheme()" style=" box-sizing: content-box;">
+                <input type="button" class="bigButton ++_$_interaction:changeColor_$_++" onclick="changeTheme()" style=" box-sizing: content-box;">
         
-                <input type="button" value="Mehr Optionen" style=" box-sizing: content-box;" onclick="copyPasteScript('Script1')">
+                <input type="button" class="bigButton ++_$_interaction:moreOptions_$_++" style=" box-sizing: content-box;" onclick="createNewSite('.content_holder', '.start', '.moreOptions', 'up', true)">
         
         
             </menu>
@@ -175,8 +179,8 @@
         
             </main>
             <footer>
-                <div style="text-align: left;"><input type="button" class="link" value="Lizenz" onclick="slide('.presentElement', '.testCardBlue', 'right')"></div>
-                <div style="text-align: right;"><input type="button" class="link" value="Impressum und Datenschutz" onclick="siteCopyPaste('testCardBlue', '.content_holder', 'true')"></div>
+                <div style="text-align: left;"><input type="button" class="link ++_$_interaction:license_$_++" onclick="createNewSite('.content_holder', '.start', '.license', 'down', true)"></div>
+                <div style="text-align: right;"><input type="button" class="link ++_$_interaction:imprintAndPrivacyPolicy_$_++"  onclick="createNewSite('.content_holder', '.start', '.imprintAndPrivacyPolicy', 'down', true)"></div>
             </footer>
         </div>
         

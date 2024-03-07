@@ -1,7 +1,9 @@
+import { textCopyPaste } from "../controller/storageController/copyPasteRemoveController/textController.js"
 document.addEventListener("DOMContentLoaded", function() {
     //ActiveEvent();
     //AutoZIndex();
     triggerEvents();
+    textCopyPaste(".start", "");
 
 });
 

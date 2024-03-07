@@ -4,12 +4,12 @@ import { slide } from "../../animations/transitions/slides/slide.js";
 import { GetSetRemoveTemplateHelper } from "../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
 import { selectDomElement } from "../../utils/selectDomElement.js";
 
-async function createNewSite(/*destination, from, to, direction, callback*/) {
-    let destination = "body";
+async function createNewSite(destination, from, to, direction, callback) {
+    /*let destination = "body";
     let from = ".container2";
     let to = ".imprintAndPrivacyPolicy"; 
     let direction = "up";
-    let callback = true;
+    let callback = true;*/
     await siteCopyPaste(to, destination, "true");
     await textCopyPaste(to, "");
     await slide(from, to, direction);
@@ -20,22 +20,40 @@ async function createNewSite(/*destination, from, to, direction, callback*/) {
     
 
     //++_$_text_$_++
-   
 
     setTimeout( async function() {
+        await remove.remove(from);
         if (callback === true) {
             try {
                 let toElement = await selectDomElement(to);
-                let childElment = toElement.querySelector('.++_$_close_$_++');
-                console.log(childElment + " ist das Kind von " + toElement);
+                let childElement = toElement.getElementsByClassName('++_$_interaction:close_$_++');
+                if (childElement.length > 0) {
+                    switch (direction) {
+                        case "down":
+                            direction = "up";
+                        break;
+                        case "up":
+                            direction = "down";
+                        break;
+                        case "right":
+                            direction = "left";
+                        break;
+                        case "left":
+                            direction = "right";
+                        break;
+                    }
+                    childElement[0].setAttribute('onclick', 'createNewSite(\'' + destination + '\', \'' + to + '\', \'' + from + '\', \'' + direction + '\', false)');
+                    console.log(childElement[0] + " ist das Kind von " + toElement);
+                    
+                }
             } catch (error) {
                 
             }
-            
-        } else {
-            await remove.remove(from);
+        
         }
+        
     }, 750)
+    
     triggerEvents();
 }
 export { createNewSite };

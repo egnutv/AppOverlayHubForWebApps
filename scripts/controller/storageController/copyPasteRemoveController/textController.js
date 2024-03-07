@@ -47,23 +47,45 @@ async function textCopyPaste(area, file) {
 
     console.log("Die Elemente: " + selectAll);
     let destinations = [];
-    const startMarker = "++_$_";
-    const endMarker = "_$_++";
+const startMarker = "++_$_";
+const endMarker = "_$_++";
 
-    for (let i = 0; i < selectAll.length; i++) {
-        let aDestination = selectAll[i];
+for (let i = 0; i < selectAll.length; i++) {
+    let aDestination = selectAll[i];
 
-        let getClassName = Array.from(aDestination.classList);
-        if (getClassName.some(getClassName => getClassName.startsWith(startMarker) && getClassName.endsWith(endMarker))) {
-            destinations.push(aDestination);
+    let getClassNames = Array.from(aDestination.classList);
+    getClassNames.forEach(className => {
+        if (className.startsWith(startMarker) && className.endsWith(endMarker)) {
+            destinations.push(className);
         }
+    });
+}
 
-    }
-
-
+console.log("Die Klassen: " + destinations);
+console.log(destinations.length + " ist die Länge des Array")
+    
+    
+    
     for (let i = 0; i < destinations.length; i++) {
-        let aDestination = destinations[i];
-        let textEntry = aDestination.className;
+        
+        let Destination = selectDomElement("." + destinations[i]);
+        let getClassNames = Array.from(Destination.classList);
+        console.log("Klassen für Ziel " + (i+1) + ": " + getClassNames.join(", "));
+        console.warn("Ausgabe: " + getClassNames);
+        /*let relevantClasses = getClassNames.filter(className => className.startsWith(startMarker) && className.endsWith(endMarker));
+        getClassNames.forEach(className => Destination.classList.remove(className));
+        relevantClasses.forEach(className => Destination.classList.add(className));
+        console.warn("Relevante Klassen für Ziel " + relevantClasses);*/
+        let relevantClasses = getClassNames.filter(className => className.startsWith(startMarker) && className.endsWith(endMarker));
+        console.warn("Relevante Klassen für Ziel " + relevantClasses);
+        relevantClasses = relevantClasses.toString();
+        console.warn(relevantClasses)
+
+
+        
+        let aDestination = selectDomElement("." + relevantClasses)
+
+        let textEntry = relevantClasses;
         textEntry = textEntry.replace(startMarker, '');
         textEntry = textEntry.replace(endMarker, '')
         

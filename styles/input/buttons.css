@@ -1,4 +1,4 @@
-input[type="button"]:not(.link){
+input[type="button"].bigButton{
     overflow: visible !important;
     background-color: var(--inactive-color);
     color: var(--activate-color);
@@ -15,7 +15,7 @@ input[type="button"]:not(.link){
     transform: scale(1);
 }
 
-input[type="button"]:not(.link):hover{
+input[type="button"].bigButton:hover{
     transition: 0.5s;
     background-color: var(--inactive-color);
     color: var(--activate-color);
@@ -23,7 +23,7 @@ input[type="button"]:not(.link):hover{
     box-shadow: 0 0 0.5rem var(--activate-color);
     cursor: pointer;
 }
-input[type="button"]:not(.link):focus{
+input[type="button"].bigButton:focus{
     transition: 0.5s;
     background-color: var(--activate-color);
     color: var(--text-color);

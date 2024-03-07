@@ -50,7 +50,7 @@ function slide(from, to, direction) {
             slideDiv.style.width = "100%";
             slideDiv.style.gridTemplateAreas = '"from from" "to to"';
             bottomPosition = bottomPosition - 100;
-            newBottomPosition = newBottomPosition + 100;
+            
         break;
         case 'left':
             slideDiv.style.height = "100%";
