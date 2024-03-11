@@ -3,7 +3,7 @@
         {
             "start": ["start.html"],
             "moreOptions": ["options.html"],
-            "license": ["onlyText.html"],
+            "creds": ["onlyText.html"],
             "imprintAndPrivacyPolicy": ["onlyText.html"],
             "testCardRed": ["testCardRed.html"],
             "testCardYellow": ["testCardYellow.html"],

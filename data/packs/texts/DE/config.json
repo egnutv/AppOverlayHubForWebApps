@@ -10,7 +10,7 @@
             "changeColor": ["Ändere Farbschema"],
             "moreOptions": ["Mehr Optionen"],
             "imprintAndPrivacyPolicy": ["Impressum und Datenschutz"],
-            "license": ["Lizenz"],
+            "creds": ["Mitwirkende"],
             "close": ["Schließen"]
         }
             
