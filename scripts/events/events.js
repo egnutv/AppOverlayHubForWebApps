@@ -7,9 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-function triggerEvents() {
-    removeFocusEvent();
+async function triggerEvents() {
+    let interval = 500;
+    await removeFocusEvent();
     addTransition();
+
+    
 }
 var stepCounter = 0;
     
@@ -33,17 +36,40 @@ function addTransition() {
     }
 };
 
-function removeFocusEvent() {
+async function removeFocusEvent() {
     let buttons = document.querySelectorAll("input[type='button']");
 
     buttons.forEach(button => {
         button.addEventListener('click', function() {
-            setTimeout(() => {
-                this.blur();
-            }, 500);
+            let start;
+            const step = timestamp => {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                if (progress > 500) {
+                    this.blur();
+                } else {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
         });
     });
 }
+
+function delayOnClickForInputButtons() {
+    let buttons = document.querySelectorAll("input[type='button']");
+    buttons.forEach(function(button) {
+        let oldOnClick = button.onclick;
+        button.onclick = function(event) {
+            setTimeout(function() {
+                if (oldOnClick) oldOnClick(event);
+            }, 500);
+        };
+    });
+}
+
+
+
 
 
 /*function ActiveEvent() {
@@ -68,3 +94,6 @@ function removeFocusEvent() {
         })
     });
 }*/
+
+export { triggerEvents };
+window.triggerEvents = triggerEvents;
