@@ -50,19 +50,7 @@ iframe {
     overflow: hidden;
 }
 
-::-webkit-scrollbar {
-    width: 3mm;
-    
-}
-::-webkit-scrollbar-track {
-    background-color: var(--transparency-color);
-}
 
-::-webkit-scrollbar-thumb {
-    background: #58d5ff;
-    cursor: pointer;
-    border-radius: 100vw;
-}
 
 
 

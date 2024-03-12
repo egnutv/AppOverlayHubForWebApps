@@ -14,6 +14,16 @@ function slide(from, to, direction) {
     let fromElement = selectDomElement(".currentElement");
     let toElement = selectDomElement(".newElement");
     
+    let element = toElement; // Ersetzen Sie '#meinElement' durch die ID Ihres Elements
+let stil = window.getComputedStyle(element);
+let stilAlsString = '';
+for(let i = 0; i < stil.length; i++) {
+    let eigenschaft = stil[i];
+    stilAlsString += eigenschaft + ': ' + stil.getPropertyValue(eigenschaft) + '; ';
+}
+console.warn("Der Stil ist der folgende Stil gewesen: " + stilAlsString);
+
+
     let slideDiv;
 
     let destinationName = fromElement.parentElement.className;
@@ -91,8 +101,6 @@ function slide(from, to, direction) {
     fromElement.classList.add("oldElement");
     fromElement.classList.remove("currentElement");
     fromElement = selectDomElement(".oldElement");
-
-    
 
     toElement.style.display = 'block';
     setTimeout(function() {

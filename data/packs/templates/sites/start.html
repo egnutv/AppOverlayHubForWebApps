@@ -1,102 +1,29 @@
-<div class="container start" id="main_grid" style="position: absolute; bottom: 0%; ">
-            
-    <menu class="quickmenu" id="notingame" style="position: relative; top: 0; width: auto; left: 0; right: 0%; margin: 0;">
-        <input type="button" class="bigButton ++_$_interaction:changeColor_$_++" onclick="changeTheme()" style=" box-sizing: content-box;">
-
-        <input type="button" class="bigButton ++_$_interaction:moreOptions_$_++" style=" box-sizing: content-box;" onclick="createNewSite('.content_holder', '.start', '.moreOptions', 'up', true)">
-
-
-    </menu>
-    <main style="height: 100%; top: 0%; bottom: 0%; position: relative;">
-        <div style="width: 100%; max-width: 100%; height: 100%; max-width: 100%;">
-            <div class="text_holder" style="width: calc(100% - 15mm); height: calc(100% - 15mm); max-height: auto; position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%); bottom: 0%; ">
-                <div style="overflow-y: scroll; width: 100%; height: 100%;" class="text">
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-                    <p>xxxx</p>
-
-
+<div class="start" style="position: absolute; bottom: 0%; max-height: 100%; max-width: 100%; height: 100%; width: 100%;">
+    <div class="container" id="main_grid" style="position: absolute; bottom: 0%; max-height: 100%; max-width: 100%; height: 100%; width: 100%;">
+        
+        <menu class="quickmenu" id="notingame" style="position: relative; top: 0; width: auto; left: 0; right: 0%; margin: 0; z-index: 1;">
+            <input type="button" class="bigButton ++_$_interaction:changeColor_$_++" onclick="changeTheme()" style=" box-sizing: content-box;">
+    
+            <input type="button" class="bigButton ++_$_interaction:moreOptions_$_++" style=" box-sizing: content-box;" onclick="createNewSite('.content_holder', '.start', '.moreOptions', 'up', true)">
+    
+    
+        </menu>
+        <main style="min-height: 100%; width: 100%; height: 100%; margin: 0; z-index: 1;">
+            <div style="width: 100%; max-width: 100%; min-height: 100%; max-width: 100%; background-color: aqua; overflow: hidden; margin: 0; height: 100%;">
+                <div class="text_holder" style="background-color: red; display: grid; grid-template-columns: minmax(10mm, 1fr) 1fr minmax(10mm, 1fr); height: 100%; padding: 0;">
+                    <div></div>
+                    <div style="overflow-y: scroll; width: 100%; height: 100%; background-color: blue;" class="text">
+                        Hier ist etwas Inhalt.
+                    </div>
+                    <div></div>
                 </div>
-
+                
             </div>
-        </div>
-    </main>
-    <footer style="position: absolute; bottom: 0%; width: auto; left: 0; right: 0%; margin: 0;">
-        <div style="text-align: left;"><input type="button" class="link ++_$_interaction:creds_$_++" onclick="createNewSite('.content_holder', '.start', '.creds', 'down', true)"></div>
-        <div style="text-align: right;"><input type="button" class="link ++_$_interaction:imprintAndPrivacyPolicy_$_++"  onclick="createNewSite('.content_holder', '.start', '.imprintAndPrivacyPolicy', 'down', true)"></div>
-    </footer>
+        </main>
+        
+        <footer style="position: absolute; bottom: 0%; width: auto; left: 0; right: 0%; margin: 0; z-index: 1;">
+            <div style="text-align: left;"><input type="button" class="link ++_$_interaction:creds_$_++" onclick="createNewSite('.content_holder', '.start', '.creds', 'down', true)"></div>
+            <div style="text-align: right;"><input type="button" class="link ++_$_interaction:imprintAndPrivacyPolicy_$_++"  onclick="createNewSite('.content_holder', '.start', '.imprintAndPrivacyPolicy', 'down', true)"></div>
+        </footer>
+    </div>
 </div>
