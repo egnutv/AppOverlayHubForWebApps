@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Parameter Beispiel</title>
+</head>
+<body>
+    <h1>URL Parameter Beispiel</h1>
+    <button onclick="setzeParameter()">Setze Parameter</button>
+    <button onclick="leseParameter()">Lese Parameter</button>
+
+    <script>
+        function setzeParameter() {
+            // Erstelle eine neue URL
+            let url = new URL(window.location.href);
+
+            // Füge Parameter hinzu
+            url.searchParams.append("param1", "wert1");
+            url.searchParams.append("param2", "wert2");
+
+            // Setze die URL mit den neuen Parametern
+            window.location.href = url.href;
+
+            // Ausgabe der URL mit Parametern
+            console.log("URL mit Parametern: " + url.href);
+        }
+
+        function leseParameter() {
+            // Erstelle eine neue URL
+            let url = new URL(window.location.href);
+
+            // Lese die Parameter
+            let param1 = url.searchParams.get("param1");
+            let param2 = url.searchParams.get("param2");
+
+            // Ausgabe der Parameter
+            console.log("param1: " + param1);
+            console.log("param2: " + param2);
+        }
+    </script>
+</body>
+</html>
