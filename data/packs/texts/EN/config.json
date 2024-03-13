@@ -1,0 +1,17 @@
+{
+    "formats":
+        {
+            "UTF": ["UTF-8"],
+            "clock": ["second", "minute", "hour"],
+            "date": ["day", "month", "year"]
+        },
+    "interaction":
+        {
+            "changeColor": ["change color"],
+            "moreOptions": ["more options"],
+            "imprintAndPrivacyPolicy": ["imprint and privacy policy"],
+            "creds": ["creator"],
+            "close": ["close"]
+        }
+            
+}

@@ -1,0 +1,126 @@
+* {
+    padding: 0%;
+    margin: 0;
+    overflow: hidden;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+.container#main_grid, #window_grid {
+    display: grid;
+    grid-template-areas:
+    "header"
+    "main"
+    "footer";
+    grid-template-rows: auto 1fr 5%;
+    grid-template-columns: 1fr;
+    align-content: space-between;
+}
+
+
+
+menu {
+    box-sizing: content-box;
+    padding: 0;
+    padding-left: 4vw; 
+    padding-right: 4vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+
+.quickmenu {
+    grid-area: header;
+}
+
+menu.quickmenu, footer, #window_header {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0.5rem, 1fr));
+    height: auto;
+    max-height: auto;
+    align-content: space-between;
+    justify-content: space-evenly;
+    align-content: stretch;
+    align-items: stretch;
+}
+
+menu.quickmenu :first-child {
+    justify-self: start;
+}
+
+menu.quickmenu :last-child {
+    justify-self: end;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    overflow: visible;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    grid-area: footer !important;
+    margin: 0%;
+    display: grid;
+    grid-template-columns: auto auto-fit auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer > div:first-child {
+    justify-self: start;
+}
+
+footer > div:last-child {
+    justify-self: end;
+}
+#mainMenuHolder, #infoBoxHolder {
+    background-color: var(--half-transparency-color);
+}
+.mainMenu{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    margin: 0;
+    overflow: visible;
+
+    height: auto !important;
+    width: 40vw;
+    height: 55vh !important;
+    
+}
+
+#window_main {
+    overflow: visible !important;
+}
+.container.active {
+    overflow: visible;
+}
+.mainMenu input[type="button"] {
+    top: 0.5rem; /* Passen Sie diesen Wert an die Größe Ihres Schattens an */
+    right: 0.5rem; /* Passen Sie diesen Wert an die Größe Ihres Schattens an */
+}
+.window_header {
+    padding:0.5rem;
+}
+.content_holder {
+    height: 100%;
+    width: 100%;
+}

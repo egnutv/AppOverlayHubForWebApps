@@ -13,30 +13,36 @@ async function textCopyPaste(area, file) {
 
     let supportedLang = await language.getTemplate("data/configs/main.json", "default/lang-support");
     let docLang = document.getElementsByTagName("html")[0].getAttribute("lang");
+
+    let langIsSuported = false;
+    for (let i = 0; i < supportedLang.length; i++) {
+        
+        if (supportedLang[i] == docLang.toUpperCase()){
+            langIsSuported = true;
+        } 
+    }
     let defaultLang = await language.getTemplate("data/configs/main.json", "default/lang");
 
     defaultLang = defaultLang.toString();
-    let findSupportedLang = supportedLang.find(lang => lang === docLang);
 
     let lang;
-    if (findSupportedLang !== docLang){
+    if (langIsSuported === false){
         console.error("Not supported lang. We use the default.");
-        lang = defaultLang;
-    } else {
-        
-        lang = docLang;
-    }
-
-    
-    console.warn("We set: " + lang);
-
-    if (docLang !== lang) {
-        console.error("Not supported lang in header. We replace that.");
-
+        console.warn("We set: " + lang);
         lang = lang.toLowerCase();
 
         document.documentElement.lang = lang;
+
+        lang = defaultLang.toUpperCase();
+    } else {
+        console.log(docLang.toUpperCase() + " is an supported lang")
+        lang = docLang.toUpperCase();
     }
+
+    
+    
+
+
     
 
     const text = new GetSetRemoveTemplateHelper;
@@ -45,7 +51,6 @@ async function textCopyPaste(area, file) {
     let selectAll = Array.from(aArea.querySelectorAll('*'));
 
 
-    console.log("Die Elemente: " + selectAll);
     let destinations = [];
 const startMarker = "++_$_";
 const endMarker = "_$_++";
@@ -61,25 +66,18 @@ for (let i = 0; i < selectAll.length; i++) {
     });
 }
 
-console.log("Die Klassen: " + destinations);
-console.log(destinations.length + " ist die Länge des Array")
-    
     
     
     for (let i = 0; i < destinations.length; i++) {
         
         let Destination = selectDomElement("." + destinations[i]);
         let getClassNames = Array.from(Destination.classList);
-        console.log("Klassen für Ziel " + (i+1) + ": " + getClassNames.join(", "));
-        console.warn("Ausgabe: " + getClassNames);
         /*let relevantClasses = getClassNames.filter(className => className.startsWith(startMarker) && className.endsWith(endMarker));
         getClassNames.forEach(className => Destination.classList.remove(className));
         relevantClasses.forEach(className => Destination.classList.add(className));
         console.warn("Relevante Klassen für Ziel " + relevantClasses);*/
         let relevantClasses = getClassNames.filter(className => className.startsWith(startMarker) && className.endsWith(endMarker));
-        console.warn("Relevante Klassen für Ziel " + relevantClasses);
         relevantClasses = relevantClasses.toString();
-        console.warn(relevantClasses)
 
 
         
@@ -97,6 +95,7 @@ console.log(destinations.length + " ist die Länge des Array")
             try {
                 valueOfText = await text.getTemplate("data/packs/texts/" + lang + "/config.json", textEntry);
             } catch (error) {
+                console.error("We cant find " + lang.toUpperCase() +". We get the defaul translation.");
                 valueOfText = await text.getTemplate("data/packs/texts/" + defaultLang + "/config.json", textEntry);
             }
             
@@ -111,10 +110,11 @@ console.log(destinations.length + " ist die Länge des Array")
             try {
                 valueOfText = await text.getTemplate("data/packs/texts/"  + lang + "/specific/" + file + ".json", textEntry);
             } catch (error) {
+                console.error("We cant find " + lang.toUpperCase() +". We get the defaul translation.");
                 valueOfText = await text.getTemplate("data/packs/texts/"  + defaultLang + "/specific/" + file + ".json", textEntry);
             }
         }
-        console.log(textEntry);
+   
             if (aDestination.nodeName === "INPUT"){
                 aDestination.value = valueOfText;
             } else {

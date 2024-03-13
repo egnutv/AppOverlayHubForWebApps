@@ -20,7 +20,7 @@
     
 }
 
-*:not(.allow-select){
+*:not(.allowSelect){
     cursor: default;
     user-select: none;
 }

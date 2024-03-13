@@ -1,4 +1,4 @@
-input[type="button"].bigButton{
+.bigButton{
     overflow: visible !important;
     background-color: var(--inactive-color);
     color: var(--activate-color);
@@ -15,7 +15,7 @@ input[type="button"].bigButton{
     transform: scale(1);
 }
 
-input[type="button"].bigButton:hover{
+.bigButton.hover{
     transition: 0.5s;
     background-color: var(--inactive-color);
     color: var(--activate-color);
@@ -23,7 +23,7 @@ input[type="button"].bigButton:hover{
     box-shadow: 0 0 0.5rem var(--activate-color);
     cursor: pointer;
 }
-input[type="button"].bigButton:focus{
+.bigButton.click{
     transition: 0.5s;
     background-color: var(--activate-color);
     color: var(--text-color);
@@ -32,7 +32,7 @@ input[type="button"].bigButton:focus{
     transform: scale(0.95);
 }
 
-input[type="button"].link {
+.link {
     background-color: (var(--transparency-color));
     overflow: visible !important;
     color: var(--text-color);
@@ -45,11 +45,11 @@ input[type="button"].link {
     cursor: pointer;
     transform: scale(1);
 }
-input[type="button"].link:hover {
+.link.hover {
     text-decoration: underline solid var(--text-color);
     transition: 0.5s;
 }
-input[type="button"].link:focus{
+.link.click{
     color: var(--activate-color);
     text-decoration: underline solid var(--activate-color);
     transition: 0.5s;

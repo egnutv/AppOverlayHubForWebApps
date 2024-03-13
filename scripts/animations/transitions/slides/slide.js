@@ -15,13 +15,6 @@ function slide(from, to, direction) {
     let toElement = selectDomElement(".newElement");
     
     let element = toElement; // Ersetzen Sie '#meinElement' durch die ID Ihres Elements
-let stil = window.getComputedStyle(element);
-let stilAlsString = '';
-for(let i = 0; i < stil.length; i++) {
-    let eigenschaft = stil[i];
-    stilAlsString += eigenschaft + ': ' + stil.getPropertyValue(eigenschaft) + '; ';
-}
-console.warn("Der Stil ist der folgende Stil gewesen: " + stilAlsString);
 
 
     let slideDiv;
@@ -46,7 +39,6 @@ console.warn("Der Stil ist der folgende Stil gewesen: " + stilAlsString);
     let newLeftPosition = 0;
     let newBottomPosition = 0;
 
-    console.log("Das Ziel " + destination + " " + destinationName + " ist das Element das gesucht wird")
     switch (direction) {
         case 'up':
             slideDiv.style.height = "200%";
@@ -106,7 +98,6 @@ console.warn("Der Stil ist der folgende Stil gewesen: " + stilAlsString);
     setTimeout(function() {
         toElement.classList.add("currentElement");
         toElement.classList.remove("newElement");
-        console.log("Dieser Text wird nach einer Millisekunde angezeigt.");
         slideDiv.style.transition = "750ms ease-in-out";
 
         slideDiv.style.left = newLeftPosition + "%";

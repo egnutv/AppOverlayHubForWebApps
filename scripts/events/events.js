@@ -1,6 +1,7 @@
 import { textCopyPaste } from "../controller/storageController/copyPasteRemoveController/textController.js"
+import { selectDomElement } from "../utils/selectDomElement.js";
 document.addEventListener("DOMContentLoaded", function() {
-    //ActiveEvent();
+    
     //AutoZIndex();
     triggerEvents();
     textCopyPaste(".start", "");
@@ -9,10 +10,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
 async function triggerEvents() {
     let interval = 500;
-    await removeFocusEvent();
+    //await removeFocusEvent();
     addTransition();
+    ActiveEvent();
 
     
+}
+
+function addClickClass() {
+    const button = selectDomElement("button");
+    const input = selectDomElement("input");
+
+
 }
 var stepCounter = 0;
     
@@ -72,28 +81,28 @@ function delayOnClickForInputButtons() {
 
 
 
-/*function ActiveEvent() {
-    let buttons = document.querySelectorAll("input[type='button']");
+function ActiveEvent() {
+    let buttons = document.querySelectorAll("input, button");
 
     buttons.forEach(button => {
         let events = [];
         button.addEventListener('click', function() {
             events.push('click');
-            this.id = 'active_clicked';
+            this.classList.add('click');
             setTimeout(() => {
-                this.id = '';
+                this.classList.remove('click');
             }, 500);
         })
         button.addEventListener('mouseover', function() {
             events.push('mouseover');
-            this.id = 'activate_hovered';
+            this.classList.add('hover');
         })
         button.addEventListener('mouseout', function() {
             events = [];
-            this.id = '';
+            this.classList.remove('hover');
         })
     });
-}*/
+}
 
 export { triggerEvents };
 window.triggerEvents = triggerEvents;
