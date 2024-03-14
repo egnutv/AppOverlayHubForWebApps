@@ -3,6 +3,7 @@
     "lang": ["DE"],
     "lang-support": ["DE", "EN"],
     "theme": ["darkmode"],
-    "lengthOfAnimation": ["250ms", "500ms", "750ms"]
+    "lengthOfAnimation": ["250ms", "500ms", "750ms"],
+    "site": ["start"]
   }
 }

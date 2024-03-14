@@ -57,6 +57,7 @@ class GetSetRemoveTemplateHelper {
 
     async setTemplate(value, setAs, className, destination) {
         let aDestination = selectDomElement(destination);
+        
         if (!aDestination) {
             //console.log('Destination not found');
             return;
@@ -91,6 +92,7 @@ class GetSetRemoveTemplateHelper {
     }
 
     async #setContainer(value, className, aDestination){
+
         let countDestinationElements = aDestination.childlength;
         console.log("Das ist die Anzahl: " + countDestinationElements + " mit dem Ziel: " + aDestination);
         let tempDiv;

@@ -36,6 +36,7 @@ async function textCopyPaste(area, file) {
         await adress.setUrl("lang", defaultLang);
         adressLang === await adress.getUrl("lang");
     }
+   
 
     
 

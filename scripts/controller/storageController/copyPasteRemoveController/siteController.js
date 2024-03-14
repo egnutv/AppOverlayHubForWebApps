@@ -14,6 +14,8 @@ async function siteCopyPaste(indexEntry, destination, hidden) {
         indexEntry = indexEntry.replace('#', '');
     } catch (error) {}
     
+    console.log("Der Wert der des Indexes was eingegeben wurde: " + indexEntry);
+    
     const index = new GetSetRemoveTemplateHelper;
     let valueOfIndex = await index.getTemplate("data/packs/templates/sites/index.json", "index/" + indexEntry);
     valueOfIndex = valueOfIndex.toString();
