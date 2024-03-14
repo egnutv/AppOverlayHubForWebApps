@@ -1,10 +1,12 @@
+import { initSite } from "../controller/loadController/initSite.js";
 import { textCopyPaste } from "../controller/storageController/copyPasteRemoveController/textController.js"
 import { selectDomElement } from "../utils/selectDomElement.js";
 document.addEventListener("DOMContentLoaded", function() {
     
+    initSite();
     //AutoZIndex();
     triggerEvents();
-    textCopyPaste(".start", "");
+    //textCopyPaste(".start", "");
 
 });
 

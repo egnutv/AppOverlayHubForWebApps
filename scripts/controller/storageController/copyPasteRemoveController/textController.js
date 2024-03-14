@@ -1,42 +1,60 @@
 import { GetSetRemoveTemplateHelper } from "../../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
 import { selectDomElement } from "../../../utils/selectDomElement.js";
+import { GetSetRemoveUrlHelper } from "../../../helper/parameterHelper/GetSetRemoveUrlHelper.js";
 
 async function textCopyPaste(area, file) {
     const language = new GetSetRemoveTemplateHelper;
+    const adress = new GetSetRemoveUrlHelper;
     //let area = "body"
     //let file = ".moreOptions";
     if (file === "") {
         file = area;
     }
+
+    
     //lang wird aus verschiedenen Quellen gelesen: 1x aus head. 1x aus der main.js
     // example: try textCopyPaste("area", LANGfilename)
 
     let supportedLang = await language.getTemplate("data/configs/main.json", "default/lang-support");
+    let adressLang = await adress.getUrl("lang");
     let docLang = document.getElementsByTagName("html")[0].getAttribute("lang");
 
+    
+    let defaultLang = await language.getTemplate("data/configs/main.json", "default/lang");
+    defaultLang = defaultLang.toString();
+
+    
+    
     let langIsSuported = false;
     for (let i = 0; i < supportedLang.length; i++) {
         
-        if (supportedLang[i] == docLang.toUpperCase()){
+        if (supportedLang[i] == adressLang.toUpperCase()){
             langIsSuported = true;
         } 
     }
-    let defaultLang = await language.getTemplate("data/configs/main.json", "default/lang");
+    if (adressLang == null || langIsSuported === false){
+        await adress.setUrl("lang", defaultLang);
+        adressLang === await adress.getUrl("lang");
+    }
 
-    defaultLang = defaultLang.toString();
+    
 
     let lang;
     if (langIsSuported === false){
         console.error("Not supported lang. We use the default.");
         console.warn("We set: " + lang);
         lang = lang.toLowerCase();
-
-        document.documentElement.lang = lang;
-
+        document.documentElement.lang = defaultLang;
         lang = defaultLang.toUpperCase();
+
+        await adress.setUrl("lang", defaultLang);
+
+
     } else {
-        console.log(docLang.toUpperCase() + " is an supported lang")
-        lang = docLang.toUpperCase();
+        console.log(adressLang.toUpperCase() + " is an supported lang")
+
+        document.documentElement.lang = adressLang.toLowerCase();
+        lang = adressLang.toUpperCase();
     }
 
     

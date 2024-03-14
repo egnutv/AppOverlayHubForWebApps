@@ -3,8 +3,9 @@ import { textCopyPaste } from "../storageController/copyPasteRemoveController/te
 import { slide } from "../../animations/transitions/slides/slide.js";
 import { GetSetRemoveTemplateHelper } from "../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
 import { selectDomElement } from "../../utils/selectDomElement.js";
+import { GetSetRemoveUrlHelper } from "../../helper/parameterHelper/GetSetRemoveUrlHelper.js";
 
-async function createNewSite(destination, from, to, direction, callback) {
+async function createNewSite(destination, from, to, direction, setNewURL, callback) {
     /*let destination = "body";
     let from = ".container2";
     let to = ".imprintAndPrivacyPolicy"; 
@@ -13,6 +14,19 @@ async function createNewSite(destination, from, to, direction, callback) {
     await siteCopyPaste(to, destination, "true");
     await textCopyPaste(to, "");
     await slide(from, to, direction);
+
+    
+    if (setNewURL === "setNewURL") {
+        let wantedURL;
+        if (to.charAt(0) == "."){
+            wantedURL = to.replace(".", "");
+        } else if (to.charAt(0) == "#") {
+            wantedURL = to.replace("#", "");
+        }
+        const adress = new GetSetRemoveUrlHelper();
+        await adress.setUrl("site", wantedURL);
+    }
+    
     
     const remove = new GetSetRemoveTemplateHelper;
 
@@ -42,7 +56,8 @@ async function createNewSite(destination, from, to, direction, callback) {
                             direction = "right";
                         break;
                     }
-                    childElement[0].setAttribute('onclick', 'createNewSite(\'' + destination + '\', \'' + to + '\', \'' + from + '\', \'' + direction + '\', false)');
+                    childElement[0].setAttribute('onclick', 'createNewSite(\'' + destination + '\', \'' + to + '\', \'' + from + '\', \'' + direction + '\', \'' + setNewURL + '\', false)');
+
                     console.log(childElement[0] + " ist das Kind von " + toElement);
                     
                 }

@@ -13,6 +13,7 @@ function slide(from, to, direction) {
 
     let fromElement = selectDomElement(".currentElement");
     let toElement = selectDomElement(".newElement");
+    //toElement.style.display = "none";
     
     let element = toElement; // Ersetzen Sie '#meinElement' durch die ID Ihres Elements
 

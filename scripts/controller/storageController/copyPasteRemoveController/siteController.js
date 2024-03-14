@@ -1,7 +1,9 @@
 import { GetSetRemoveTemplateHelper } from "../../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
-
+import { GetSetRemoveUrlHelper } from "../../../helper/parameterHelper/GetSetRemoveUrlHelper.js"
 async function siteCopyPaste(indexEntry, destination, hidden) {
     let pasteMode;
+
+    
     //example:
     //const indexEntry = "imprintAndPrivacyPolicy";
     //const destination = "body";
@@ -11,6 +13,7 @@ async function siteCopyPaste(indexEntry, destination, hidden) {
     try {
         indexEntry = indexEntry.replace('#', '');
     } catch (error) {}
+    
     const index = new GetSetRemoveTemplateHelper;
     let valueOfIndex = await index.getTemplate("data/packs/templates/sites/index.json", "index/" + indexEntry);
     valueOfIndex = valueOfIndex.toString();
@@ -25,6 +28,8 @@ async function siteCopyPaste(indexEntry, destination, hidden) {
     }
 
     entry.setTemplate(valueOfEntry, pasteMode, indexEntry, destination);
+    
+    
     
 }
 
