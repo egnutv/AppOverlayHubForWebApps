@@ -5,10 +5,13 @@ document.addEventListener("DOMContentLoaded", function() {
     
     initSite();
     //AutoZIndex();
+    createFontSize();
     triggerEvents();
     //textCopyPaste(".start", "");
 
 });
+
+window.addEventListener('resize', createFontSize);
 
 async function triggerEvents() {
     let interval = 500;
@@ -27,6 +30,77 @@ function addClickClass() {
 }
 var stepCounter = 0;
     
+/*async function createFontSize() {
+    let screenWidth = screen.width;
+    let screenHeight = screen.height;
+    let areaSize = screenHeight + screenWidth;
+    console.log(areaSize)
+    let wantedLetterSize = areaSize / 100 / 10;
+
+    let ratio;
+    if (areaSize <= 921.6) {
+        wantedLetterSize = 1.7;
+    } else if (areaSize > 921.6 && areaSize <= 2073.6) {
+        ratio = (areaSize - 921.6) / (2073.6 - 921.6);
+        wantedLetterSize = 1.7 - (0.3 * ratio); // Sinkt von 1.7 auf 1.4
+    } else if (areaSize > 2073.6 && areaSize <= 8294.4) {
+        ratio = (areaSize - 2073.6) / (8294.4 - 2073.6);
+        wantedLetterSize = 1.4 + (0.6 * ratio); // Steigt von 1.4 auf 2
+    } else if (areaSize > 8294.4) {
+        wantedLetterSize = 2;
+    }
+
+    // Erstelle die CSS-Regel
+    const cssRule = `* { font-size: ${wantedLetterSize}rem; }`;
+
+    // Überprüfe, ob das <style>-Element bereits existiert
+    let styleTag = document.getElementById('dynamicFontSize');
+    if (styleTag) {
+        // Wenn das <style>-Element existiert, aktualisiere einfach seinen Inhalt
+        styleTag.textContent = cssRule;
+    } else {
+        // Wenn das <style>-Element nicht existiert, erstelle es und füge es zum <head> hinzu
+        styleTag = document.createElement('style');
+        styleTag.id = 'dynamicFontSize';
+        styleTag.textContent = cssRule;
+        const head = document.head;
+        head.insertBefore(styleTag, head.firstChild);
+    }
+}*/
+
+async function createFontSize() {
+    
+        let standardScrennSizes = [
+            800 * 600,     // 15 Zoll
+            1280 * 1024,   // 17 Zoll
+            1600 * 900,    // 22 Zoll
+            1920 * 1080,   // 24 Zoll
+            2560 * 1440,   // 27 Zoll
+            3840 * 2160,   // 32 Zoll
+            3440 * 1440    // 34 Zoll
+        ];
+
+        for (let i = 0; i < standardScrennSizes.length; i++) {
+            let standardScreenSize = standardScrennSizes[i];
+            console.log("Flächeninhalt: " + standardScreenSize)
+
+            let standardScreenSizeValue = standardScreenSize / 100 / 100 / 10;
+
+            console.log("standardScreenSizeValue: " + standardScreenSizeValue)
+
+            standardScrennSizes[i] = standardScreenSizeValue;
+            //standardScrennSizes[i] = standardScreenSize;
+            
+        }
+
+        console.log("Der Array über die Screengröße: " +  standardScrennSizes);
+
+        
+        
+}
+
+
+
 
 /*function AutoZIndex() {
 

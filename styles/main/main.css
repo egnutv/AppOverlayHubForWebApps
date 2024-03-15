@@ -20,10 +20,12 @@
     
 }
 
-*:not(.allowSelect){
+*{
     cursor: default;
     user-select: none;
 }
+
+
 
 body {
     font-family: sans-serif;

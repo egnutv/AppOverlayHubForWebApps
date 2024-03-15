@@ -5,9 +5,9 @@
     width: auto !important;
     height: auto !important;
     padding: 0%;
-    border-radius: 3rem;
+    border-radius: 3em;
     box-sizing: border-box;
-    border: 1rem solid transparent !important;
+    border: 0.5em solid transparent !important;
     max-width: auto !important;
     min-width: auto !important;
     
@@ -70,10 +70,12 @@
 
 
 ::-webkit-scrollbar {
-    width: 3mm;
+    width: 0.7rem;
 }
 ::-webkit-scrollbar-track {
     background-color: var(--transparency-color);
+    cursor: auto;
+    user-select: auto;
 }
 
 ::-webkit-scrollbar-thumb {
