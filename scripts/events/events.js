@@ -70,34 +70,93 @@ var stepCounter = 0;
 
 async function createFontSize() {
     
-        let standardScrennSizes = [
-            800 * 600,     // 15 Zoll
-            1280 * 1024,   // 17 Zoll
-            1600 * 900,    // 22 Zoll
-            1920 * 1080,   // 24 Zoll
-            2560 * 1440,   // 27 Zoll
-            3840 * 2160,   // 32 Zoll
-            3440 * 1440    // 34 Zoll
-        ];
+    let standardScreenSize = [
+        800 * 600,     // 15 Zoll
+        1280 * 1024,   // 17 Zoll
+        1600 * 900,    // 22 Zoll
+        1920 * 1080,   // 24 Zoll
+        2560 * 1440,   // 27 Zoll
+        3840 * 2160,   // 32 Zoll
+        3440 * 1440,    // 34 Zoll
+    ];
 
-        for (let i = 0; i < standardScrennSizes.length; i++) {
-            let standardScreenSize = standardScrennSizes[i];
-            console.log("Flächeninhalt: " + standardScreenSize)
+    for (let i = 0; i < standardScreenSize.length; i++) {
+        let standardScreenSizeValue = standardScreenSize[i] / 100 / 100 / 10;
+        standardScreenSize[i] = standardScreenSizeValue;
+    }
+    standardScreenSize.sort(function (a, b) {return a - b;});
+    console.log("Der Array über die Screengröße: " +  standardScreenSize);
+    let averageValue;
+    if (standardScreenSize.length % 2 === 1) {
+        averageValue = standardScreenSize[Math.floor(standardScreenSize.length / 2)];
+    } else {
+        let middlePart1 = standardScreenSize[standardScreenSize.length / 2 - 1];
+        let middlePart2 = standardScreenSize[standardScreenSize.length / 2];
+        averageValue = (middlePart1 + middlePart2) / 2;
+    }
 
-            let standardScreenSizeValue = standardScreenSize / 100 / 100 / 10;
+    console.log("Mittelwert: " + averageValue);
 
-            console.log("standardScreenSizeValue: " + standardScreenSizeValue)
+    let clientScreenSize = screen.width * screen.height;
+    console.log("Der Screengröße: " + clientScreenSize);
 
-            standardScrennSizes[i] = standardScreenSizeValue;
-            //standardScrennSizes[i] = standardScreenSize;
-            
-        }
+    let clientScreenSizeValue = clientScreenSize / 100 / 100 / 10;
+    console.log("clientScreenSizeValue: " + clientScreenSizeValue);
 
-        console.log("Der Array über die Screengröße: " +  standardScrennSizes);
+    let negativeValues = standardScreenSize.filter(value => value < averageValue);
+    let positiveValues = standardScreenSize.filter(value => value > averageValue);
 
-        
-        
+    console.log("Negative Werte: " + negativeValues);
+    console.log("Positive Werte: " + positiveValues);
+
+    let negativeIncreaseRate = negativeValues.map(value => {
+        let rate = (averageValue - value) / averageValue * 100;
+        return rate < 100 ? 100 - rate : rate;
+    });
+    let positiveIncreaseRate = positiveValues.map(value => {
+        let rate = (value - averageValue) / averageValue * 100;
+        return rate < 100 ? 100 - rate : rate;
+    });
+
+    console.log("Rate der Steigerung der negativen Werte: " + negativeIncreaseRate);
+    console.log("Rate der Steigerung der positiven Werte: " + positiveIncreaseRate);
+
+    let negativeFactors = negativeIncreaseRate.map(rate => rate / 100);
+    let positiveFactors = positiveIncreaseRate.map(rate => rate / 100);
+
+    console.log("Faktoren der negativen Werte: " + negativeFactors);
+    console.log("Faktoren der positiven Werte: " + positiveFactors);
+
+    let clientPositiveIncreaseRate;
+    let clientNegativeIncreaseRate;
+    let clientEqualIncreaseRate;
+
+    if (clientScreenSizeValue === averageValue){
+        console.log("ist gleich");
+        clientEqualIncreaseRate = 0;
+    } else if (clientScreenSizeValue > averageValue) {
+        console.log("ist größer");
+        let rate = (clientScreenSizeValue - averageValue) / averageValue * 100;
+        clientPositiveIncreaseRate = rate < 100 ? 100 - rate : rate;
+        console.log("Client: " + clientPositiveIncreaseRate);
+    } else if (clientScreenSizeValue < averageValue) {
+        console.log("ist kleiner");
+        let rate = (averageValue - clientScreenSizeValue) / averageValue * 100;
+        clientNegativeIncreaseRate = rate < 100 ? 100 - rate : rate;
+        console.log("Client: " + clientNegativeIncreaseRate);
+    }
+
+
+    
+    
 }
+
+
+
+
+
+
+
 
 
 
