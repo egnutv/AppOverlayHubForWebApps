@@ -30,7 +30,7 @@ function addClickClass() {
 }
 var stepCounter = 0;
     
-/*async function createFontSize() {
+async function x() {
     let screenWidth = screen.width;
     let screenHeight = screen.height;
     let areaSize = screenHeight + screenWidth;
@@ -66,10 +66,13 @@ var stepCounter = 0;
         const head = document.head;
         head.insertBefore(styleTag, head.firstChild);
     }
-}*/
+}
 
 async function createFontSize() {
-    
+    let maxFontSize = 1.7;
+    let fontSize = 1.4;
+    let nextFontSize = 0.2;
+
     let standardScreenSize = [
         800 * 600,     // 15 Zoll
         1280 * 1024,   // 17 Zoll
@@ -85,7 +88,6 @@ async function createFontSize() {
         standardScreenSize[i] = standardScreenSizeValue;
     }
     standardScreenSize.sort(function (a, b) {return a - b;});
-    console.log("Der Array über die Screengröße: " +  standardScreenSize);
     let averageValue;
     if (standardScreenSize.length % 2 === 1) {
         averageValue = standardScreenSize[Math.floor(standardScreenSize.length / 2)];
@@ -95,60 +97,138 @@ async function createFontSize() {
         averageValue = (middlePart1 + middlePart2) / 2;
     }
 
-    console.log("Mittelwert: " + averageValue);
 
     let clientScreenSize = screen.width * screen.height;
-    console.log("Der Screengröße: " + clientScreenSize);
 
-    let clientScreenSizeValue = clientScreenSize / 100 / 100 / 10;
-    console.log("clientScreenSizeValue: " + clientScreenSizeValue);
+    clientScreenSize = clientScreenSize / 100 / 100 / 10;
+    
 
     let negativeValues = standardScreenSize.filter(value => value < averageValue);
+    negativeValues = negativeValues.reverse();
     let positiveValues = standardScreenSize.filter(value => value > averageValue);
 
-    console.log("Negative Werte: " + negativeValues);
-    console.log("Positive Werte: " + positiveValues);
 
     let negativeIncreaseRate = negativeValues.map(value => {
         let rate = (averageValue - value) / averageValue * 100;
-        return rate < 100 ? 100 - rate : rate;
+        return rate;
     });
     let positiveIncreaseRate = positiveValues.map(value => {
         let rate = (value - averageValue) / averageValue * 100;
-        return rate < 100 ? 100 - rate : rate;
+        return rate;
     });
-
-    console.log("Rate der Steigerung der negativen Werte: " + negativeIncreaseRate);
-    console.log("Rate der Steigerung der positiven Werte: " + positiveIncreaseRate);
 
     let negativeFactors = negativeIncreaseRate.map(rate => rate / 100);
     let positiveFactors = positiveIncreaseRate.map(rate => rate / 100);
 
-    console.log("Faktoren der negativen Werte: " + negativeFactors);
-    console.log("Faktoren der positiven Werte: " + positiveFactors);
 
-    let clientPositiveIncreaseRate;
-    let clientNegativeIncreaseRate;
-    let clientEqualIncreaseRate;
+    let factors;
+    let increaseRate;
 
-    if (clientScreenSizeValue === averageValue){
-        console.log("ist gleich");
-        clientEqualIncreaseRate = 0;
-    } else if (clientScreenSizeValue > averageValue) {
-        console.log("ist größer");
-        let rate = (clientScreenSizeValue - averageValue) / averageValue * 100;
-        clientPositiveIncreaseRate = rate < 100 ? 100 - rate : rate;
-        console.log("Client: " + clientPositiveIncreaseRate);
-    } else if (clientScreenSizeValue < averageValue) {
-        console.log("ist kleiner");
-        let rate = (averageValue - clientScreenSizeValue) / averageValue * 100;
-        clientNegativeIncreaseRate = rate < 100 ? 100 - rate : rate;
-        console.log("Client: " + clientNegativeIncreaseRate);
+    let clientIncreaseRate;
+    let clientFactor;
+
+    let negative = false;
+
+    if (clientScreenSize === averageValue){
+        clientIncreaseRate = 0;
+        clientFactor = 0;
+    
+        increaseRate = [0];
+        factors = [0];
+    
+    } else if (clientScreenSize > averageValue) {
+
+
+
+        let clientSizeValue = clientScreenSize;
+        let rate = (clientSizeValue - averageValue) / averageValue * 100;
+        clientIncreaseRate = rate;
+
+        clientFactor = [clientIncreaseRate].map(rate => rate / 100);
+
+        increaseRate = positiveIncreaseRate;
+        factors = positiveFactors;
+
+    } else if (clientScreenSize < averageValue) {
+
+        let clientSizeValue = clientScreenSize;
+        let rate = (averageValue - clientSizeValue) / averageValue * 100;
+        clientIncreaseRate = rate;
+
+        clientFactor = [clientIncreaseRate].map(rate => rate / 100);
+
+        increaseRate = negativeIncreaseRate
+        factors = negativeFactors;
+
+        negative = true;
+        
     }
 
+    
+    if (factors.includes(0)) {
+    } else {
+        factors.unshift(0);
+    }
 
+    let fontSizes = [];
+    
+    for (let i = 0; i < factors.length; i++) {
+
+        if (i !== 0) {
+            fontSize = fontSize + nextFontSize;
+        fontSize = parseFloat(fontSize.toFixed(2));  // Rundet auf 2 Dezimalstellen
+        }
+        fontSizes.push(fontSize)
+        
+    }
     
     
+    
+    if (clientFactor === factors[0]) {
+    fontSize = fontSize;
+} else if (clientFactor < factors[factors.length - 1]) {
+    let exist = factors.includes(clientFactor);
+    if (exist) {
+        let index = factors.indexOf(clientFactor);
+        fontSize = fontSizes[index];
+    } else {
+        let index;
+        for (let i = 0; i < factors.length - 1; i++) {
+            if (clientFactor >= factors[i] && clientFactor < factors[i + 1]) {
+                index = i;
+                break;
+            }
+        }
+
+        //ratio = ((clientFactor - factors[index]) / (factors[index + 1] - factors[index]))
+        fontSize = (fontSizes[index] / factors[index + 1]) * clientFactor;
+    }
+} else if (clientFactor >= factors[factors.length - 1]) {
+    fontSize = ((fontSizes[fontSizes.length - 1] / factors[factors.length - 1]) * clientFactor);
+    }
+
+if (negative && fontSize > maxFontSize) {
+    fontSize = maxFontSize;
+} 
+
+// Erstelle die CSS-Regel
+const cssRule = `* { font-size: ${fontSize}rem; }`;
+
+// Überprüfe, ob das <style>-Element bereits existiert
+let styleTag = document.getElementById('dynamicFontSize');
+if (styleTag) {
+    // Wenn das <style>-Element existiert, aktualisiere einfach seinen Inhalt
+    styleTag.textContent = cssRule;
+} else {
+    // Wenn das <style>-Element nicht existiert, erstelle es und füge es zum <head> hinzu
+    styleTag = document.createElement('style');
+    styleTag.id = 'dynamicFontSize';
+    styleTag.textContent = cssRule;
+    const head = document.head;
+    head.insertBefore(styleTag, head.firstChild);
+}
+
+
 }
 
 
