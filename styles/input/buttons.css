@@ -93,3 +93,7 @@
     transition-delay: 0.5s;
 }
 
+.text, .text:nth-child() {
+    cursor: text;
+    user-select: text;
+}

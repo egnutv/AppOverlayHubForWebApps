@@ -1,31 +1,29 @@
 class GetSetRemoveUrlHelper {
-    async setUrl(...varValues) {
+    async setUrl(varName, varValue) {
         let url = new URL(window.location.href);
-        url.pathname = '/' + varValues.join('/');
+        url.searchParams.set(varName, varValue);
         history.pushState({}, '', url.href);
     }
 
-    async getUrl(index) {
+    async getUrl(varName) {
         let url = new URL(window.location.href);
-        let params = url.pathname.split('/');
-        return params[index + 1]; // +1 to ignore the first empty string from split
+        return url.searchParams.get(varName);
     }
 
-    async removeUrl(index) {
+    async removeUrl(varName) {
         let url = new URL(window.location.href);
-        let params = url.pathname.split('/');
-        if (index !== undefined) {
+
+        if (varName) {
             // Einzelnen Parameter entfernen
-            params.splice(index + 1, 1); // +1 to ignore the first empty string from split
+            url.searchParams.delete(varName);
         } else {
-            // Gesamten Pfad entfernen
-            params = [''];
+            // Gesamten Query-String entfernen
+            url.search = '';
         }
-        url.pathname = params.join('/');
+
         history.pushState({}, '', url.href);
     }
 }
-
 export { GetSetRemoveUrlHelper };
 
 

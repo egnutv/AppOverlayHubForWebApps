@@ -20,9 +20,13 @@
     
 }
 
-*{
+*:not(.text:nth-child()){
     cursor: default;
     user-select: none;
+}
+.text:nth-child() {
+    cursor: text;
+    user-select: text;
 }
 
 

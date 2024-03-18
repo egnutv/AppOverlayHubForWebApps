@@ -124,3 +124,8 @@ footer > div:last-child {
     height: 100%;
     width: 100%;
 }
+
+.text, .text:nth-child() {
+    cursor: text;
+    user-select: text;
+}
