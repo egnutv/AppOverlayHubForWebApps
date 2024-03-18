@@ -1,3 +1,5 @@
-import { siteCopyPaste } from "./scripts/controller/storageController/copyPasteRemoveController/siteController.js";
+import { testGet, testRemove, testSet } from "./testFunctions.js";
 
-window.siteCopyPaste = siteCopyPaste();
+window.testGet = testGet;
+window.testSet = testSet;
+window.testRemove = testRemove;

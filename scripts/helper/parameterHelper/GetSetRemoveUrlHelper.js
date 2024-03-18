@@ -1,96 +1,27 @@
 class GetSetRemoveUrlHelper {
-    async setUrl(...varValues) {
+    async setUrl(varName, varValue) {
         let url = new URL(window.location.href);
-        url.pathname = '/' + varValues.join('/');
+        url.searchParams.set(varName, varValue);
         history.pushState({}, '', url.href);
     }
 
-    async getUrl(index) {
+    async getUrl(varName) {
         let url = new URL(window.location.href);
-        let params = url.pathname.split('/');
-        return params[index + 1]; // +1 to ignore the first empty string from split
+        return url.searchParams.get(varName);
     }
 
-    async removeUrl(index) {
+    async removeUrl(varName) {
         let url = new URL(window.location.href);
-        let params = url.pathname.split('/');
-        if (index !== undefined) {
+
+        if (varName) {
             // Einzelnen Parameter entfernen
-            params.splice(index + 1, 1); // +1 to ignore the first empty string from split
+            url.searchParams.delete(varName);
         } else {
-            // Gesamten Pfad entfernen
-            params = [''];
+            // Gesamten Query-String entfernen
+            url.search = '';
         }
-        url.pathname = params.join('/');
+
         history.pushState({}, '', url.href);
     }
 }
-
 export { GetSetRemoveUrlHelper };
-
-
-let callNUM = 1;
-async function testCall() {
-    console.warn("Zahl der Aufrufe: " +  callNUM)
-    switch (callNUM) {
-        case 0:
-            await testSet(); // Warte auf das Ergebnis der asynchronen Methode
-            break;
-        case 1:
-            await testRead(); // Warte auf das Ergebnis der asynchronen Methode
-            break;
-    }
-    callNUM = callNUM + 1;
-}
-
-async function testSet() {
-    const value = new GetSetRemoveUrlHelper();
-    let valueOfName = "lang";
-    let valueOfValue = "EN";
-    console.log("Die Werte in der URL: Der VariablenName: " + valueOfName + " Der VariabelnWert: " + valueOfValue);
-    let x = await value.setUrl(valueOfName, valueOfValue); // Warte auf das Ergebnis der asynchronen Methode
-    x;
-}
-async function testSet2() {
-    const value = new GetSetRemoveUrlHelper();
-    let valueOfName = "x";
-    let valueOfValue = "yyyy";
-    console.log("Die Werte in der URL: Der VariablenName: " + valueOfName + " Der VariabelnWert: " + valueOfValue);
-    let x = await value.setUrl(valueOfName, valueOfValue); // Warte auf das Ergebnis der asynchronen Methode
-    x;
-}
-
-async function testRead() {
-    let valueOfName = "lang";
-    const value = new GetSetRemoveUrlHelper();
-    let searchedValue = await value.getUrl(valueOfName); // Warte auf das Ergebnis der asynchronen Methode
-    console.log("Der gesuchte Wert des URL-Parameters ist: " + searchedValue);
-}
-
-async function testRemove() {
-    const value = new GetSetRemoveUrlHelper();
-
-    // Entferne den Parameter "lang"
-    await value.removeUrl();
-
-    // Entferne den gesamten Query-String
-    // value.removeUrl();
-
-    // Aktualisiere die URL
-    console.log('Aktuelle URL nach dem Entfernen:');
-    console.log(window.location.href);
-}
-
-async function testRemoveONE() {
-    const value = new GetSetRemoveUrlHelper();
-
-    // Entferne den Parameter "lang"
-    await value.removeUrl('lang');
-
-    // Entferne den gesamten Query-String
-    // value.removeUrl();
-
-    // Aktualisiere die URL
-    console.log('Aktuelle URL nach dem Entfernen:');
-    console.log(window.location.href);
-}
