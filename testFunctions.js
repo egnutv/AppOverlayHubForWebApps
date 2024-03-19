@@ -9,12 +9,11 @@ async function testSet() {
 async function testGet() {
     const site = new GetSetRemoveUrlHelper();
 
-    let getting = site.getUrl();
+    let getting = site.getUrl(XY);
 
 
     let output = document.getElementById("output");
-    console.log("X");
-    output.innerHTML = "Ein ominöser Output";
+    output.innerHTML = "Ausgelesener Wert: " + getting;
     console.log();
 }
 

@@ -70,6 +70,9 @@ async function x() {
 
 async function createFontSize() {
     let maxFontSize = 1.7;
+    if (screen.height < screen.width) {
+        maxFontSize = 1.4;
+    }
     let fontSize = 1.4;
     let nextFontSize = 0.2;
 

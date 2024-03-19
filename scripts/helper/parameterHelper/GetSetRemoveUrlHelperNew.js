@@ -5,17 +5,52 @@ class GetSetRemoveUrlHelper {
         history.pushState({}, '', url);
     }
     
-    async getUrl(segmentValue) {
-        console.log("HI")
+    async getUrlCoating(segmentValue) {
         let url = new URL(window.location.href);
         let segments = url.pathname.split('/');
-        let x = ((segments.length - 1) - 1); // -1 to ignore the first empty string from split
-        console.log(x)
-        await this.setUrl("XY");
-        url = new URL(window.location.href);
-        segments = url.pathname.split('/');
-        console.log(x)
+        segments = segments.slice(1); // remove the first empty string from split
+        let segmentInfo = [];
+        for (let i = 0; i < segments.length; i++) {
+            if (segments[i] !== 'index.html' && segments[i] !== url.hostname) {
+                if (segments[i] === segmentValue) {
+                    segmentInfo.push("Segment " + (i+1) + ": " + segments[i] + " (found)");
+                } else {
+                    segmentInfo.push("Segment " + (i+1) + ": " + segments[i]);
+                }
+            }
+        }
+        return segmentInfo;
     }
+
+    async getUrlValueName(position) {
+        let url = new URL(window.location.href);
+        let segments = url.pathname.split('/');
+        segments = segments.slice(1); // remove the first empty string from split
+        let adjustedSegments = segments.filter(segment => segment !== 'index.html' && segment !== url.hostname);
+        if (position >= 1 && position <= adjustedSegments.length) {
+            return adjustedSegments[position - 1];
+        } else {
+            return "Position out of range";
+        }
+    }
+
+    async getUrl(name){
+        let want;
+        switch (name) {
+            case ("lang"):
+            want = await this.getUrlValueName(1);
+              
+            break;
+        
+            case("site"):
+            break;
+
+            default:
+            break;
+        }
+    }
+    
+    
     
 
     #constURL(varName) {
@@ -30,20 +65,8 @@ class GetSetRemoveUrlHelper {
     }
 
     async removeUrl(paramName) {
-        let url = new URL(window.location.href);
-        let params = url.pathname.split('/');
-        let index = this.#constURL().indexOf(paramName);
-
-        if (index !== -1) {
-            params.splice(index + 1, 1); // +1 to ignore the first empty string from split
-        } else {
-            console.error("Ungültiger Parametername: " + paramName);
-            return;
-        }
-
-        url.pathname = params.join('/');
-        history.pushState({}, '', url.href);
     }
 }
+
 
 export { GetSetRemoveUrlHelper };
