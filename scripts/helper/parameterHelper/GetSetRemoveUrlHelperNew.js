@@ -1,71 +1,83 @@
 class GetSetRemoveUrlHelper {
     async setUrl(segmentValue) {
-        let url = new URL(window.location.href);
-        url.pathname += '/' + segmentValue;
-        history.pushState({}, '', url);
+        try {
+            let position = await this.getSegmentPosition(segmentValue);
+            position;
+        } catch (error) {
+            let url = new URL(window.location.href);
+            url.pathname += '/' + segmentValue;
+            history.pushState({}, '', url);
+        }
     }
     
-    async getUrlCoating(segmentValue) {
-        let url = new URL(window.location.href);
-        let segments = url.pathname.split('/');
-        segments = segments.slice(1); // remove the first empty string from split
-        let segmentInfo = [];
-        for (let i = 0; i < segments.length; i++) {
-            if (segments[i] !== 'index.html' && segments[i] !== url.hostname) {
-                if (segments[i] === segmentValue) {
-                    segmentInfo.push("Segment " + (i+1) + ": " + segments[i] + " (found)");
-                } else {
-                    segmentInfo.push("Segment " + (i+1) + ": " + segments[i]);
-                }
-            }
+    async getSegmentPosition(segmentValue) {
+        let wantedValuesOfAdress = await this.#filterUrl();
+        let getPosOfAdress = wantedValuesOfAdress.indexOf(segmentValue);
+    
+        if (getPosOfAdress === (1 - 2)) {
+            throw new Error(null);
+        } else {
+            return getPosOfAdress;
         }
-        return segmentInfo;
-    }
+    }    
 
     async getUrlValueName(position) {
-        let url = new URL(window.location.href);
-        let segments = url.pathname.split('/');
-        segments = segments.slice(1); // remove the first empty string from split
-        let adjustedSegments = segments.filter(segment => segment !== 'index.html' && segment !== url.hostname);
-        if (position >= 1 && position <= adjustedSegments.length) {
-            return adjustedSegments[position - 1];
+        let wantedValuesOfAdress = await this.#filterUrl();
+        if (wantedValuesOfAdress == "") {
+            throw new Error("No content");
         } else {
-            return "Position out of range";
+            return wantedValuesOfAdress[position]
         }
     }
 
-    async getUrl(name){
+    async #filterUrl() {
+        let adress = window.location.href;
+        let wants = adress.split("/");
+        console.log(wants);
+        for (let i = 0; i < wants.length; i++) {
+            if (wants[i].includes(".") || wants[i].includes(":") || wants[i] === "") {
+                wants.splice(i, 1);
+                i--;
+            }
+        }
+        return wants;
+    }
+
+    
+    
+    
+
+    async getUrl(name, segmentValue){
         let want;
-        switch (name) {
-            case ("lang"):
-            want = await this.getUrlValueName(1);
-              
-            break;
+        let selection;
+        if (name === "lang" || name === "site"){
+            switch (name) {
+                case ("lang"):
+                    selection = 0;
+                break;
+            
+                case("site"):
+                    selection = 1;
+                break;
+            }
+            
+            let values = await this.#filterUrl();
+            let segPos = values.indexOf(segmentValue);
+            if (segPos !== -1) {
+                want = await this.getUrlValueName(segPos);
+            } else {
+                throw new Error(segmentValue + " not found in URL");
+            }
+    
+            console.log(want)
+            return want;
+        } else {
+    
+        }
         
-            case("site"):
-            break;
-
-            default:
-            break;
-        }
     }
     
     
-    
-
-    #constURL(varName) {
-        switch (varName) {
-            case ("lang"):
-            break;
-            case ("site"):
-            break;
-            default:
-            break;
-        }
-    }
-
-    async removeUrl(paramName) {
-    }
 }
 
 

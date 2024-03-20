@@ -5,16 +5,17 @@ import { GetSetRemoveUrlHelper } from "./scripts/helper/parameterHelper/GetSetRe
 async function testSet() {
     const site = new GetSetRemoveUrlHelper();
 
+    site.setUrl("XY/XX/YY")
+
 }
 async function testGet() {
     const site = new GetSetRemoveUrlHelper();
 
-    let getting = site.getUrl(XY);
-
+    let getting = await site.getUrl("lang", "XX");
 
     let output = document.getElementById("output");
     output.innerHTML = "Ausgelesener Wert: " + getting;
-    console.log();
+    console.log("Ausgelesener Wert: " + getting);
 }
 
 async function testRemove() {

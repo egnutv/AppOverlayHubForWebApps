@@ -8,3 +8,18 @@ helper: Hier könnten sich Hilfsfunktionen befinden, also kleinere Funktionen, d
 main: Dieser Ordner könnte den Hauptcode Ihrer Anwendung enthalten, also den Code, der beim Starten Ihrer Anwendung ausgeführt wird.
 manager: Dieser Ordner könnte Funktionen enthalten, die Ressourcen verwalten, z.B. das Erstellen und Zerstören von Objekten oder das Verwalten von Verbindungen zu Datenbanken oder anderen Diensten.
 utils: In diesem Ordner könnten sich “Dienstprogramme” oder “Hilfsprogramme” befinden, also Code, der allgemeine Aufgaben ausführt und in vielen verschiedenen Teilen Ihrer Anwendung wiederverwendet werden kann.
+
+
+
+
+Informationen zum Laden:
+https://www.youtube.com/watch?v=QHoNXVELmgU&t=291s
+
+
+- Nur das was wirklich Sichtbar ist erstmal laden. Dann den Rest.
+
+Hießt also:
+- Analysiere Link. Gucke ist da? Kommt erst später. Füge Text ein auch. Denn zuerst wird Grundinhalt Laden und das ist der HTML-Inhalt.
+- Ladebalken dann schon eher.
+
+
