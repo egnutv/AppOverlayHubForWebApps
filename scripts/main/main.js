@@ -1,10 +1,10 @@
 import('./content.js');
 import('./../utils/selectDomElement.js');
 
-const content_holder = selectDomElement(".content_holder");
+const content = selectDomElement(".content");
 
 var observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        
+
     })
 })

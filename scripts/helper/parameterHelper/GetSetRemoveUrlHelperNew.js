@@ -70,11 +70,15 @@ class GetSetRemoveUrlHelper {
             }
     
             console.log(want)
-            return want;
+            
         } else {
-    
+            if (isNaN(segmentValue)){
+                want = getUrlValueName(segmentValue);
+            } else if (segmentValue === String) {
+               want = getSegmentPosition(segmentValue);
+            }
         }
-        
+        return want;
     }
     
     

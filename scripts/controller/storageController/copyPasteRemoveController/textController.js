@@ -11,10 +11,6 @@ async function textCopyPaste(area, file) {
         file = area;
     }
 
-    
-    //lang wird aus verschiedenen Quellen gelesen: 1x aus head. 1x aus der main.js
-    // example: try textCopyPaste("area", LANGfilename)
-
     let supportedLang = await language.getTemplate("data/configs/main.json", "default/lang-support");
     let adressLang = await adress.getUrl("lang");
     let docLang = document.getElementsByTagName("html")[0].getAttribute("lang");
@@ -91,10 +87,6 @@ for (let i = 0; i < selectAll.length; i++) {
         
         let Destination = selectDomElement("." + destinations[i]);
         let getClassNames = Array.from(Destination.classList);
-        /*let relevantClasses = getClassNames.filter(className => className.startsWith(startMarker) && className.endsWith(endMarker));
-        getClassNames.forEach(className => Destination.classList.remove(className));
-        relevantClasses.forEach(className => Destination.classList.add(className));
-        console.warn("Relevante Klassen für Ziel " + relevantClasses);*/
         let relevantClasses = getClassNames.filter(className => className.startsWith(startMarker) && className.endsWith(endMarker));
         relevantClasses = relevantClasses.toString();
 
