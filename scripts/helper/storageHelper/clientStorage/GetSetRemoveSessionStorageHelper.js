@@ -2,10 +2,10 @@ class GetSetRemoveSessionStorageHelper {
     constructor() {
         this.storage = sessionStorage;
     }
-    async setStorage(valueName, value){
+    async set(valueName, value){
         await this.storage.setItem(valueName, value);
     }
-    async getStorage(valueName){
+    async get(valueName){
         let value = await this.storage.getItem(valueName);
         if (value === null) {
             throw new Error('Value is null');
@@ -13,14 +13,19 @@ class GetSetRemoveSessionStorageHelper {
             return value;
         }
     }
-    async replaceStorage(valueName, value) {
-        await this.removeStorage(valueName);
-        await this.setStorage(valueName, value)
+    async exists(valueName){
+        let value = await this.storage.getItem(valueName);
+        if (value !== null) { return true; } else { return false; }
     }
-    async removeStorage(valueName){
+    
+    async replace(valueName, value) {
+        await this.remove(valueName);
+        await this.set(valueName, value)
+    }
+    async remove(valueName){
         await this.storage.removeItem(valueName);
     }
-    async clearStorage() {
+    async clear() {
         await this.storage.clear();
     }
 }

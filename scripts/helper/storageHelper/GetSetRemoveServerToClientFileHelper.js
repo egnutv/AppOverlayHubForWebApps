@@ -1,9 +1,9 @@
 import { GetSetRemoveSessionStorageHelper } from "./clientStorage/GetSetRemoveSessionStorageHelper.js"
 
 class GetSetRemoveServerToClientHelper extends GetSetRemoveSessionStorageHelper{
-    async getStorage(valueName, path) {
+    async get(valueName, path) {
+        console.log("SendPath === " + valueName +  " " + path)
         let value;
-        value = await this.storage.getItem(valueName);
         if (value === null) {
             try {
                 value = await fetch(path)

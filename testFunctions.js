@@ -2,7 +2,7 @@
 
 import { GetSetRemoveUrlHelper } from "./scripts/helper/parameterHelper/GetSetRemoveUrlHelperNew.js";
 import { GetSetRemoveServerToClientHelper } from "./scripts/helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
-
+import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/newSiteController.js"
 function testOutput(input)  {
     let output = document.getElementById("output");
 
@@ -31,17 +31,17 @@ async function testRemove() {
 let getValue;
 async function testSetStorage(){
     const theStorage = new GetSetRemoveServerToClientHelper();
-    await theStorage.setStorage("EinName", getValue);
+    await theStorage.set("EinName", getValue);
 
 }
 async function testGetStorage(){
-    const theStorage = new GetSetRemoveServerToClientHelper();
-    getValue = await theStorage.getStorage("EinName", "data/packs/templates/sites/testCardGreen.html");
+    const theStorage = new SiteController();
+    getValue = await theStorage.get("start");
     testOutput(getValue);
 }
 async function testRemoveStorage(){
     const theStorage = new GetSetRemoveServerToClientHelper();
-    await theStorage.removeStorage("EinName");
+    await theStorage.remove("EinName");
 
 }
 
