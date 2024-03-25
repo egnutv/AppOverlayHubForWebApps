@@ -45,5 +45,12 @@ async function testRemoveStorage(){
 
 }
 
+async function testSiteController(){
+    const theStorage = new SiteController();
+    await theStorage.controller("start", ".xxx");
 
-export { testGet, testSet, testRemove, testSetStorage, testGetStorage, testRemoveStorage}
+    
+}
+
+
+export { testGet, testSet, testRemove, testSetStorage, testGetStorage, testRemoveStorage, testSiteController}

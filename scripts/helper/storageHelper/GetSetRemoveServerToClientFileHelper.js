@@ -2,19 +2,21 @@ import { GetSetRemoveSessionStorageHelper } from "./clientStorage/GetSetRemoveSe
 
 class GetSetRemoveServerToClientHelper extends GetSetRemoveSessionStorageHelper{
     async get(valueName, path) {
-        console.log("SendPath === " + valueName +  " " + path)
-        let value;
+        let value = this.storage.getItem(valueName);
         if (value === null) {
             try {
+                
                 value = await fetch(path)
                     .then(response => response.text())
                     .catch(error => console.error('Error:', error));
+                    this.storage.setItem(valueName, value);
             } catch (error) { 
-
+    
             }
-        } 
+        }
         return value;
     }
+    
 }
 
 export { GetSetRemoveServerToClientHelper };

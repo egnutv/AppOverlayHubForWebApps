@@ -1,6 +1,6 @@
 function selectDomElement(aDestination) {
     var destination = aDestination;
-    //console.warn("Das Ziel: " + aDestination)
+    console.warn("Das Ziel: " + aDestination)
     var letterOfDestination = destination.charAt(0);
     
     switch (letterOfDestination) {
@@ -17,8 +17,8 @@ function selectDomElement(aDestination) {
             break;
     }
     
-    //console.warn("INPUT: " + aDestination);
-    //console.warn("DESTINATION IN DOM SELECTOR: " + destination);
+    console.warn("INPUT: " + aDestination);
+    console.warn("DESTINATION IN DOM SELECTOR: " + destination);
     return destination;
 }
 

@@ -8,69 +8,45 @@ class SiteController{
         this.indexPath = "data/packs/templates/sites/index.json";
         this.pathToFile = "data/packs/templates/sites/%file%";
     }
-
-    async controller(indexEntry, value, destination) {
-        arrayOfEntrys = await this.get(indexEntry);
+    async controller(indexEntry, destination) {
+        let arrayOfEntrys = await this.get(indexEntry);
         await this.set(indexEntry, arrayOfEntrys, destination);
     }
-
     async set(className, arrayOfEntrys, destination) {
-        let pathToFile = this.pathToFile;
-        let s = await selectDomElement(destination); destination = s;
+        let pathsToFiles = this.pathToFile;
+        
+        let d = await selectDomElement(destination);
+
+        
+        await this.#createDivIn("tempDiv", destination);
+        let tempDiv = await selectDomElement(".tempDiv");
 
         for (let i = 0; i < arrayOfEntrys.length; i++) {
-            pathToFile = pathToFiles.replace("%file%", arrayOfEntrys[i]);
-
-
-
-        } 
-    }
-/*
-    let countDestinationElements = aDestination.childlength;
-        console.log("Das ist die Anzahl: " + countDestinationElements + " mit dem Ziel: " + aDestination);
-        let tempDiv;
-        let tempDivCount = document.getElementsByClassName('tempDiv');
-        if (tempDivCount.length === 0) {
-            tempDiv = document.createElement('div');
-            tempDiv.className = 'tempDiv';
-            aDestination.appendChild(tempDiv);
-            tempDiv = document.getElementsByClassName('tempDiv')[0];
+            let pathToFile = pathsToFiles.replace("%file%", arrayOfEntrys[i]);
+            let value = await this.storage.get(className, pathToFile);
             tempDiv.insertAdjacentHTML('beforeend', value);
-
-            for (let i = 0; i < tempDiv.children.length; i++) {
-                tempDiv.children[i].classList.add(className);
-            }
-            
-            
-            let children = Array.from(tempDiv.children);
-            for (let i = 0; i < children.length; i++) {
-                aDestination.appendChild(children[i]);
-            }
-
-            
+            tempDiv.children[i].classList.add(className);
+        }
+        while (tempDiv.childNodes.length > 0) {
+            d.appendChild(tempDiv.childNodes[0]);
+        }
+        d.removeChild(tempDiv);
 
 
-            aDestination.removeChild(tempDiv);
-
-            
-        } 
-*/
-
-    async get(indexEntry) {
-        let test;
-        let valueOfEntry = await this.#getEntryOf(this.indexName, this.indexPath); 
-        
-        console.log(valueOfEntry)
-
-        indexEntry = await this.#convertToPath(indexEntry);
-        console.log(indexEntry);
-        let value = valueOfEntry.index[indexEntry];
-
-        test = value;
-
-        return test;
     }
-
+    async #createDivIn(divName, destination) {
+        let d = await selectDomElement(destination); destination = d;
+        let Div = document.createElement('div'); 
+        Div.className = divName;
+        destination.appendChild(Div);
+    }
+    
+    async get(indexEntry) {
+        let valueOfEntry = await this.#getEntryOf(this.indexName, this.indexPath); 
+        indexEntry = await this.#convertToPath(indexEntry);
+        let value = valueOfEntry.index[indexEntry];
+        return value;
+    }
     async #convertToPath(innerPathValue){
         if (innerPathValue.includes(".")) {
             innerPathValue = innerPathValue.replace(".", "/");
@@ -81,17 +57,11 @@ class SiteController{
     async #getEntryOf(valueName, pathToFile){
         let valueOfEntry;
         let valuesOfIndex = await this.storage.get(valueName, pathToFile);
-        
-
         if (await this.storage.exists(valueName) === false) {
             this.storage.set(valueName, valuesOfIndex);
         }
         valueOfEntry = await JSON.parse(valuesOfIndex);
         return valueOfEntry;
     }
-
-    
-
-
 }
 export { SiteController }
