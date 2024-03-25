@@ -8,7 +8,7 @@ class SiteController{
         this.indexPath = "data/packs/templates/sites/index.json";
         this.pathToFile = "data/packs/templates/sites/%file%";
     }
-    async controller(indexEntry, destination) {
+    async getSet(indexEntry, destination) {
         let arrayOfEntrys = await this.get(indexEntry);
         await this.set(indexEntry, arrayOfEntrys, destination);
     }
@@ -31,8 +31,6 @@ class SiteController{
             d.appendChild(tempDiv.childNodes[0]);
         }
         d.removeChild(tempDiv);
-
-
     }
     async #createDivIn(divName, destination) {
         let d = await selectDomElement(destination); destination = d;
@@ -40,7 +38,6 @@ class SiteController{
         Div.className = divName;
         destination.appendChild(Div);
     }
-    
     async get(indexEntry) {
         let valueOfEntry = await this.#getEntryOf(this.indexName, this.indexPath); 
         indexEntry = await this.#convertToPath(indexEntry);
@@ -52,7 +49,6 @@ class SiteController{
             innerPathValue = innerPathValue.replace(".", "/");
         }
         return innerPathValue;
-        
     }
     async #getEntryOf(valueName, pathToFile){
         let valueOfEntry;
@@ -62,6 +58,10 @@ class SiteController{
         }
         valueOfEntry = await JSON.parse(valuesOfIndex);
         return valueOfEntry;
+    }
+    async remove(destination) {
+        let d = await selectDomElement(destination);
+        d.remove();
     }
 }
 export { SiteController }
