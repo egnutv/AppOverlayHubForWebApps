@@ -39,18 +39,18 @@ class SiteController{
         destination.appendChild(Div);
     }
     async get(indexEntry) {
-        let valueOfEntry = await this.#getEntryOf(this.indexName, this.indexPath); 
-        indexEntry = await this.#convertToPath(indexEntry);
+        let valueOfEntry = await this.getEntryOf(this.indexName, this.indexPath); 
+        indexEntry = await this.convertToPath(indexEntry);
         let value = valueOfEntry.index[indexEntry];
         return value;
     }
-    async #convertToPath(innerPathValue){
+    async convertToPath(innerPathValue){
         if (innerPathValue.includes(".")) {
             innerPathValue = innerPathValue.replace(".", "/");
         }
         return innerPathValue;
     }
-    async #getEntryOf(valueName, pathToFile){
+    async getEntryOf(valueName, pathToFile){
         let valueOfEntry;
         let valuesOfIndex = await this.storage.get(valueName, pathToFile);
         if (await this.storage.exists(valueName) === false) {
