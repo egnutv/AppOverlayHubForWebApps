@@ -3,6 +3,7 @@
 import { GetSetRemoveUrlHelper } from "./scripts/helper/parameterHelper/GetSetRemoveUrlHelperNew.js";
 import { GetSetRemoveServerToClientHelper } from "./scripts/helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
 import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/newSiteController.js"
+import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/newTextController.js"
 function testOutput(input)  {
     let output = document.getElementById("output");
 
@@ -29,28 +30,29 @@ async function testRemove() {
 }
 
 let getValue;
-async function testSetStorage(){
+async function testSiteControllerSet(){
     const theStorage = new GetSetRemoveServerToClientHelper();
     await theStorage.set("EinName", getValue);
 
 }
-async function testGetStorage(){
+async function testSiteControllerGet(){
     const theStorage = new SiteController();
     getValue = await theStorage.get("start");
     testOutput(getValue);
 }
-async function testRemoveStorage(){
+async function testSiteControllerRemove(){
     const theStorage = new GetSetRemoveServerToClientHelper();
     await theStorage.remove("EinName");
 
 }
 
-async function testSiteController(){
+async function testSiteControllerGetSet(){
     const theStorage = new SiteController();
-    await theStorage.controller("start", ".xxx");
-
-    
+    await theStorage.getSet("start", ".xxx");
 }
 
+async function testTextControllerGetSet() {
+    const theStorage = new TextController();
+}
 
-export { testGet, testSet, testRemove, testSetStorage, testGetStorage, testRemoveStorage, testSiteController}
+export { testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet}
