@@ -11,11 +11,26 @@ class TextController extends SiteController {
         this.standardLangFile = "config.json";
         this.speceficLangFile = "specific/%file%.json";
     }
-    async getSet(indexEntry) {
-        let arrayOfEntrys = await this.get(indexEntry)
+    async getSet(/*indexEntry*/) {
+        
+        let indexEntry = "start"
+        let arrayOfEntrys = await this.get(indexEntry);
+        console.log("Der Eintrag : " + arrayOfEntrys);
+        await this.set(arrayOfEntrys)
+    }
+    async get(indexEntry) {
+        let a = await super.get(indexEntry);
+        a = a.toString();
+        if (a.includes(".html") ) {
+            return indexEntry;
+        } else {
+            return console.error(null);
+        }
     }
 
-    async set() {
+    async set(destination) {
+        let d = destination;
+        destination = "." + d;
     }
 }
 export { TextController }
