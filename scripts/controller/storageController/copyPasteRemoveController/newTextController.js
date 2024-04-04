@@ -1,4 +1,5 @@
 import { GetSetRemoveServerToClientHelper } from "../../../helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
+import { selectDomElement } from "../../../utils/selectDomElement.js";
 import { SiteController } from "./newSiteController.js";
 
 class TextController extends SiteController {
@@ -11,7 +12,7 @@ class TextController extends SiteController {
         this.standardLangFile = "config.json";
         this.speceficLangFile = "specific/%file%.json";
     }
-    async getSet(/*indexEntry*/) {
+    async getSet(/*indexEntry, destination*/) {
         
         let indexEntry = "start"
         let arrayOfEntrys = await this.get(indexEntry);
@@ -31,6 +32,22 @@ class TextController extends SiteController {
     async set(destination) {
         let d = destination;
         destination = "." + d;
+
+        d = await selectDomElement(destination);
+        let currentLang = await this.findLang();
+
+        
+
+    }
+
+    async findLang() {
+        let lang;
+        try {
+            lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+        } catch (error) {
+            lang = await getEntryOf("lang", this.standardLangFile)
+        }
+        return lang;
     }
 }
 export { TextController }

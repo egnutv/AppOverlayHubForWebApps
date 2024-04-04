@@ -1,4 +1,5 @@
 .bigButton{
+    
     overflow: visible !important;
     background-color: var(--inactive-color);
     color: var(--activate-color);
@@ -13,6 +14,8 @@
     
     cursor: pointer !important;
     transform: scale(1);
+    padding-left: 2.5%; padding-right: 2.5%;
+    margin-left: 2.5%; margin-right: 2.5%;
 }
 
 .bigButton.hover{
@@ -31,6 +34,7 @@
     cursor: pointer;
     transform: scale(0.95);
 }
+
 
 .link {
     background-color: (var(--transparency-color));

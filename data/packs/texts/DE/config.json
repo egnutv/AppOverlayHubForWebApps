@@ -11,7 +11,11 @@
             "moreOptions": ["Mehr Optionen"],
             "imprintAndPrivacyPolicy": ["Impressum und Datenschutz"],
             "creds": ["Mitwirkende"],
-            "close": ["Schließen"]
+            "close": ["Schließen"],
+            "snake": ["Snake-TimeTravel"],
+            "mouth-animator": ["Mund-Animator"],
+            "paint": ["Paint"],
+            "calc": ["Rechner"]
         }
             
 }

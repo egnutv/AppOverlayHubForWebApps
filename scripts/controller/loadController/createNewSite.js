@@ -4,6 +4,7 @@ import { slide } from "../../animations/transitions/slides/slide.js";
 import { GetSetRemoveTemplateHelper } from "../../helper/storageHelper/GetSetRemoveTemplateHelper.js";
 import { selectDomElement } from "../../utils/selectDomElement.js";
 import { GetSetRemoveUrlHelper } from "../../helper/parameterHelper/GetSetRemoveUrlHelper.js";
+import { SiteController } from "../storageController/copyPasteRemoveController/newSiteController.js";
 
 async function createNewSite(destination, from, to, direction, setNewURL, callback) {
     /*let destination = "body";
@@ -12,6 +13,10 @@ async function createNewSite(destination, from, to, direction, setNewURL, callba
     let direction = "up";
     let callback = true;*/
     await siteCopyPaste(to, destination, "true");
+    /*const newSite = new SiteController;
+    await newSite.getSet(to, destination);
+    let addHidden = await selectDomElement(to);
+    addHidden.*/
     await textCopyPaste(to, "");
     await slide(from, to, direction);
 
