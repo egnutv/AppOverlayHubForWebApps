@@ -5,6 +5,8 @@
             "moreOptions": ["options.html"],
             "creds": ["onlyText.html"],
             "imprintAndPrivacyPolicy": ["onlyText.html"],
+
+            "calc": ["calc.html"],
             "testCardRed": ["testCardRed.html"],
             "testCardYellow": ["testCardYellow.html"],
             "testCardGreen": ["testCardGreen.html"],
