@@ -17,38 +17,38 @@
 
 .calcField{
     display: grid;
-            grid-template-columns: auto auto auto;
+            
             grid-template-rows: auto auto auto;
-            grid-template-areas: 
-            "h h h"
-            "num num num"
-            "o o o";
-            gap: 0;
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            border-radius: 0;
             
 }
 
 .valueField {
     grid-area: h;
     display: grid;
-    grid-template-columns: 70% 30%;
     gap: 0em;
+    grid-template-columns: 2fr 1fr;
 }
 .valueField:nth-child(n) {
-    margin: 0 !important; 
+    margin: 0 !important;
+    
+}
+.valueField > :nth-child(2) {
+}
+.valueField > :nth-child(1) {
+    
 }
 
 .interactionField {
-    grid-area: o;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+
 }
 .interactionField:nth-child(n) {
     margin: 0 !important;
 }
 .numField {
-    grid-area: num;
+    
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -57,8 +57,12 @@
 .numField:nth-child(n) {
     margin: 0 !important;
 }
-.calcField :child {
-    padding: 1em !important;
+.calcField > :nth-child(n) > :nth-child(n){
+    padding: 0.1em !important;
     gap: 1em !important;
     
+}
+.calcField > :nth-child(2) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
 }
