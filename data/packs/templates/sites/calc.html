@@ -1,5 +1,5 @@
 <div style="position: absolute; bottom: 0%; max-height: 100%; max-width: 100%; height: 100%; width: 100%;">
-    
+     
     <div class="container" id="main_grid" style="position: absolute; bottom: 0%; max-height: 100%; max-width: 100%; height: 100%; width: 100%;">
         
         <menu class="quickmenu" id="notingame" style="position: relative; top: 0; width: auto; left: 0; right: 0%; margin: 0; z-index: 1;">
@@ -15,20 +15,24 @@
                     <div></div>
                     <div style="overflow-y: scroll; width: 100%; height: calc(100% - 1rem); grid-template-columns: 1fr; height: 100%; box-sizing: border-box;" class="text_scroll" >
                         <div class="text">
-                            <h1 class="++_$_headline_$_++"></h1>
-                            <p class="++_$_text_$_++"></p>
+                            
                             
                             <div class= "calcField" style="cursor: default; user-select: none; padding: 0; gap: 0.3em; overflow: visible;">
                                 <div class="innerGridContainer">
                                     <div class="valueField" style="width: 100%; margin: 0;">
-                                        <input type="button" value="1121331" class="bigButton " style="">
+                                        <input type="button" value="1121331" class="result bigButton " style="">
                                         <input type="button" class="++_$_reset_$_++ bigButton">
                                         
                                 </div> 
                                 </div>
                                 <div class="innerGridContainer">
                                     <div class="numField" style="width: 100%; margin: 0;">
-                                        <input type="button" class="bigButton" value="1">
+                                        <script>
+                                            function toResult() {
+                                                console.log("TEST ERGEBNIS")
+                                            }
+                                        </script> 
+                                        <input type="button" class="bigButton" value="1" onclick="toResult()">
                                         <input type="button" class="bigButton" value="2">
                                         <input type="button" class="bigButton" value="3">
                                         <input type="button" class="bigButton" value="4">
@@ -47,6 +51,7 @@
                                         <input type="button" class="bigButton" value="=" >
                                     </div>
                                 </div>
+                                                              
                                 
                                 <link rel="stylesheet" href="styles\calc\main.css">
                             </div>

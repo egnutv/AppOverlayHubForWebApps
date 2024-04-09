@@ -42,6 +42,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, 1fr);
+    
 
 }
 .interactionField:nth-child(n) {
@@ -65,4 +66,7 @@
 .calcField > :nth-child(2) {
     display: grid;
     grid-template-columns: 2fr 1fr;
+}
+.interactionField {
+    
 }
