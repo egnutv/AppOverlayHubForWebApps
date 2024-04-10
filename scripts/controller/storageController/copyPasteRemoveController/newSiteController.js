@@ -39,6 +39,7 @@ class SiteController{
         destination.appendChild(Div);
     }
     async get(indexEntry) {
+        console.log("IndexName: " + this.indexName + " indexPath: " + this.indexPath)
         let valueOfEntry = await this.getEntryOf(this.indexName, this.indexPath);
         console.log(valueOfEntry)
         indexEntry = await this.convertToPath(indexEntry);

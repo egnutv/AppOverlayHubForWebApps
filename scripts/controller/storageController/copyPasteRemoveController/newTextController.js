@@ -7,10 +7,13 @@ class TextController extends SiteController {
         super();
         this.stroage = new GetSetRemoveServerToClientHelper;
         this.indexName = "indexOfSites";
+        this.defaultConfName = "defaultConf";
         this.indexPath = "data/packs/templates/sites/index.json";
-        this.pathToLang = "data/packs/texts/%lang%/";
+        this.pathToLangPack = "data/packs/texts/%lang%/";
         this.standardLangFile = "config.json";
         this.speceficLangFile = "specific/%file%.json";
+        this.configForSite = "data/configs/main.json"
+        this.langName = "lang:";
     }
     async getSet(/*indexEntry, destination*/) {
         
@@ -30,24 +33,82 @@ class TextController extends SiteController {
     }
 
     async set(destination) {
+
+        
+        console.log("SET OF TEXT")
+        let dest = destination;
         let d = destination;
         destination = "." + d;
 
         d = await selectDomElement(destination);
+        
         let currentLang = await this.findLang();
+
+        let pathToLangPack = this.pathToLangPack;
+        pathToLangPack = pathToLangPack.replace("%lang%", currentLang.toUpperCase());
+        console.log("pathToLangPack " + pathToLangPack);
+        let standardLangFile = this.standardLangFile;
+        let speceficLangFile = this.speceficLangFile;
+        
+        standardLangFile = pathToLangPack + this.standardLangFile;
+        speceficLangFile = pathToLangPack + this.speceficLangFile;
+        speceficLangFile = speceficLangFile.replace("%file%", dest);
+        console.log(speceficLangFile);
+        console.log(standardLangFile);
+        let langName = this.langName;
+        let valueOfSpecific;
+        let valueOfStandard;
+        let nameOfLang = langName + currentLang;
+        try {
+            valueOfSpecific = await this.getEntryOf(nameOfLang, speceficLangFile);
+            console.log("try of specific");
+        } catch (error) {
+            currentLang = await findLang("null");
+            pathToLangPack = pathToLangPack.replace("%lang%", currentLang.toUpperCase());
+            speceficLangFile = this.speceficLangFile;
+            speceficLangFile = pathToLangPack + this.speceficLangFile;
+            speceficLangFile = speceficLangFile.replace("%file%", dest);
+        }
+        try {
+            valueOfStandard = await this.getEntryOf(nameOfLang, standardLangFile);
+            console.log("try of standard");
+        } catch (error) {
+            currentLang = await findLang("null");
+            pathToLangPack = pathToLangPack.replace("%lang%", currentLang.toUpperCase());
+            standardLangFile = this.standardLangFile;
+            standardLangFile = pathToLangPack + this.standardLangFile;
+            standardLangFile = standardLangFile.replace("%file%", dest);
+        }
+
+
+
+        //console.log(currentLang);
 
         
 
     }
 
-    async findLang() {
-        let lang;
-        try {
-            lang = document.getElementsByTagName("html")[0].getAttribute("lang");
-        } catch (error) {
-            lang = await getEntryOf("lang", this.standardLangFile)
+    async findLang(lang) {
+        let docLang;
+        let outputLang;
+        let defaultConf = await this.getEntryOf(this.defaultConfName, this.configForSite);
+        if (lang != null || lang != undefined || lang != "null") {
+            docLang = lang;
+        } else {
+            docLang = document.getElementsByTagName("html")[0].getAttribute("lang");
         }
-        return lang;
+        
+        let defaultLang = defaultConf.default["lang"];
+        let supportLangs = defaultConf.default["lang-support"];
+
+        if (supportLangs.includes(docLang)) {
+            outputLang = docLang;
+        } else {
+            outputLang = defaultLang;
+        }
+        console.log("lang: " + outputLang);
+        return outputLang;
+
     }
 }
 export { TextController }
