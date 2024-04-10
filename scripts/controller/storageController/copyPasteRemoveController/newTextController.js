@@ -63,7 +63,7 @@ class TextController extends SiteController {
             valueOfSpecific = await this.getEntryOf(nameOfLang, speceficLangFile);
             console.log("try of specific");
         } catch (error) {
-            currentLang = await findLang("null");
+            currentLang = await this.findLang("null");
             pathToLangPack = pathToLangPack.replace("%lang%", currentLang.toUpperCase());
             speceficLangFile = this.speceficLangFile;
             speceficLangFile = pathToLangPack + this.speceficLangFile;
@@ -73,12 +73,14 @@ class TextController extends SiteController {
             valueOfStandard = await this.getEntryOf(nameOfLang, standardLangFile);
             console.log("try of standard");
         } catch (error) {
-            currentLang = await findLang("null");
+            currentLang = await this.findLang("null");
             pathToLangPack = pathToLangPack.replace("%lang%", currentLang.toUpperCase());
             standardLangFile = this.standardLangFile;
             standardLangFile = pathToLangPack + this.standardLangFile;
             standardLangFile = standardLangFile.replace("%file%", dest);
         }
+
+         
 
 
 
@@ -86,6 +88,12 @@ class TextController extends SiteController {
 
         
 
+    }
+    async #getValuesOfFile(lang, filename){
+        let path;
+        if (filename.includes("/")){
+            
+        }
     }
 
     async findLang(lang) {
