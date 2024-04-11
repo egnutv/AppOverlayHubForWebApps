@@ -1,11 +1,13 @@
 import { GetSetRemoveServerToClientHelper } from "../../../helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
 import { selectDomElement } from "../../../utils/selectDomElement.js";
 import { SiteController } from "./newSiteController.js";
+import { GetSetRemoveSessionStorageHelper } from "../../../helper/storageHelper/clientStorage/GetSetRemoveSessionStorageHelper.js";
 
 class TextController extends SiteController {
     constructor() {
         super();
         this.stroage = new GetSetRemoveServerToClientHelper;
+        this.sessionValue = new GetSetRemoveSessionStorageHelper;
         this.indexName = "indexOfSites";
         this.defaultConfName = "defaultConf";
         this.indexPath = "data/packs/templates/sites/index.json";
@@ -43,44 +45,15 @@ class TextController extends SiteController {
         d = await selectDomElement(destination);
         
         let currentLang = await this.findLang();
-
-        let pathToLangPack = this.pathToLangPack;
-        pathToLangPack = pathToLangPack.replace("%lang%", currentLang.toUpperCase());
-        console.log("pathToLangPack " + pathToLangPack);
-        let standardLangFile = this.standardLangFile;
-        let speceficLangFile = this.speceficLangFile;
         
-        standardLangFile = pathToLangPack + this.standardLangFile;
-        speceficLangFile = pathToLangPack + this.speceficLangFile;
-        speceficLangFile = speceficLangFile.replace("%file%", dest);
-        console.log(speceficLangFile);
-        console.log(standardLangFile);
-        let langName = this.langName;
-        let valueOfSpecific;
-        let valueOfStandard;
-        let nameOfLang = langName + currentLang;
-        try {
-            valueOfSpecific = await this.getEntryOf(nameOfLang, speceficLangFile);
-            console.log("try of specific");
-        } catch (error) {
-            currentLang = await this.findLang("null");
-            pathToLangPack = pathToLangPack.replace("%lang%", currentLang.toUpperCase());
-            speceficLangFile = this.speceficLangFile;
-            speceficLangFile = pathToLangPack + this.speceficLangFile;
-            speceficLangFile = speceficLangFile.replace("%file%", dest);
-        }
-        try {
-            valueOfStandard = await this.getEntryOf(nameOfLang, standardLangFile);
-            console.log("try of standard");
-        } catch (error) {
-            currentLang = await this.findLang("null");
-            pathToLangPack = pathToLangPack.replace("%lang%", currentLang.toUpperCase());
-            standardLangFile = this.standardLangFile;
-            standardLangFile = pathToLangPack + this.standardLangFile;
-            standardLangFile = standardLangFile.replace("%file%", dest);
-        }
+        currentLang = currentLang.toString();
+        
+        let standard = await this.#getValuesOfFile(currentLang, dest);
 
-         
+        //console.log(standard);
+        
+        let zeichen; zeichen = "Ich bin kein Caps"; console.log(zeichen.toUpperCase());
+        
 
 
 
@@ -90,17 +63,55 @@ class TextController extends SiteController {
 
     }
     async #getValuesOfFile(lang, filename){
-        let path;
-        if (filename.includes("/")){
-            
+        let l = lang;
+        lang = l.toUpperCase();
+        let path = this.pathToLangPack;
+        path = path.replace("%lang%", lang);
+        
+        console.log(path);
+
+        let specificPath = path + this.speceficLangFile;
+        specificPath = specificPath.replace("%file%", filename)
+        let standardPath = path + this.standardLangFile;
+
+        console.log(specificPath);
+        console.log(standardPath);
+        let specificValues; let standardValues;
+        
+        if (await this.sessionValue.existsStartsWith(this.langName + lang + ":specific:")) {
+            console.log("YES ITS OK.")
+            let valueOfSession = await this.sessionValue.getKeysStartsWith(this.langName + lang + ":specific:");
+            console.log(valueOfSession);
+            if (valueOfSession != this.langName + lang + ":specific:" + filename){
+                await this.sessionValue.remove(valueOfSession);
+            }
         }
+
+        try {
+            specificValues = await this.getEntryOf(this.langName + lang + ":specific:" + filename, specificPath);
+        } catch (error) {
+            lang = await this.findLang("null");
+            await this.#getValuesOfFile(lang, filename);
+        }
+        try {
+            standardValues = await this.getEntryOf(this.langName + lang + ":standard", standardPath);
+        } catch (error) {
+            lang = await this.findLang("null");
+            await this.#getValuesOfFile(lang, filename);
+        }
+        
+        
+        console.log("specificValues: ")
+        console.log(specificValues)
+        console.log("standardValues: ")
+        console.log(standardValues)
     }
 
     async findLang(lang) {
         let docLang;
         let outputLang;
         let defaultConf = await this.getEntryOf(this.defaultConfName, this.configForSite);
-        if (lang != null || lang != undefined || lang != "null") {
+        if (lang == null || lang == undefined || lang == "null") {
             docLang = lang;
         } else {
             docLang = document.getElementsByTagName("html")[0].getAttribute("lang");
@@ -113,6 +124,9 @@ class TextController extends SiteController {
             outputLang = docLang;
         } else {
             outputLang = defaultLang;
+        }
+        if (Array.isArray(outputLang)) {
+            let o = outputLang[0]; outputLang = o;
         }
         console.log("lang: " + outputLang);
         return outputLang;

@@ -3,6 +3,7 @@ import { GetSetRemoveTemplateHelper } from "../../helper/storageHelper/GetSetRem
 import { selectDomElement } from "../../utils/selectDomElement.js";
 import { siteCopyPaste } from "../storageController/copyPasteRemoveController/siteController.js";
 import { textCopyPaste } from "../storageController/copyPasteRemoveController/textController.js";
+import { scriptCopyPaste } from "../storageController/copyPasteRemoveController/scriptController.js";
 
 async function initSite() {
     const adress = new GetSetRemoveUrlHelper;
@@ -25,11 +26,13 @@ async function initSite() {
         await adress.setUrl("site", landing);
         site = await adress.getUrl("site");
     }
-
+    
 
     await siteCopyPaste(site, ".content_holder");
-    
+    console.log(site + " site is the val " + landing)
     await textCopyPaste("." + site, "");
+    
+    
 
         try {
             let CLOSEDbutton = await selectDomElement(".++_$_interaction:close_$_++");
@@ -39,9 +42,11 @@ async function initSite() {
             
         }
         
-
+        
         triggerEvents();
-
+        await scriptCopyPaste(site, "script", "head");
+        
+        
 
     
 }

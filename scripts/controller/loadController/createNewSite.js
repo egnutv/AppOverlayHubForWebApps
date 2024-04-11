@@ -5,6 +5,7 @@ import { GetSetRemoveTemplateHelper } from "../../helper/storageHelper/GetSetRem
 import { selectDomElement } from "../../utils/selectDomElement.js";
 import { GetSetRemoveUrlHelper } from "../../helper/parameterHelper/GetSetRemoveUrlHelper.js";
 import { SiteController } from "../storageController/copyPasteRemoveController/newSiteController.js";
+import { scriptCopyPaste } from "../storageController/copyPasteRemoveController/scriptController.js";
 
 async function createNewSite(destination, from, to, direction, setNewURL, callback) {
     /*let destination = "body";
@@ -39,7 +40,8 @@ async function createNewSite(destination, from, to, direction, setNewURL, callba
     
 
     //++_$_text_$_++
-
+    let x = to.replace(".", "");
+    await scriptCopyPaste(x, "script", "head");
     setTimeout( async function() {
         await remove.remove(from);
         if (callback === true) {
