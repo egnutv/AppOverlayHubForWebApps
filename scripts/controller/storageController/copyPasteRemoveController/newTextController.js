@@ -62,6 +62,12 @@ class TextController extends SiteController {
         
 
     }
+    async #getValuesOfVariables(destination, value) {
+        let d; let dest =  destination;
+
+        d = await selectDomElement("." + destination);
+        
+    }
     async #getValuesOfFile(lang, filename){
         let l = lang;
         lang = l.toUpperCase();
@@ -105,6 +111,10 @@ class TextController extends SiteController {
         console.log(specificValues)
         console.log("standardValues: ")
         console.log(standardValues)
+
+        let values = Object.assign({}, specificValues, standardValues.interaction);
+        console.log(values);
+        return values;
     }
 
     async findLang(lang) {
