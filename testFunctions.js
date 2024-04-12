@@ -53,7 +53,7 @@ async function testSiteControllerGetSet(){
 
 async function testTextControllerGetSet() {
     const theStorage = new TextController();
-    await theStorage.getSet()
+    await theStorage.getSet("start")
 }
 
 export { testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet}

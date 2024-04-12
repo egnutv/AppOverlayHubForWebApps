@@ -12,9 +12,8 @@ class TextController extends SiteController {
         this.indexPath = "data/packs/templates/sites/index.json"; this.pathToLangPack = "data/packs/texts/%lang%/"; this.standardLangFile = "config.json"; this.speceficLangFile = "specific/%file%.json"; this.configForSite = "data/configs/main.json";
         this.textParStart = "++_$_"; this.textParEnd = "_$_++"; this.count;
     }
-    async getSet(/*indexEntry, destination*/) {
+    async getSet(indexEntry) {
         
-        let indexEntry = "start"
         let arrayOfEntrys = await this.get(indexEntry);
         console.log("Der Eintrag : " + arrayOfEntrys);
         await this.set(arrayOfEntrys)
