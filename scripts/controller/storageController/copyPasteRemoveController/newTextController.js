@@ -8,14 +8,9 @@ class TextController extends SiteController {
         super();
         this.stroage = new GetSetRemoveServerToClientHelper;
         this.sessionValue = new GetSetRemoveSessionStorageHelper;
-        this.indexName = "indexOfSites";
-        this.defaultConfName = "defaultConf";
-        this.indexPath = "data/packs/templates/sites/index.json";
-        this.pathToLangPack = "data/packs/texts/%lang%/";
-        this.standardLangFile = "config.json";
-        this.speceficLangFile = "specific/%file%.json";
-        this.configForSite = "data/configs/main.json"
-        this.langName = "lang:";
+        this.indexName = "indexOfSites"; this.defaultConfName = "defaultConf"; this.langName = "lang:";
+        this.indexPath = "data/packs/templates/sites/index.json"; this.pathToLangPack = "data/packs/texts/%lang%/"; this.standardLangFile = "config.json"; this.speceficLangFile = "specific/%file%.json"; this.configForSite = "data/configs/main.json";
+        this.textParStart = "++_$_"; this.textParEnd = "_$_++"; this.count;
     }
     async getSet(/*indexEntry, destination*/) {
         
@@ -48,11 +43,13 @@ class TextController extends SiteController {
         
         currentLang = currentLang.toString();
         
-        let standard = await this.#getValuesOfFile(currentLang, dest);
+        let newDestValues = await this.#getValuesOfFile(currentLang, dest);
 
         //console.log(standard);
         
         let zeichen; zeichen = "Ich bin kein Caps"; console.log(zeichen.toUpperCase());
+
+        let destinations = await this.#getValuesOfVariables(dest);
         
 
 
@@ -62,13 +59,34 @@ class TextController extends SiteController {
         
 
     }
-    async #getValuesOfVariables(destination, value) {
-        let d; let dest =  destination;
+    async #getValuesOfVariables(destination) {
+        // Wählen Sie alle Elemente auf der Seite aus
+        let alleDestinationen = await selectDomElement("." + destination);
 
-        d = await selectDomElement("." + destination);
+        // Konvertieren Sie die Sammlung von Elementen in ein Array
+        let destinationArray = Array.from(alleDestinationen);
+
+        // Erstellen Sie ein Array, um die Elemente zu speichern, deren Klassenname mit "%" beginnt und endet
+        let gesuchteDestinationen = [];
+
+        // Iterieren Sie über jedes Element im Array
+        for (let destination of destinationArray) {
+            // Überprüfen Sie, ob das Element eine Klasse hat
+            if (destination.className) {
+                // Überprüfen Sie, ob der Klassenname des Elements mit "%" beginnt und endet
+                if (destination.className.startsWith(this.textParStart) && destination.className.endsWith(this.textParEnd)) {
+                    // Fügen Sie das Element zum Array hinzu
+                    gesuchteDestinationen.push(destination);
+                }
+            }
+        }
+
+        // Jetzt enthält das Array "gesuchteDestinationen" alle Elemente, deren Klassenname mit "%" beginnt und endet
+        console.log(gesuchteDestinationen);
         
     }
     async #getValuesOfFile(lang, filename){
+        let state;
         let l = lang;
         lang = l.toUpperCase();
         let path = this.pathToLangPack;
@@ -92,18 +110,16 @@ class TextController extends SiteController {
                 await this.sessionValue.remove(valueOfSession);
             }
         }
-
+        
         try {
             specificValues = await this.getEntryOf(this.langName + lang + ":specific:" + filename, specificPath);
         } catch (error) {
-            lang = await this.findLang("null");
-            await this.#getValuesOfFile(lang, filename);
+            await this.#errorCatchBlock1(lang, filename);
         }
         try {
-            standardValues = await this.getEntryOf(this.langName + lang + ":standard", standardPath);
+            standardValues = await this.getEntryOf(this.langName + lang + ":standard:", standardPath);
         } catch (error) {
-            lang = await this.findLang("null");
-            await this.#getValuesOfFile(lang, filename);
+            await this.#errorCatchBlock1(lang, filename);
         }
         
         
@@ -115,6 +131,25 @@ class TextController extends SiteController {
         let values = Object.assign({}, specificValues, standardValues.interaction);
         console.log(values);
         return values;
+    }
+
+    async #errorCatchBlock1(lang, filename) {
+        let recall;
+        this.count++;
+        recall = this.#byPass();
+        if (recall) {
+            lang = await this.findLang("null");
+            await this.#getValuesOfFile(lang, filename);
+        }
+}    
+
+    #byPass() {
+        if (this.count >= 3) {
+            this.count = 0;
+            return false;
+        } else {
+            return true;
+        }
     }
 
     async findLang(lang) {
