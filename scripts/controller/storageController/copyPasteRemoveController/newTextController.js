@@ -40,20 +40,44 @@ class TextController extends SiteController {
         d = await selectDomElement(destination);
         
         let currentLang = await this.findLang();
+        let defaultLang = await this.findLang("default");
         
         currentLang = currentLang.toString();
         
         let newDestValues = await this.#getValuesOfFile(currentLang, dest);
+        console.log("------------------------------------------------------")
+        let defaultDestValues = await this.#getValuesOfFile(defaultLang, dest);
 
         //console.log(standard);
         
         let zeichen; zeichen = "Ich bin kein Caps"; console.log(zeichen.toUpperCase());
 
         let destinations = await this.#getValuesOfVariables(dest);
-        
 
 
+        for (let i = 0; i < destinations.length; i++) {
+            let desti = destinations[i];
+            let destiClass = this.textParStart + desti + this.textParEnd;
+            console.log(desti);
+            let changeValue;
 
+            if (newDestValues.hasOwnProperty(desti)) {
+                console.log("YEAH")
+                changeValue = newDestValues[desti].toString();
+                console.log(changeValue);
+            } else {
+                changeValue = defaultDestValues[desti].toString();
+                console.log(changeValue);
+            }
+            let dC = await selectDomElement("." + destiClass); destiClass = dC;
+
+            if (destiClass.hasAttribute('value')) {
+                destiClass.value = changeValue;
+            } else {
+                destiClass.innerHTML = changeValue;
+            }
+            
+        }
         //console.log(currentLang);
 
         
@@ -61,30 +85,28 @@ class TextController extends SiteController {
     }
     async #getValuesOfVariables(destination) {
         // Wählen Sie alle Elemente auf der Seite aus
-        let alleDestinationen = await selectDomElement("." + destination);
-
-        // Konvertieren Sie die Sammlung von Elementen in ein Array
-        let destinationArray = Array.from(alleDestinationen);
-
-        // Erstellen Sie ein Array, um die Elemente zu speichern, deren Klassenname mit "%" beginnt und endet
-        let gesuchteDestinationen = [];
-
-        // Iterieren Sie über jedes Element im Array
-        for (let destination of destinationArray) {
+        let alleDestinationen = document.getElementsByTagName("*");
+    
+        // Erstellen Sie ein Array, um die Elemente zu speichern, deren Klassenname mit "++_$_" beginnt und "_$_++" endet
+        let destinationArray = [];
+    
+        // Iterieren Sie über jedes Element in der Sammlung
+        for (let destination of alleDestinationen) {
             // Überprüfen Sie, ob das Element eine Klasse hat
             if (destination.className) {
-                // Überprüfen Sie, ob der Klassenname des Elements mit "%" beginnt und endet
+                // Überprüfen Sie, ob der Klassenname des Elements mit "++_$_" beginnt und "_$_++" endet
                 if (destination.className.startsWith(this.textParStart) && destination.className.endsWith(this.textParEnd)) {
                     // Fügen Sie das Element zum Array hinzu
-                    gesuchteDestinationen.push(destination);
+                    destinationArray.push(destination.className.slice(this.textParStart.length, -this.textParEnd.length));
                 }
             }
         }
-
-        // Jetzt enthält das Array "gesuchteDestinationen" alle Elemente, deren Klassenname mit "%" beginnt und endet
-        console.log(gesuchteDestinationen);
-        
+    
+        // Jetzt enthält das Array "destinationArray" die extrahierten Werte
+        console.log(destinationArray);
+        return destinationArray;
     }
+    
     async #getValuesOfFile(lang, filename){
         let state;
         let l = lang;
@@ -114,12 +136,16 @@ class TextController extends SiteController {
         try {
             specificValues = await this.getEntryOf(this.langName + lang + ":specific:" + filename, specificPath);
         } catch (error) {
-            await this.#errorCatchBlock1(lang, filename);
+            //await this.#errorCatchBlock1(filename);
+            lang = await this.findLang("default");
+            await this.#getValuesOfFile(lang, filename);
         }
         try {
             standardValues = await this.getEntryOf(this.langName + lang + ":standard:", standardPath);
         } catch (error) {
-            await this.#errorCatchBlock1(lang, filename);
+            //await this.#errorCatchBlock1(filename);
+            lang = await this.findLang("default");
+            await this.#getValuesOfFile(lang, filename);
         }
         
         
@@ -133,12 +159,12 @@ class TextController extends SiteController {
         return values;
     }
 
-    async #errorCatchBlock1(lang, filename) {
+    async #errorCatchBlock1(filename) {
         let recall;
         this.count++;
         recall = this.#byPass();
         if (recall) {
-            lang = await this.findLang("null");
+            let lang = await this.findLang("default");
             await this.#getValuesOfFile(lang, filename);
         }
 }    
@@ -153,27 +179,31 @@ class TextController extends SiteController {
     }
 
     async findLang(lang) {
+        let usedefault = false;
         let docLang;
         let outputLang;
         let defaultConf = await this.getEntryOf(this.defaultConfName, this.configForSite);
-        if (lang == null || lang == undefined || lang == "null") {
-            docLang = lang;
+        let defaultLang = defaultConf.default["lang"];
+        console.log("UND DIE SPRACHE: " + defaultLang)
+        let supportLangs = defaultConf.default["lang-support"];
+        if (lang === "default") {
+            docLang = defaultLang;
         } else {
             docLang = document.getElementsByTagName("html")[0].getAttribute("lang");
         }
         
-        let defaultLang = defaultConf.default["lang"];
-        let supportLangs = defaultConf.default["lang-support"];
+        
 
-        if (supportLangs.includes(docLang)) {
-            outputLang = docLang;
-        } else {
-            outputLang = defaultLang;
-        }
+            if (supportLangs.includes(docLang)) {
+                outputLang = docLang;
+            } else {
+                outputLang = defaultLang;
+            }
+            
+            console.log("lang: " + outputLang);
         if (Array.isArray(outputLang)) {
             let o = outputLang[0]; outputLang = o;
         }
-        console.log("lang: " + outputLang);
         return outputLang;
 
     }
