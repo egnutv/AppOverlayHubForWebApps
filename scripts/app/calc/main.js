@@ -21,4 +21,13 @@ class Calculator {
             }
         }
     }
+    async result() {
+        let trigger = await selectDomElement(".resultTrigger");
+        let destination = await selectDomElement(".result");
+        let d = destination; let t = trigger;
+
+        if (d.value != null) {
+            
+        }
+    }
 }
