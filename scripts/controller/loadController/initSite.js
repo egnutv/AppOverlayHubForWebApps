@@ -4,10 +4,15 @@ import { selectDomElement } from "../../utils/selectDomElement.js";
 import { siteCopyPaste } from "../storageController/copyPasteRemoveController/siteController.js";
 import { textCopyPaste } from "../storageController/copyPasteRemoveController/textController.js";
 import { scriptCopyPaste } from "../storageController/copyPasteRemoveController/scriptController.js";
+import { SiteController } from "../storageController/copyPasteRemoveController/newSiteController.js";
+import { TextController } from "../storageController/copyPasteRemoveController/newTextController.js";
 
 async function initSite() {
     const adress = new GetSetRemoveUrlHelper;
     const defaults = new GetSetRemoveTemplateHelper();
+    const htmlTemp = new SiteController();
+    const textTemp = new TextController();
+
 
     let site = await adress.getUrl("site");
     let lang = await adress.getUrl("lang");
@@ -28,9 +33,12 @@ async function initSite() {
     }
     
 
-    await siteCopyPaste(site, ".content_holder");
+    //await siteCopyPaste(site, ".content_holder");
+    await htmlTemp.getSet(site, ".content_holder");
     console.log(site + " site is the val " + landing)
-    await textCopyPaste("." + site, "");
+
+    await textTemp.getSet(site);
+    //await textCopyPaste("." + site, "");
     
     
 

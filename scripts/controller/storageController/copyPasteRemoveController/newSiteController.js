@@ -4,9 +4,7 @@ import { selectDomElement } from "../../../utils/selectDomElement.js";
 class SiteController{
     constructor() {
         this.storage = new GetSetRemoveServerToClientHelper;
-        this.indexName = "indexOfSites";
-        this.indexPath = "data/packs/templates/sites/index.json";
-        this.pathToFile = "data/packs/templates/sites/%file%";
+        this.indexName = "indexOfSites"; this.indexPath = "data/packs/templates/sites/index.json"; this.pathToFile = "data/packs/templates/sites/%file%"; this.defaultConf = "data/configs/main.json"; this.defaultConfName = "defaultConf";
     }
     async getSet(indexEntry, destination) {
         let arrayOfEntrys = await this.get(indexEntry);
@@ -41,10 +39,17 @@ class SiteController{
     async get(indexEntry) {
         console.log("IndexName: " + this.indexName + " indexPath: " + this.indexPath)
         let valueOfEntry = await this.getEntryOf(this.indexName, this.indexPath);
+        let valueOfDefault = await this.getEntryOf(this.defaultConfName, this.defaultConf);
         console.log(valueOfEntry)
         indexEntry = await this.convertToPath(indexEntry);
         console.log(indexEntry)
-        let value = valueOfEntry.index[indexEntry];
+        let value;
+        try {
+            value = valueOfEntry.index[indexEntry];
+        } catch (error) {
+            value = valueOfDefault.default["site"];
+            value += ".html"
+        }
         console.log(value)
         return value;
     }
