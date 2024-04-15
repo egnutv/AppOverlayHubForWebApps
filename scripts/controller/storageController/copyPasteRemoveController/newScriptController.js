@@ -9,7 +9,8 @@ class ScriptController extends SiteController {
     }
 
     async getSet(indexEntry) {
-        let arrayOfEntrys = await this.get(indexEntry);
+        let value = await this.get(indexEntry);
+        await this.set(value, indexEntry);
     }
 
     async get(indexEntry) {
@@ -25,13 +26,15 @@ class ScriptController extends SiteController {
 
         let value = "";
         if (headEntry || footEntry) {
-            value += this.footName + ":" + footEntry + this.headName + ":" +  headEntry;
+            value += footEntry + "|||||" + headEntry;
         }
         
         return value;
     }
-    async set() {
-
+    async set(value, name) {
+        let entries = value.split('|||||');
+        let footEntries = entries[0];
+        let headEntries = entries[1];
     }
 
 }
