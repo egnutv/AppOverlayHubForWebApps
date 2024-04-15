@@ -15,19 +15,18 @@ class Calculator {
         let b = button.value;
         let d = destination.value;
         let allowed = false;
-        if (b.length <= 1 || d.charAt(d.length - 1) != b) {
+        if (b.length <= 1 || d.charAt(d.length - 1) != b && d[0] && d[d.length]) {
             if(isNaN(d)){
                 destination.value += b;
             }
         }
     }
     async result() {
-        let trigger = await selectDomElement(".resultTrigger");
         let destination = await selectDomElement(".result");
-        let d = destination; let t = trigger;
+        let d = destination; let raw = destination.value;
 
-        if (d.value != null) {
-            
-        }
+        let result = eval(raw);
+        destination.value = result;
+        
     }
 }
