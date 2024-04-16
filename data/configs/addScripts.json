@@ -1,8 +1,8 @@
 {
   "add": {
     "calc": {
-      "head": ["1"],
-      "foot": ["2"]
+      "head": ["Ich bin ein Link", "Ich auch und das im Head"],
+      "body": ["Und ich bin unten"]
     }
   }
   }
