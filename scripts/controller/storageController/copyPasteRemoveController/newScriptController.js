@@ -35,6 +35,8 @@ class ScriptController extends SiteController {
         let entries = value.split('|||||');
         let footEntries = entries[0];
         let headEntries = entries[1];
+
+        console.log(headEntries, footEntries);
     }
 
 }

@@ -1,4 +1,4 @@
-import { testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet} from "./testFunctions.js";
+import { testScriptControllerGetSet, testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet} from "./testFunctions.js";
 
 window.testGet = testGet;
 window.testSet = testSet;
@@ -8,3 +8,4 @@ window.testSiteControllerGet = testSiteControllerGet;
 window.testSiteControllerRemove = testSiteControllerRemove;
 window.testSiteControllerGetSet = testSiteControllerGetSet;
 window.testTextControllerGetSet = testTextControllerGetSet;
+window.testScriptControllerGetSet = testScriptControllerGetSet;

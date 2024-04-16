@@ -4,6 +4,7 @@ import { GetSetRemoveUrlHelper } from "./scripts/helper/parameterHelper/GetSetRe
 import { GetSetRemoveServerToClientHelper } from "./scripts/helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
 import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/newSiteController.js"
 import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/newTextController.js"
+import { ScriptController } from "./scripts/controller/storageController/copyPasteRemoveController/newScriptController.js";
 function testOutput(input)  {
     let output = document.getElementById("output");
 
@@ -55,5 +56,10 @@ async function testTextControllerGetSet() {
     const theStorage = new TextController();
     await theStorage.getSet("start")
 }
+async function testScriptControllerGetSet() {
+    console.log("TEST")
+    const theStorage = new ScriptController;
+    await theStorage.getSet("clalc")
+}
 
-export { testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet}
+export { testScriptControllerGetSet, testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet}
