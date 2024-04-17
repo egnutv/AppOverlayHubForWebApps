@@ -3,6 +3,10 @@
     "calc": {
       "head": ["Ich bin ein Link", "Ich auch und das im Head"],
       "body": ["Und ich bin unten"]
+    },
+    "start": {
+      "head": ["JA WIR HABEN START"],
+      "body": ["Ohja", "JA"]
     }
   }
   }

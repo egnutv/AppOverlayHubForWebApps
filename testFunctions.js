@@ -58,9 +58,21 @@ async function testTextControllerGetSet() {
     const theStorage = new TextController();
     await theStorage.getSet("start")
 }
+
+let count; count = 0;
 async function testScriptControllerGetSet() {
-    console.log("TEST");
+    console.warn("count: " + count);
     const theStorage = new ScriptController;
-    await theStorage.getSet("calc");
+    switch (count) {
+        case 0:
+            
+            await theStorage.getSet("calc");
+            count++;
+            break;
+        case 1:
+            await theStorage.getSet("start");
+            count = 0;
+            break;
+    }
 }
 export { testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet, testScriptControllerGetSet}

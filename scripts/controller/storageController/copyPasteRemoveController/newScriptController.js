@@ -18,17 +18,38 @@ class ScriptController extends SiteController {
         } catch (error) {
             console.error(error);
         }*/
+        /*
         await this.remove(this.laterScriptName);
         console.log("BY PASSED")
+        */
+
+        
+        await this.remove();
+
+        
+
         
         let value = await this.get(indexEntry);
         console.log(value);
         
         await this.set(value, indexEntry);
     }
+
+    async remove() {
+        console.log("ICH WURDE AUSGEFÜHRT!");
+        let pastElements = document.getElementsByClassName(this.laterScriptName);
+        let numOfPastElements = pastElements.length; // Speichere die Länge der Kollektion in einer Variablen
+        console.log("-----------------------------------");
+        console.log(numOfPastElements); // Verwende die gespeicherte Länge
+        console.log("-----------------------------------");
+    }
+    
     
     async set(value, name) {
-        console.log(value)
+        
+        
+            console.log("ICH WURDE AUSGEFÜHRT!");
+            console.log(value)
         let keys = Object.keys(value);
         let numOfEntrys = keys.length;
     
@@ -52,17 +73,24 @@ class ScriptController extends SiteController {
             let numOfObjKeys = objKeys.length;
             console.log(numOfObjKeys);*/
             
-            for (let j = 0; j < numOfFinalEntrys; j++) {
-                let finalDestination = finalKeys[j];
-                let finalKeyValue = value[entry][finalDestination]; // Abrufen des Werts, der dem Schlüssel zugeordnet ist
-                console.log("Key Value: " + finalKeyValue); // Ausgabe des zugeordneten Werts
-                let destiObj = document.createElement("script");
-                destiObj.className = this.laterScriptName;
-                destiObj.src = finalKeyValue;
-                destiObj.defer = true;
-                destination.appendChild(destiObj);
-            }
             
+            
+            
+                for (let j = 0; j < numOfFinalEntrys; j++) {
+                    let finalDestination = finalKeys[j];
+                    let finalKeyValue = value[entry][finalDestination]; // Abrufen des Werts, der dem Schlüssel zugeordnet ist
+                    console.log("Key Value: " + finalKeyValue); // Ausgabe des zugeordneten Werts
+                    let destiObj = document.createElement("script");
+                    destiObj.className = this.laterScriptName;
+                    destiObj.src = finalKeyValue;
+                    destiObj.defer = true;
+                    destination.appendChild(destiObj);
+                }
+            
+            
+            
+            
+        
         }
     }
 
