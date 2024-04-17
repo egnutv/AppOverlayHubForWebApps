@@ -2,9 +2,9 @@
 
 import { GetSetRemoveUrlHelper } from "./scripts/helper/parameterHelper/GetSetRemoveUrlHelperNew.js";
 import { GetSetRemoveServerToClientHelper } from "./scripts/helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
-import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/newSiteController.js"
-import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/newTextController.js"
-import { ScriptController } from "./scripts/controller/storageController/copyPasteRemoveController/newScriptController.js";
+import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/SiteController.js"
+import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/TextController.js"
+import { ScriptController } from "./scripts/controller/storageController/copyPasteRemoveController/ScriptController.js";
 
 
 function testOutput(input)  {

@@ -5,7 +5,8 @@ class GetSetRemoveUrlHelper {
             position;
         } catch (error) {
             let url = new URL(window.location.href);
-            url.pathname += '/' + segmentValue;
+            let separator = url.search ? '/' : '?';
+            url.search += separator + segmentValue;
             history.pushState({}, '', url);
         }
     }
