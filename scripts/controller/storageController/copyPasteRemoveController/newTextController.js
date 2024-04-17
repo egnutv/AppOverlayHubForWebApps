@@ -47,10 +47,26 @@ class TextController extends SiteController {
             }
             let dC = await selectDomElement("." + destiClass); destiClass = dC;
 
+            
+            
+            
             if (destiClass.hasAttribute('value')) {
-                destiClass.value = changeValue;
+                let loggedValue = destiClass.value;
+                console.log(loggedValue);
+
+                if (changeValue != loggedValue) {
+                    destiClass.value = changeValue;
+                }
+                
             } else {
-                destiClass.innerHTML = changeValue;
+                let loggedInner = destiClass.innerHTML;
+                console.log(loggedInner);
+
+                if (changeValue != loggedInner) {
+                    destiClass.innerHTML = changeValue;
+                }
+
+                
             }
             
         }

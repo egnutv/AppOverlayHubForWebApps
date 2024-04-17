@@ -7,116 +7,57 @@ class ScriptController extends SiteController {
         this.indexPath = "data/configs/addScripts.json"
         this.indexName = "ImportScript"
         this.footName = "foot"; this.headName = "head";
-        this.laterScriptName = "|||[[[---LaterAddScript---]]]|||"
+        this.laterScriptName = "|||[[[---LaterAddScript---]]]|||";
     }
     async getSet(indexEntry) {
-        /*try {
-            let elements = document.querySelectorAll(this.laterScriptName);
-            elements.forEach((element) => {
-                element.remove();
-            });
-        } catch (error) {
-            console.error(error);
-        }*/
-        /*
-        await this.remove(this.laterScriptName);
-        console.log("BY PASSED")
-        */
 
-        
         await this.remove();
-
-        
-
-        
         let value = await this.get(indexEntry);
-        console.log(value);
-        
-        await this.set(value, indexEntry);
+        try {
+            await this.set(value, indexEntry);
+        } catch (error) {
+            
+        }
     }
 
     async remove() {
-        console.log("ICH WURDE AUSGEFÜHRT!");
-        let pastElements = document.getElementsByClassName(this.laterScriptName);
-        let numOfPastElements = pastElements.length; // Speichere die Länge der Kollektion in einer Variablen
-        console.log("-----------------------------------");
-        console.log(numOfPastElements); // Verwende die gespeicherte Länge
-        console.log("-----------------------------------");
+        let elements = document.getElementsByClassName(this.laterScriptName);
+
+        if (elements.length > 0) {
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+        }
     }
-    
-    
+
     async set(value, name) {
-        
-        
-            console.log("ICH WURDE AUSGEFÜHRT!");
-            console.log(value)
         let keys = Object.keys(value);
         let numOfEntrys = keys.length;
     
         for (let i = 0; i < numOfEntrys; i++) {
-            let entry = keys[i]; // Ändern Sie numOfEntrys[i] in keys[i]
-            console.log(entry);
+            let entry = keys[i];
             let destination = await selectDomElement(entry);
-            console.log(destination)
-            /*let destiObj = document.createElement("script"); // Änderung hier
-            destiObj.className = this.laterScriptName;
-            destination.appendChild(destiObj); // Änderung hier
-            destination.appendChild(destiObj);*/
-
-            console.log(value[entry])
-
             let finalKeys = Object.keys(value[entry])
             let numOfFinalEntrys = finalKeys.length;
-            console.log(numOfFinalEntrys)
-
-            /*let objKeys = Object.keys(value[destination]);
-            let numOfObjKeys = objKeys.length;
-            console.log(numOfObjKeys);*/
-            
-            
-            
-            
                 for (let j = 0; j < numOfFinalEntrys; j++) {
                     let finalDestination = finalKeys[j];
-                    let finalKeyValue = value[entry][finalDestination]; // Abrufen des Werts, der dem Schlüssel zugeordnet ist
-                    console.log("Key Value: " + finalKeyValue); // Ausgabe des zugeordneten Werts
+                    let finalKeyValue = value[entry][finalDestination]; 
                     let destiObj = document.createElement("script");
                     destiObj.className = this.laterScriptName;
                     destiObj.src = finalKeyValue;
                     destiObj.defer = true;
                     destination.appendChild(destiObj);
                 }
-            
-            
-            
-            
-        
         }
     }
-
-    async remove(className) {
-        let rmDestination = document.getElementsByClassName(className);
-        let rmDestinationSUM = rmDestination.length;
-            for (let i = 0; i < rmDestinationSUM; i++) {
-                let element = rmDestinationSUM[i];
-                element.remove();
-                
-            }
-        
-    }
-
-    
-
     async get(indexEntry) {
         let valueOfEntry = await this.getEntryOf(this.indexName, this.indexPath);
-        
-        console.log(valueOfEntry)
         let value;
         
         if (valueOfEntry.add.hasOwnProperty(indexEntry)) {
             value = valueOfEntry.add[indexEntry];
         } else {
-            value = null; // Setzen Sie hier Ihren Standardwert
+            value = null;
         }
         return value;
     }

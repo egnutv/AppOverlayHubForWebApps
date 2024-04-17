@@ -44,8 +44,8 @@ async function testSiteControllerGet(){
     testOutput(getValue);
 }
 async function testSiteControllerRemove(){
-    const theStorage = new GetSetRemoveServerToClientHelper();
-    await theStorage.remove("EinName");
+    const theStorage = new SiteController();
+    await theStorage.remove(".xxx");
 
 }
 
