@@ -1,10 +1,11 @@
 import { GetSetRemoveServerToClientHelper } from "../../../helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
 import { selectDomElement } from "../../../utils/selectDomElement.js";
+import { DefaultsController } from "./DefaultsController.js";
 
-class SiteController{
+class SiteController extends DefaultsController {
     constructor() {
-        this.storage = new GetSetRemoveServerToClientHelper;
-        this.indexName = "indexOfSites"; this.indexPath = "data/packs/templates/sites/index.json"; this.pathToFile = "data/packs/templates/sites/%file%"; this.defaultConf = "data/configs/main.json"; this.defaultConfName = "defaultConf";
+        super();
+        this.indexName = "indexOfSites"; this.indexPath = "data/packs/templates/sites/index.json"; this.pathToFile = "data/packs/templates/sites/%file%";  
     }
     async getSet(indexEntry, destination) {
         let arrayOfEntrys = await this.get(indexEntry);
@@ -36,10 +37,15 @@ class SiteController{
         Div.className = divName;
         destination.appendChild(Div);
     }
+    async getIndex() {
+        let value = await this.getEntryOf(this.indexName, this.indexPath);
+        return value;
+    }
     async get(indexEntry) {
         console.log("IndexName: " + this.indexName + " indexPath: " + this.indexPath)
-        let valueOfEntry = await this.getEntryOf(this.indexName, this.indexPath);
-        let valueOfDefault = await this.getEntryOf(this.defaultConfName, this.defaultConf);
+        let valueOfEntry = await this.getIndex();
+        //let a = await super.get(indexEntry);
+        let valueOfDefault = await super.get();
         console.log(valueOfEntry)
         indexEntry = await this.convertToPath(indexEntry);
         console.log(indexEntry)
@@ -58,15 +64,6 @@ class SiteController{
             innerPathValue = innerPathValue.replace(".", "/");
         }
         return innerPathValue;
-    }
-    async getEntryOf(valueName, pathToFile){
-        let valueOfEntry;
-        let valuesOfIndex = await this.storage.get(valueName, pathToFile);
-        if (await this.storage.exists(valueName) === false) {
-            this.storage.set(valueName, valuesOfIndex);
-        }
-        valueOfEntry = await JSON.parse(valuesOfIndex);
-        return valueOfEntry;
     }
     async remove(destination) {
         let d = await selectDomElement(destination);

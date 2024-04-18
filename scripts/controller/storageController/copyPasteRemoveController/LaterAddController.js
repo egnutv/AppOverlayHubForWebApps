@@ -1,13 +1,13 @@
 import { selectDomElement } from "../../../utils/selectDomElement.js";
 import { SiteController } from "./SiteController.js";
 
-class ScriptController extends SiteController {
+class LaterAddController extends SiteController {
     constructor() {
         super();
-        this.indexPath = "data/configs/addScripts.json"
+        this.indexPath = "data/configs/laterAdd.json"
         this.indexName = "ImportScript"
         this.footName = "foot"; this.headName = "head";
-        this.laterScriptName = "|||[[[---LaterAddScript---]]]|||";
+        this.laterScriptName = "|||[[[---LaterAdd---]]]|||";
     }
     async getSet(indexEntry) {
 
@@ -51,7 +51,7 @@ class ScriptController extends SiteController {
         }
     }
     async get(indexEntry) {
-        let valueOfEntry = await this.getEntryOf(this.indexName, this.indexPath);
+        let valueOfEntry = await this.getIndex();
         let value;
         
         if (valueOfEntry.add.hasOwnProperty(indexEntry)) {
@@ -63,4 +63,4 @@ class ScriptController extends SiteController {
     }
 }
 
-export { ScriptController }
+export { LaterAddController }

@@ -1,9 +1,12 @@
 class GetSetRemoveUrlHelper {
+    constructor() {
+        this.url = new URL(window.location.href);
+    }
     async set(value) {
         try {
             await this.#getSegmentPosition(value);
         } catch (error) {
-            let url = new URL(window.location.href);
+            let url = this.url;
             let separator = url.search ? '/' : '?';
             url.search += separator + value;
             history.pushState({}, '', url);
@@ -11,8 +14,6 @@ class GetSetRemoveUrlHelper {
         
     }
     async overwrite(position, newValue) {
-        let url = new URL(window.location.href);
-
         let oldValue;
         try {
             oldValue = await this.#getSegmentPosition(position);
@@ -28,7 +29,7 @@ class GetSetRemoveUrlHelper {
         }
     }
     async remove() {
-        let url = new URL(window.location.href);
+        let url = this.url;
         url.search = '';
         history.pushState({}, '', url);
     }
