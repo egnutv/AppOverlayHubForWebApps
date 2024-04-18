@@ -16,20 +16,20 @@ function testOutput(input)  {
 async function testSet() {
     const site = new GetSetRemoveUrlHelper();
 
-    site.setUrl("XY/XX/YY")
+    site.set("XY/YY")
 
 }
 async function testGet() {
     const site = new GetSetRemoveUrlHelper();
 
-    let getting = await site.getUrl("lang", "XX");
+    let getting = await site.get(0);
 
     testOutput(getting);
 }
 
 async function testRemove() {
     const site = new GetSetRemoveUrlHelper();
-    
+    await site.remove();
 }
 
 let getValue;
