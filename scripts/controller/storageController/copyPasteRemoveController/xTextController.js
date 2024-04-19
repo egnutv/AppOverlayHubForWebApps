@@ -1,5 +1,5 @@
 import { selectDomElement } from "../../../utils/selectDomElement.js";
-import { SiteController } from "./SiteController.js";
+import { SiteController } from "./xSiteController.js";
 import { GetSetRemoveSessionStorageHelper } from "../../../helper/storageHelper/clientStorage/GetSetRemoveSessionStorageHelper.js";
 
 class TextController extends SiteController {

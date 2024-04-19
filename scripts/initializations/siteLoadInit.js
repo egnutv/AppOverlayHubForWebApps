@@ -1,7 +1,7 @@
 import { DefaultsController } from "../controller/storageController/copyPasteRemoveController/DefaultsController.js";
 import { LaterAddController } from "../controller/storageController/copyPasteRemoveController/LaterAddController.js";
-import { SiteController } from "../controller/storageController/copyPasteRemoveController/SiteController.js"
-import { TextController } from "../controller/storageController/copyPasteRemoveController/TextController.js";
+import { SiteController } from "../controller/storageController/copyPasteRemoveController/xSiteController.js"
+import { TextController } from "../controller/storageController/copyPasteRemoveController/xTextController.js";
 import { GetSetRemoveUrlHelper } from "../helper/parameterHelper/GetSetRemoveUrlHelper.js";
 
 class SiteLoadInit {
@@ -19,7 +19,7 @@ class SiteLoadInit {
         await this.builder(indexEntry, d);
         await this.fadeIn();
     }
-    async builder(indexEntry) {
+    async builder(indexEntry, destination) {
         /*let lang;
         try {
             lang = await this.adress.get(0);
@@ -29,34 +29,55 @@ class SiteLoadInit {
 
         let valueOfDefaults = await this.defaults.getDefaults();
         let supportedLangs = valueOfDefaults.default["lang-support"];
-        let adressLang = await this.adress.get(0); adressLang = adressLang.toLowerCase();
+        let adressLang;
+        try {
+            adressLang = await this.adress.get(0); adressLang = adressLang.toLowerCase();
+        } catch (error) {
+            adressLang = "NoLang"
+        }
         
         //await this.adressBuilder(standardValues, defaultValue, position);
         if (supportedLangs.includes(adressLang)) {
         } else {
+            console.log("Sprache wird versucht zu setzen.");
             let standardLang = valueOfDefaults.default["lang"]; standardLang = standardLang[0]; standardLang = standardLang.toUpperCase();
             try {
-                await adress.overwrite(0, standardLang);
+                await this.adress.overwrite(0, standardLang);
             } catch (error) {
-                await adress.set(standardLang);
+                await this.adress.set(standardLang);
             }
         }
 
         let supportedSites = await this.site.getIndex();
-        let adressSite = await this.adress.get(1);
+        let adressSite;
+
+        try {
+            adressSite = await this.adress.get(1);
+        } catch (error) {
+            adressSite = "NoSite";
+        }
 
         supportedSites = supportedSites["index"];
         console.log(supportedSites);
         supportedSites = Object.keys(supportedSites);
         console.log(supportedSites);
 
-        if (supportedSites.toUpperCase().includes(adressSite.toUpperCase())) {
+        //supportedSites.toUpperCase()).includes(adressSite.toUpperCase())
+        if ((supportedSites.map(element => element.toUpperCase())).includes(adressSite.toUpperCase())) {
+            
         } else {
-            let standardSite = valueOfDefaults.default["site"]; standardSite = standardSite[0];
+            console.log("Seite wird versucht zu setzen.");
+            let standardSite = valueOfDefaults.default["site"]; 
+            console.log(standardSite);
+            standardSite = standardSite[0];
+            console.log(standardSite);
+            console.log("Sprache Anweisung 1 wurde erfolgreich überwunden!");
             try {
-                await adress.overwrite(1, standardSite);
+                await this.adress.overwrite(1, standardSite);
+                console.log("Sprache Anweisung 2 wurde erfolgreich überwunden!");
             } catch (error) {
-                await adress.set(standardSite);
+                await this.adress.set(standardSite);
+                console.log("Sprache Anweisung 3 wurde erfolgreich überwunden!");
             }
         }
 
@@ -67,39 +88,15 @@ class SiteLoadInit {
         try {
             await this.laterAdd.getSet(indexEntry);
         } catch (error) {
-            
         }
 
 
     }
     
-    /*async adressBuilder(standardValues, position) {
-        
-    }*/
-
-    //Muss noch weiter gemacht werden, um Code zu sparen:
-    async adressBuilder(index, defaultKey, adress) {
-        let valueOfDefaults = await this.defaults.getDefaults();
-        let supportedValues = valueOfDefaults.default[defaultKey];
-        let adressValue = await this.adress.get(index); adressValue = adressValue.toLowerCase();
-    
-        if (!supportedValues.includes(adressValue)) {
-            let standardValue = valueOfDefaults.default[defaultKey]; standardValue = standardValue[0]; standardValue = standardValue.toUpperCase();
-            try {
-                await adress.overwrite(index, standardValue);
-            } catch (error) {
-                await adress.set(standardValue);
-            }
-        }
-    }
-    
-    // Verwendung der neuen Methode
-    //await checkAndSetDefault(0, "lang-support", this.adress);
-    //await checkAndSetDefault(1, "site", this.adress);
     
     async fadeIn() {
-
+        console.log("A fadeIn was not written")
     }
 }
 
-export { siteLoadInit }
+export { SiteLoadInit }

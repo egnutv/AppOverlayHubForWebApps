@@ -2,10 +2,11 @@
 
 import { GetSetRemoveUrlHelper } from "./scripts/helper/parameterHelper/GetSetRemoveUrlHelper.js";
 import { GetSetRemoveServerToClientHelper } from "./scripts/helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
-import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/SiteController.js"
-import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/TextController.js"
+import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/xSiteController.js"
+import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/xTextController.js"
 import { DefaultsController } from "./scripts/controller/storageController/copyPasteRemoveController/DefaultsController.js";
 import { LaterAddController } from "./scripts/controller/storageController/copyPasteRemoveController/LaterAddController.js";
+import { SiteLoadInit } from "./scripts/initializations/SiteLoadInit.js";
 
 
 function testOutput(input)  {
@@ -26,6 +27,11 @@ async function testGet() {
     let getting = await site.get(0);
 
     testOutput(getting);
+}
+async function testOverwrite() {
+    const site = new GetSetRemoveUrlHelper();
+
+    await site.overwrite(0, "XXX")
 }
 
 async function testRemove() {
@@ -77,44 +83,9 @@ async function testLaterAddControllerGetSet() {
     }
 }
 async function testDefaults() {
-    const defaults = new DefaultsController;
-    const adress = new GetSetRemoveUrlHelper;
-    const site = new SiteController;
+    let newSite = new SiteLoadInit;
 
-    let defaultsValues = await defaults.getDefaults();
-    console.log(defaultsValues);
-
-    let valueOfDefaults = await defaults.getDefaults();
-        let supportedLangs = valueOfDefaults.default["lang-support"];
-        
-        let adressLang = await adress.get(0); adressLang = adressLang.toLowerCase();
-        
-        if (supportedLangs.includes(adressLang)) {
-            console.log("YES")
-        } else {
-            console.log("NO");
-            let standardLang = valueOfDefaults.default["lang"]; standardLang = standardLang[0]; standardLang = standardLang.toUpperCase();
-            try {
-                await adress.overwrite(0, standardLang);
-            } catch (error) {
-                await adress.set(standardLang);
-            }
-            console.log(standardLang);
-        }
-
-        let supportedSites = await site.getIndex();
-
-        console.log(supportedSites);
-
-        supportedSites = supportedSites["index"];
-        console.log(supportedSites);
-        supportedSites = Object.keys(supportedSites);
-        console.log(supportedSites)
-        
-
-        if (supportedSites.includes("imprintAndPrivacyPolicy")) {
-            console.log("YEAH IST COOL")
-        }
+    await newSite.init("start", "xxx");
         
 }
-export { testDefaults, testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet, testLaterAddControllerGetSet}
+export { testOverwrite, testDefaults, testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet, testLaterAddControllerGetSet}
