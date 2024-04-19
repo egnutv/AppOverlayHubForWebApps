@@ -70,19 +70,8 @@ class TextController extends SiteController {
 
     }
 
-    replaceTextInNode(element, nameOfParameter, valueOfDestination) {
-        for (let i = element.childNodes.length - 1; i >= 0; i--) {
-            let child = element.childNodes[i];
-    
-            // Wenn es ein Textknoten ist, ersetzen Sie den Text
-            if (child.nodeType === Text.TEXT_NODE) {
-                child.textContent = child.textContent.replace(nameOfParameter, valueOfDestination);
-            } 
-            // Wenn es ein Elementknoten ist, suchen Sie weiter
-            else if (child.nodeType === Element.ELEMENT_NODE) {
-                replaceTextInNode(child, nameOfParameter, valueOfDestination);
-            }
-        }
+    replaceTextIn(nameOfParameter, valueOfDestination) {
+
     }
     async #compareAndReplace(defaultArray, replaceArray) {
 
