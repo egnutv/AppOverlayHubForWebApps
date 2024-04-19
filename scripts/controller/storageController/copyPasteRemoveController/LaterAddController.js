@@ -1,5 +1,5 @@
 import { selectDomElement } from "../../../utils/selectDomElement.js";
-import { SiteController } from "./xSiteController.js";
+import { SiteController } from "./SiteController.js";
 
 class LaterAddController extends SiteController {
     constructor() {
