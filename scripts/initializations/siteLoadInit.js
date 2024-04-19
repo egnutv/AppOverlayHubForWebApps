@@ -1,10 +1,10 @@
-import { DefaultsController } from "../controller/storageController/copyPasteRemoveController/DefaultsController";
-import { LaterAddController } from "../controller/storageController/copyPasteRemoveController/LaterAddController";
-import { SiteController } from "../controller/storageController/copyPasteRemoveController/SiteController";
-import { TextController } from "../controller/storageController/copyPasteRemoveController/TextController";
-import { GetSetRemoveUrlHelper } from "../helper/parameterHelper/GetSetRemoveUrlHelper";
+import { DefaultsController } from "../controller/storageController/copyPasteRemoveController/DefaultsController.js";
+import { LaterAddController } from "../controller/storageController/copyPasteRemoveController/LaterAddController.js";
+import { SiteController } from "../controller/storageController/copyPasteRemoveController/SiteController.js"
+import { TextController } from "../controller/storageController/copyPasteRemoveController/TextController.js";
+import { GetSetRemoveUrlHelper } from "../helper/parameterHelper/GetSetRemoveUrlHelper.js";
 
-class siteLoadInit {
+class SiteLoadInit {
     constructor() {
         
         this.adress = new GetSetRemoveUrlHelper;
