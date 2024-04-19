@@ -15,10 +15,7 @@ class GetSetRemoveUrlHelper {
     }
     async overwrite(position, newValue) {
         let oldValue;
-        try {
-            oldValue = await this.#getSegmentPosition(position);
-        } catch (error) {
-        }
+        oldValue = await this.#getSegmentPosition(position);
         if (oldValue !== undefined) {
             let arrayOfEntrys = await this.#arrayFromURL();
             arrayOfEntrys[position] = newValue;
@@ -39,12 +36,15 @@ class GetSetRemoveUrlHelper {
         let arrayOfEntrys = await this.#arrayFromURL();
 
         let position = arrayOfEntrys.indexOf(value);
+        
         return position;
     }
-    async #getvalue(position) {
+    async #getSegmentValue(position) {
         let arrayOfEntrys = await this.#arrayFromURL();
         let value = arrayOfEntrys[position];
-        return value;
+
+            return value;
+        
     }
     async #arrayFromURL() {
         let adress = window.location.href;
@@ -66,9 +66,18 @@ class GetSetRemoveUrlHelper {
             if (isNaN(value)){
                 want = await this.#getSegmentPosition(value);
             } else {
-                want = await this.#getvalue(value);
+                want = await this.#getSegmentValue(value);
             }
-        return want;
+
+
+            if (typeof want == 'string') {
+            } else if (typeof want == 'number'){
+            }  else {
+                throw new Error(undefined)
+                
+            }
+            return want;
+        
     }
     
     

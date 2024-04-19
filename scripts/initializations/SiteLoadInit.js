@@ -50,6 +50,7 @@ class SiteLoadInit {
 
         let supportedSites = await this.site.getIndex();
         let adressSite;
+    
 
         try {
             adressSite = await this.adress.get(1);
@@ -57,21 +58,20 @@ class SiteLoadInit {
             adressSite = "NoSite";
         }
 
+        console.log(adressSite);
+
         supportedSites = supportedSites["index"];
         console.log(supportedSites);
         supportedSites = Object.keys(supportedSites);
         console.log(supportedSites);
 
-        //supportedSites.toUpperCase()).includes(adressSite.toUpperCase())
         if ((supportedSites.map(element => element.toUpperCase())).includes(adressSite.toUpperCase())) {
             
         } else {
-            console.log("Seite wird versucht zu setzen.");
             let standardSite = valueOfDefaults.default["site"]; 
             console.log(standardSite);
             standardSite = standardSite[0];
             console.log(standardSite);
-            console.log("Sprache Anweisung 1 wurde erfolgreich überwunden!");
             try {
                 await this.adress.overwrite(1, standardSite);
                 console.log("Sprache Anweisung 2 wurde erfolgreich überwunden!");
@@ -83,8 +83,9 @@ class SiteLoadInit {
 
 
         await this.site.getSet(indexEntry, destination);
-
+        console.log("TEST site");
         await this.text.getSet(indexEntry);
+        console.log("TEST text");
         try {
             await this.laterAdd.getSet(indexEntry);
         } catch (error) {

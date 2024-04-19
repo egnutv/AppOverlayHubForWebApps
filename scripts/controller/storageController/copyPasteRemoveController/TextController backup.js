@@ -31,78 +31,62 @@ class TextController extends SiteController {
         let currentLang = await this.findLang();
         let defaultLang = await this.findLang("default");
         currentLang = currentLang.toString();
-
-        //console.log(DestValues);
-        
-        //let zeichen; zeichen = "Ich bin kein Caps"; console.log(zeichen.toUpperCase());
+        let newDestValues = await this.#getValuesOfFile(currentLang, dest);
+        let defaultDestValues = await this.#getValuesOfFile(defaultLang, dest);
+        let zeichen; zeichen = "Ich bin kein Caps"; console.log(zeichen.toUpperCase());
         //let destinations = await this.#getValuesOfVariables(dest);
         //console.log(destinations);
 
-        //let destinations = defaultDestValues + DestValues;
+        //let destinations = defaultDestValues + newDestValues;
         //console.log(destinations)
-        let defaultDestValues = await this.#getValuesOfFile(defaultLang, dest);
-        let DestValues = await this.#getValuesOfFile(currentLang, dest);
+        console.log(defaultDestValues);
+        console.log(newDestValues);
 
-        let arrayOfDestinations = await this.#compareAndReplace(defaultDestValues, DestValues);
+        
 
-        let keysOfDestinations = Object.keys(arrayOfDestinations);
-        console.log(arrayOfDestinations);
-        for (let i = 0; i < keysOfDestinations.length; i++) {
-            //const element = keysOfDestinations[i];
-            let nameOfDestination = keysOfDestinations[i];
-            //console.log(nameOfDestination)
+        let keysOfDefault = Object.keys(defaultDestValues);
+        console.log(keysOfDefault)
+        let keysOfDestValues = Object.keys(newDestValues);
+        console.log(keysOfDestValues)
+        let keysOfDestinations = keysOfDefault.concat(keysOfDestValues);
+        console.log(keysOfDestinations);
+        for (let i = 0; i < destinations.length; i++) {
 
-            let valueOfDestination = arrayOfDestinations[nameOfDestination][0];
-            console.log(valueOfDestination);
-            //let value = valueOfDestination[nameOfDestination];
-            //console.log(value);
-            let parameter = this.textParStart + nameOfDestination + this.textParEnd;
-            console.log(parameter);
+            console.log(destinations[i])
+            let desti = destinations[i];
+            let destiClass = this.textParStart + desti + this.textParEnd;
+            let changeValue;
+
+            if (newDestValues.hasOwnProperty(desti)) {
+                changeValue = newDestValues[desti].toString();
+            } else {
+                changeValue = defaultDestValues[desti].toString();
+            }
+            let dC = await selectDomElement("." + destiClass); destiClass = dC;
+
             
-            //document.body.innerHTML = document.body.innerHTML.replace(nameOfParameter, valueOfDestination);
-            this.replaceTextIn(parameter, valueOfDestination);
-            try {
-                
-            } catch (error) {
-                
-            }
-        }
+            
+            console.log(destiClass);
+            if (destiClass.hasAttribute('value')) {
+                let loggedValue = destiClass.value;
+                console.log(loggedValue);
 
-    }
-
-    replaceTextInNode(element, nameOfParameter, valueOfDestination) {
-        for (let i = element.childNodes.length - 1; i >= 0; i--) {
-            let child = element.childNodes[i];
-    
-            // Wenn es ein Textknoten ist, ersetzen Sie den Text
-            if (child.nodeType === Text.TEXT_NODE) {
-                child.textContent = child.textContent.replace(nameOfParameter, valueOfDestination);
-            } 
-            // Wenn es ein Elementknoten ist, suchen Sie weiter
-            else if (child.nodeType === Element.ELEMENT_NODE) {
-                replaceTextInNode(child, nameOfParameter, valueOfDestination);
-            }
-        }
-    }
-    async #compareAndReplace(defaultArray, replaceArray) {
-
-        let outputArray = defaultArray;
-        let dA = defaultArray; defaultArray = dA; let rA = replaceArray; replaceArray = rA;
-        let keysOfDefault = Object.keys(defaultArray);
-        let keysOfReplace = Object.keys(replaceArray);
-
-        for (let i = 0; i < keysOfReplace.length; i++) {
-            let keyOfReplace = keysOfReplace[i];
-            let keyOfReplaceValue = replaceArray[keyOfReplace];
-            keyOfReplaceValue = keyOfReplaceValue.toString();
-                if (outputArray.hasOwnProperty(keyOfReplace)) {
-
-                    outputArray[keyOfReplace][0] = keyOfReplaceValue;
-                } else {
-                    outputArray[keyOfReplace][0] = keyOfReplaceValue;
+                if (changeValue != loggedValue) {
+                    destiClass.value = changeValue;
                 }
+                
+            } else {
+                let loggedInner = destiClass.innerHTML;
+                console.log(loggedInner);
+
+                if (changeValue != loggedInner) {
+                    destiClass.innerHTML = changeValue;
+                }
+
+                
+            }
+            
         }
-        return outputArray;
     }
     async #getValuesOfVariables(destination) {
         let alleDestinationen = await document.getElementsByTagName("*");
