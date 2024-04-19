@@ -3,7 +3,7 @@
 import { GetSetRemoveUrlHelper } from "./scripts/helper/parameterHelper/GetSetRemoveUrlHelper.js";
 import { GetSetRemoveServerToClientHelper } from "./scripts/helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
 import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/xSiteController.js"
-import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/xTextController.js"
+import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/TextController.js"
 import { DefaultsController } from "./scripts/controller/storageController/copyPasteRemoveController/DefaultsController.js";
 import { LaterAddController } from "./scripts/controller/storageController/copyPasteRemoveController/LaterAddController.js";
 import { SiteLoadInit } from "./scripts/initializations/SiteLoadInit.js";

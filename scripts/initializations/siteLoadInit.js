@@ -1,7 +1,7 @@
 import { DefaultsController } from "../controller/storageController/copyPasteRemoveController/DefaultsController.js";
 import { LaterAddController } from "../controller/storageController/copyPasteRemoveController/LaterAddController.js";
 import { SiteController } from "../controller/storageController/copyPasteRemoveController/xSiteController.js"
-import { TextController } from "../controller/storageController/copyPasteRemoveController/xTextController.js";
+import { TextController } from "../controller/storageController/copyPasteRemoveController/TextController.js";
 import { GetSetRemoveUrlHelper } from "../helper/parameterHelper/GetSetRemoveUrlHelper.js";
 
 class SiteLoadInit {
