@@ -3,8 +3,8 @@
 import { GetSetRemoveUrlHelper } from "./scripts/helper/parameterHelper/GetSetRemoveUrlHelper.js";
 import { GetSetRemoveServerToClientHelper } from "./scripts/helper/storageHelper/GetSetRemoveServerToClientFileHelper.js";
 import { SiteController } from "./scripts/controller/storageController/copyPasteRemoveController/SiteController.js"
-import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/TextController.js"
-import { DefaultsController } from "./scripts/controller/storageController/copyPasteRemoveController/DefaultsController.js";
+//import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/TextController.js"
+//import { DefaultsController } from "./scripts/controller/storageController/copyPasteRemoveController/DefaultsController.js";
 import { LaterAddController } from "./scripts/controller/storageController/copyPasteRemoveController/LaterAddController.js";
 //import { SiteLoadInit } from "./scripts/initializations/loading/SiteLoadInit.js";
 import { SiteOnLoadInit } from "./scripts/initializations/loading/SiteOnLoadInit.js";
@@ -62,8 +62,11 @@ async function testSiteControllerGetSet(){
 }
 
 async function testTextControllerGetSet() {
-    const theStorage = new TextController();
-    await theStorage.getSet("xxx")
+    /*const theStorage = new TextController();
+    await theStorage.getSet("xxx")*/
+    /*let xyz = new SiteOnLoadInit;
+    await xyz.init();*/
+    console.log("TEST TEXT");
 }
 
 let count; count = 0;

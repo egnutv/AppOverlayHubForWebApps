@@ -1,15 +1,17 @@
 //import { initSite } from "../controller/loadController/initSite.js";
 //import { textCopyPaste } from "../controller/storageController/copyPasteRemoveController/textController.js"
-import { SiteLoadInit } from "../initializations/loading/SiteLoadInit.js";
+//import { SiteLoadInit } from "../initializations/loading/SiteLoadInit.js";
 import { SiteOnLoadInit } from "../initializations/loading/SiteOnLoadInit.js";
 import { selectDomElement } from "../utils/selectDomElement.js";
 document.addEventListener("DOMContentLoaded", function() {
-    
+    createFontSize();
     const site = new SiteOnLoadInit;
+    
     site.init("start", "content_holder")
     //initSite();
     //AutoZIndex();
-    createFontSize();
+    
+    //site.init();
     triggerEvents();
     //textCopyPaste(".start", "");
 

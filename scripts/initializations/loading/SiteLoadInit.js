@@ -3,6 +3,7 @@ import { LaterAddController } from "../../controller/storageController/copyPaste
 import { SiteController } from "../../controller/storageController/copyPasteRemoveController/SiteController.js"
 import { TextController } from "../../controller/storageController/copyPasteRemoveController/TextController.js";
 import { GetSetRemoveUrlHelper } from "../../helper/parameterHelper/GetSetRemoveUrlHelper.js";
+import { selectDomElement } from "../../utils/selectDomElement.js";
 
 class SiteLoadInit {
     constructor() {
@@ -16,8 +17,12 @@ class SiteLoadInit {
 
     async init(indexEntry, destination) {
         let d = "." + destination;
+        await this.fade("In");
         await this.builder(indexEntry, d);
-        await this.fadeIn();
+        await this.fade("Out");
+        triggerEvents();
+
+
     }
     async builder(indexEntry, destination) {
         /*let lang;
@@ -95,16 +100,44 @@ class SiteLoadInit {
     }
     
     
-    async fadeIn() {
-        console.log("A fadeIn was not written");
+    async fade(mode) {
+        let contentHolder = await selectDomElement(".content_holder");
+        let crossfade = await selectDomElement(".crossfade");
+        let backgroundHolder = await selectDomElement(".background_holder");
+
+        switch (mode) {
+            case "In":
+                try {
+                    crossfade.classList.add("active")
+                } catch {}
+                
+                setTimeout(function() {
+                    backgroundHolder.style.visibility = "visible";
+                    contentHolder.style.visibility = "visible";
+                }, 2000);
+                
+                
+                break;
+            case "Out":
+                try {
+                    crossfade.classList.remove("active");
+                } catch {}
+                backgroundHolder.style.visibility = "hidden";
+                contentHolder.style.visibility = "hidden";
+        
+            default:
+                break;
+        }
     }
-    async fadeOut(){
+    /*async fadeOut(){
         
     }
 
-    async #gettingAreas() {
+    async #fade() {
         
-    }
+
+        
+    }*/
 }
 
 export { SiteLoadInit }

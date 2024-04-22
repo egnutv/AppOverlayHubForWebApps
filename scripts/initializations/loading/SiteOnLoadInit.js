@@ -1,9 +1,12 @@
-import { SiteLoadInit } from "./SiteLoadInit";
+import { SiteLoadInit } from "./SiteLoadInit.js";
 
 class SiteOnLoadInit extends SiteLoadInit {
-    async init() {
-        console.log("ICH BIN DA")
-    }
+    /*async init(indexEntry, destination) {
+        
+        let d = "." + destination;
+        await this.builder(indexEntry, d);
+        console.log("ICH BIN DA");
+    }*/
 }
 
 export { SiteOnLoadInit };
