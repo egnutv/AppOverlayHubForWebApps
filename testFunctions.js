@@ -6,8 +6,8 @@ import { SiteController } from "./scripts/controller/storageController/copyPaste
 import { TextController } from "./scripts/controller/storageController/copyPasteRemoveController/TextController.js"
 import { DefaultsController } from "./scripts/controller/storageController/copyPasteRemoveController/DefaultsController.js";
 import { LaterAddController } from "./scripts/controller/storageController/copyPasteRemoveController/LaterAddController.js";
-import { SiteLoadInit } from "./scripts/initializations/SiteLoadInit.js";
-
+//import { SiteLoadInit } from "./scripts/initializations/loading/SiteLoadInit.js";
+import { SiteOnLoadInit } from "./scripts/initializations/loading/SiteOnLoadInit.js";
 
 function testOutput(input)  {
     let output = document.getElementById("output");
@@ -63,7 +63,7 @@ async function testSiteControllerGetSet(){
 
 async function testTextControllerGetSet() {
     const theStorage = new TextController();
-    await theStorage.getSet("start")
+    await theStorage.getSet("xxx")
 }
 
 let count; count = 0;
@@ -83,7 +83,7 @@ async function testLaterAddControllerGetSet() {
     }
 }
 async function testDefaults() {
-    let newSite = new SiteLoadInit;
+    let newSite = new SiteOnLoadInit;
 
     await newSite.init("start", "xxx");
         

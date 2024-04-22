@@ -9,7 +9,6 @@ class TextController extends SiteController {
         this.textParStart = "++_$_"; this.textParEnd = "_$_++"; this.count;
     }
     async getSet(indexEntry) {
-        
         let arrayOfEntrys = await this.get(indexEntry);
         console.log("Der Eintrag : " + arrayOfEntrys);
         await this.set(arrayOfEntrys)
@@ -26,60 +25,41 @@ class TextController extends SiteController {
     async set(destination) {
         let dest = destination;
         let d = destination;
-        destination = "." + d;
-        d = await selectDomElement(destination);
         let currentLang = await this.findLang();
         let defaultLang = await this.findLang("default");
         currentLang = currentLang.toString();
-
-        //console.log(DestValues);
-        
-        //let zeichen; zeichen = "Ich bin kein Caps"; console.log(zeichen.toUpperCase());
-        //let destinations = await this.#getValuesOfVariables(dest);
-        //console.log(destinations);
-
-        //let destinations = defaultDestValues + DestValues;
-        //console.log(destinations)
         let defaultDestValues = await this.#getValuesOfFile(defaultLang, dest);
         let DestValues = await this.#getValuesOfFile(currentLang, dest);
-
         let arrayOfDestinations = await this.#compareAndReplace(defaultDestValues, DestValues);
-
         let keysOfDestinations = Object.keys(arrayOfDestinations);
         console.log(arrayOfDestinations);
         for (let i = 0; i < keysOfDestinations.length; i++) {
-            //const element = keysOfDestinations[i];
             let nameOfDestination = keysOfDestinations[i];
-            //console.log(nameOfDestination)
-
             let valueOfDestination = arrayOfDestinations[nameOfDestination][0];
             console.log(valueOfDestination);
-            //let value = valueOfDestination[nameOfDestination];
-            //console.log(value);
             let parameter = this.textParStart + nameOfDestination + this.textParEnd;
             console.log(parameter);
-            
-            //document.body.innerHTML = document.body.innerHTML.replace(nameOfParameter, valueOfDestination);
-            this.replaceTextIn(parameter, valueOfDestination);
-            try {
-                
-            } catch (error) {
-                
-            }
+            await this.replaceTextIn(parameter, valueOfDestination, d);
         }
-
     }
-
-    replaceTextIn(nameOfParameter, valueOfDestination) {
-
+    async replaceTextIn(nameOfParameter, valueOfDestination, d) {
+        let area = await selectDomElement("." + d);
+        let parameter = await area.getElementsByClassName(nameOfParameter)[0];
+        if(parameter) {
+            console.log("YEAH HA")
+            if(parameter.hasAttribute('value')) {
+                parameter.value = valueOfDestination;
+            } else {
+                parameter.innerHTML = valueOfDestination;
+            }
+        } else {
+        }
     }
     async #compareAndReplace(defaultArray, replaceArray) {
-
         let outputArray = defaultArray;
         let dA = defaultArray; defaultArray = dA; let rA = replaceArray; replaceArray = rA;
         let keysOfDefault = Object.keys(defaultArray);
         let keysOfReplace = Object.keys(replaceArray);
-
         for (let i = 0; i < keysOfReplace.length; i++) {
             let keyOfReplace = keysOfReplace[i];
             let keyOfReplaceValue = replaceArray[keyOfReplace];
@@ -125,14 +105,12 @@ class TextController extends SiteController {
         try {
             specificValues = await this.getEntryOf(this.langName + lang + ":specific:" + filename, specificPath);
         } catch (error) {
-            //await this.#errorCatchBlock1(filename);
             lang = await this.findLang("default");
             await this.#getValuesOfFile(lang, filename);
         }
         try {
             standardValues = await this.getEntryOf(this.langName + lang + ":standard:", standardPath);
         } catch (error) {
-            //await this.#errorCatchBlock1(filename);
             lang = await this.findLang("default");
             await this.#getValuesOfFile(lang, filename);
         }
