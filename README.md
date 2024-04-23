@@ -14,10 +14,13 @@ So, here we are at this point, and hopefully, we'll make even more progress next
 
 **Progress:** 
 - [--- 40% Complete ---] create some input-visualizations
-- [--- 60% Complete ---] GUI with background controling and diffrent files for this
-- [--- 00% Complete ---] Code a testApp
+- [--- 70% Complete ---] GUI with background controling and diffrent files for this
+- [--- 50% Complete ---] Code a testApp
 - [--- 00% Complete ---] Code a the Timetravel Snakegame
 
 **Used languages:** 
 JavaScript, CSS, HTML
+
+## April 23, 2024
+Decision that after successful completion of the project: The whole thing will become a desktop app instead of a web app.
 
