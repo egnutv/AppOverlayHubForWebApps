@@ -77,7 +77,7 @@ class SiteLoadInit {
         } else {
             let standardSite = valueOfDefaults.default["site"]; 
             console.log(standardSite);
-            standardSite = standardSite[0];
+            standardSite = standardSite[0]; 
             console.log(standardSite);
             try {
                 await this.adress.overwrite(1, standardSite);
@@ -86,6 +86,7 @@ class SiteLoadInit {
                 await this.adress.set(standardSite);
                 console.log("Sprache Anweisung 3 wurde erfolgreich überwunden!");
             }
+            indexEntry = standardSite;
         }
 
 
