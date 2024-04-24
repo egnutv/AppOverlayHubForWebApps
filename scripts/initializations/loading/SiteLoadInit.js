@@ -17,13 +17,15 @@ class SiteLoadInit {
 
     async init(indexEntry, destination) {
         let d = "." + destination;
-        await this.fade("In");
-        await this.builder(indexEntry, d);
         await this.fade("Out");
-        triggerEvents();
-
-
+        await this.destroy(d);
+        await this.builder(indexEntry, d);
+        setTimeout(async () => { // Verwende Arrow Function
+            await this.fade("In");
+            triggerEvents();
+        }, 600);
     }
+    
     async builder(indexEntry, destination) {
         /*let lang;
         try {
@@ -108,27 +110,38 @@ class SiteLoadInit {
         switch (mode) {
             case "In":
                 try {
-                    crossfade.classList.add("active")
+                    crossfade.classList.remove("active");
+
                 } catch {}
-                
-                setTimeout(function() {
-                    backgroundHolder.style.visibility = "visible";
+                    setTimeout(() => {
+                        backgroundHolder.style.visibility = "visible";
                     contentHolder.style.visibility = "visible";
-                }, 2000);
+                    }, 1);
                 
                 
                 break;
             case "Out":
                 try {
-                    crossfade.classList.remove("active");
+                    crossfade.classList.add("active");
                 } catch {}
-                backgroundHolder.style.visibility = "hidden";
-                contentHolder.style.visibility = "hidden";
+                
+                setTimeout(function() {
+                    backgroundHolder.style.visibility = "hidden";
+                    contentHolder.style.visibility = "hidden";
+                    
+                }, 1);
         
             default:
                 break;
         }
+    } 
+    async destroy(destination) {
+        let destroyChildsOf = await selectDomElement(destination);
+        while (destroyChildsOf.lastChild) {
+            destroyChildsOf.removeChild(destroyChildsOf.lastChild);
+        }
     }
+    
     /*async fadeOut(){
         
     }

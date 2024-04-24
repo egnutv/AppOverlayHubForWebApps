@@ -1,8 +1,34 @@
+import { ApplySettingsController } from "../../controller/storageController/applyController/ApplySettingsController.js";
 import { SiteLoadInit } from "./SiteLoadInit.js";
 
 class SiteOnLoadInit extends SiteLoadInit {
-    async init(indexEntry, destination) {
-        await super.init(indexEntry, destination);
+    constructor() {
+        super();  // Fügen Sie diese Zeile hinzu
+        this.applySettings = new ApplySettingsController;
+    }
+    async init(/*indexEntry, destination*/) {
+        console.log("TEST MESSAGE")
+        let settings;
+        //try {
+            settings = await this.applySettings.init();
+            console.log(settings);
+            let site = settings[1];
+            console.log(site);
+            //console.log("Ich Treffe ein: try")
+        /*} catch (error) {
+            console.log("Ich Treffe ein: error")*/
+            //super.init(site , "content_holder");
+            await this.fade("Out");
+            this.builder(site , ".content_holder");
+            setTimeout(async () => { // Verwende Arrow Function
+                await this.fade("In");
+                triggerEvents();
+            }, 600);
+            /*
+            
+        }*/
+        //console.log(settings);
+        //await super.init(indexEntry, destination);
     }
     
 }

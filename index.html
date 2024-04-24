@@ -11,6 +11,7 @@
     <script type="module" class="events" src="scripts/events/events.js" defer></script>
     <script type="module" src="scripts\controller\loadController\index.js" defer></script>
     <script>
+
     </script>
     <meta charset="UTF-8">
 
@@ -18,61 +19,7 @@
         
     </script>
     <style>
-        .load_animation, .content_holder, .crossfade, .background_holder {
-            width: 100%;
-            height: 100%;
-            
-            position: absolute;
-        }
         
-        .loadArea {
-            overflow: visible;
-            width: 10em;
-            height: 10em;
-            /* Zentriere horizontal und vertikal */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .spinner {
-            width: 10em;
-            height: 10em;
-            border-radius: 50%;
-            border: 0.5em solid var(--text-color); /* Kreis mit rotem Rand */
-            border-top-color: transparent;
-           
-            animation: spin 2s linear infinite; /* Spin-Animation */
-            position: absolute; /* Ändere die Positionierung auf absolut */
-        }
-
-        .blurred-spinner {
-            filter: blur(5px); /* Unscharfer Effekt */
-        }
-        
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg); /* Vollständige Drehung */
-            }
-        }
-
-        .crossfade {
-
-            background-color: var(--transparency-color);
-            transition: 2s ease-in-out;
-            visibility: hidden;
-        }
-        .crossfade.active {
-            background-color: var(--text-color);
-            visibility: visible;
-            transition-delay: 0.5s;
-        } 
-        .background_holder {
-            width: 100%; height: 100%;
-            background-color: var(--background-color);
-        }
 
     </style>
 </head>
@@ -81,7 +28,7 @@
         <div class="loadArea">
             <div class="spinner" style="z-index: 1"></div> <!-- Die scharfe Ladeschnecke -->
             <div class="spinner blurred-spinner" style="z-index: 1"></div> <!-- Die unscharfe Ladeschnecke -->
-        </div>
+            <div class="process_representation"><h1 class="percentage_progress">0%</h1></div></div>
     <div class="background_holder" style="z-index: 1; visibility: hidden;" ></div>
     </div>
     <div class="content_holder" style="z-index: 2; visibility: hidden;">
