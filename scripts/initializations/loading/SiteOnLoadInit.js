@@ -12,7 +12,12 @@ class SiteOnLoadInit extends SiteLoadInit {
         //try {
             settings = await this.applySettings.init();
             console.log(settings);
-            let site = settings[1];
+            let site;
+            try {
+                site = settings[1];
+            } catch (error) {
+                site = "NoSite";
+            }
             console.log(site);
             //console.log("Ich Treffe ein: try")
         /*} catch (error) {
