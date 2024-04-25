@@ -1,12 +1,12 @@
 {
     "index":
         {
-            "start": ["start.html"],
-            "moreOptions": ["options.html"],
-            "creds": ["onlyText.html"],
-            "imprintAndPrivacyPolicy": ["onlyText.html"],
+            "start": ["main/start.html"],
+            "moreOptions": ["main/options.html"],
+            "creds": ["main/onlyText.html"],
+            "imprintAndPrivacyPolicy": ["main/onlyText.html"],
 
-            "calc": ["calc.html"],
+            "calc": ["apps/calc.html"],
             "testCardRed": ["testCardRed.html"],
             "testCardYellow": ["testCardYellow.html"],
             "testCardGreen": ["testCardGreen.html"],

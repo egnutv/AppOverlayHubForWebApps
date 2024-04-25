@@ -19,6 +19,11 @@ class SiteLoadInit {
         let d = "." + destination;
         await this.fade("Out");
         await this.destroy(d);
+        try {
+            await this.adress.overwrite(1, indexEntry);
+        } catch (error) {
+            
+        }
         await this.builder(indexEntry, d);
         setTimeout(async () => { // Verwende Arrow Function
             await this.fade("In");

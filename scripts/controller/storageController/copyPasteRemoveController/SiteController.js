@@ -51,11 +51,30 @@ class SiteController extends DefaultsController {
         console.log(indexEntry)
         let value;
         try {
-            value = valueOfEntry.index[indexEntry];
+            let key = indexEntry.toUpperCase();
+            let upperCaseKeysObject = {};
+            for (let k in valueOfEntry.index) {
+                upperCaseKeysObject[k.toUpperCase()] = valueOfEntry.index[k];
+            }
+            value = upperCaseKeysObject[key];
         } catch (error) {
             value = valueOfDefault.default["site"];
             value += ".html"
         }
+        
+        /*let capValueOfEntry = valueOfEntry["index"];
+
+        capValueOfEntry = Object.keys(capValueOfEntry);
+        capValueOfEntry = capValueOfEntry.map(element => element.toUpperCase());
+        if (capValueOfEntry.includes(indexEntry.toUpperCase())){
+            console.log("YES")
+            let i = capValueOfEntry.indexOf(indexEntry);
+            console.log(i);
+            console.log(capValueOfEntry[i])
+        } else {
+            console.log("NO")
+        }
+        console.log(capValueOfEntry)*/
         console.log(value)
         return value;
     }

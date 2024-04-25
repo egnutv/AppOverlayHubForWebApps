@@ -1,12 +1,12 @@
 import { SiteLoadInit } from "../initializations/loading/SiteLoadInit.js";
-import { SiteOnLoadInit } from "../initializations/loading/SiteOnLoadInit.js";
-import { selectDomElement } from "../utils/selectDomElement.js";
-import { Events } from "../events/events.js";
-
-const siteLoader = new SiteLoadInit; const siteLoad = new SiteLoadInit;
-function siteLoad(params) {
-    siteLoader.init(indexEntry, ".")
+//import { SiteOnLoadInit } from "../initializations/loading/SiteOnLoadInit.js";
+//import { selectDomElement } from "../utils/selectDomElement.js";
+const siteLoader = new SiteLoadInit;
+function siteLoad(indexEntry) {
+    siteLoader.init(indexEntry, "content_holder")
 }
+export { siteLoad }
+
 
 // Kommentar: Events soll später teilweise, zumindest was das Auslösen angeht, hier erstzt weden.
 
