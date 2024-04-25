@@ -21,61 +21,9 @@ async function triggerEvents() {
     ActiveEvent();
 }
 var stepCounter = 0;
-
 async function createFontSize() {
-    let fontSize = 1.4;
-    let nextFontSize = 0.2;
-
-    let standardScreenSize = [
-        800 * 600,     // 15 Zoll
-        1280 * 1024,   // 17 Zoll
-        1600 * 900,    // 22 Zoll
-        1920 * 1080,   // 24 Zoll
-        2560 * 1440,   // 27 Zoll
-        3840 * 2160,   // 32 Zoll
-        3440 * 1440,    // 34 Zoll
-    ];
-    for (let i = 0; i < standardScreenSize.length; i++) {
-        let standardScreenSizeValue = standardScreenSize[i] / 100 / 100 / 10;
-        standardScreenSize[i] = standardScreenSizeValue;
-    }
-    console.log(standardScreenSize)
-    
-    
-    let averageValue;
-    if (standardScreenSize.length % 2 === 1) {
-        averageValue = standardScreenSize[Math.floor(standardScreenSize.length / 2)];
-    } else {
-        let middlePart1 = standardScreenSize[standardScreenSize.length / 2 - 1];
-        let middlePart2 = standardScreenSize[standardScreenSize.length / 2];
-        averageValue = (middlePart1 + middlePart2) / 2;
-    }
-    let clientScreenSize = screen.width * screen.height;
-    clientScreenSize = clientScreenSize / 100 / 100 / 10;
-
-    
-    let smallestValue = Math.min(...standardScreenSize);
-    let largestValue = Math.min(...standardScreenSize);
-
-    let finalFontSize;
-    if (clientScreenSize === averageValue) {
-        finalFontSize = fontSize;
-    } else if (clientScreenSize < averageValue) {
-        finalFontSize = nextFontSize;
-    } else if (clientScreenSize > averageValue) {
-        finalFontSize = nextFontSize;
-    }
-
-    
-    
-    
-
-}
-async function createFontSizeSub() {
-
-}
-/*async function createFontSize() {
     let maxFontSize = 1.7;
+    let minFontSize = 1.4;
     if (screen.height < screen.width) {
         maxFontSize = 1.4;
     }
@@ -181,7 +129,11 @@ async function createFontSizeSub() {
 
 if (negative && fontSize > maxFontSize) {
     fontSize = maxFontSize;
-} 
+}
+
+if (fontSize <= minFontSize) {
+    fontSize = minFontSize;
+}
 const cssRule = `* { font-size: ${fontSize}rem; }`;
 let styleTag = document.getElementById('dynamicFontSize');
 if (styleTag) {

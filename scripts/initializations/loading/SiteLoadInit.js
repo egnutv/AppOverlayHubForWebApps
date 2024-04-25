@@ -17,18 +17,18 @@ class SiteLoadInit {
 
     async init(indexEntry, destination) {
         let d = "." + destination;
-        await this.fade("Out");
-        await this.destroy(d);
         try {
             await this.adress.overwrite(1, indexEntry);
         } catch (error) {
             
         }
-        await this.builder(indexEntry, d);
         setTimeout(async () => { // Verwende Arrow Function
-            await this.fade("In");
+            await this.fade("Out", ["content_holder"]);
+            await this.destroy(d);
+            await this.builder(indexEntry, d);
+            await this.fade("In", ["content_holder"]);
             triggerEvents();
-        }, 600);
+        }, 500);
     }
     
     async builder(indexEntry, destination) {
@@ -108,7 +108,7 @@ class SiteLoadInit {
     }
     
     
-    async fade(mode) {
+    async fade(mode, listOfObjects) {
         let contentHolder = await selectDomElement(".content_holder");
         let crossfade = await selectDomElement(".crossfade");
         let backgroundHolder = await selectDomElement(".background_holder");
@@ -119,9 +119,14 @@ class SiteLoadInit {
                     crossfade.classList.remove("active");
 
                 } catch {}
-                    setTimeout(() => {
-                        backgroundHolder.style.visibility = "visible";
-                    contentHolder.style.visibility = "visible";
+                    setTimeout(async () => {
+                        for (let i = 0; i < listOfObjects.length; i++) {
+                            let element = listOfObjects[i];
+                            let x = await selectDomElement("." + element);
+                            x.style.visibility = "visible";
+
+                            
+                        }
                     }, 1);
                 
                 
@@ -131,9 +136,14 @@ class SiteLoadInit {
                     crossfade.classList.add("active");
                 } catch {}
                 
-                setTimeout(function() {
-                    backgroundHolder.style.visibility = "hidden";
-                    contentHolder.style.visibility = "hidden";
+                setTimeout(async function() {
+                    for (let i = 0; i < listOfObjects.length; i++) {
+                        let element = listOfObjects[i];
+                        let x = await selectDomElement("." + element);
+                        x.style.visibility = "hidden";
+
+                        
+                    }
                     
                 }, 1);
         

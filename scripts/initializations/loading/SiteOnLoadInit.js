@@ -23,10 +23,12 @@ class SiteOnLoadInit extends SiteLoadInit {
         /*} catch (error) {
             console.log("Ich Treffe ein: error")*/
             //super.init(site , "content_holder");
-            await this.fade("Out");
+            await this.fade("Out", ["content_holder", "background_holder"]);
             this.builder(site , ".content_holder");
             setTimeout(async () => { // Verwende Arrow Function
-                await this.fade("In");
+                
+                await this.fade("In", ["content_holder", "background_holder"]);
+                backgroundHolder.style.visibility = "visible";
                 triggerEvents();
             }, 600);
             /*
