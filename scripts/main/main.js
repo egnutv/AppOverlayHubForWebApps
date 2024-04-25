@@ -1,10 +1,36 @@
-import('./content.js');
-import('./../utils/selectDomElement.js');
+import { SiteLoadInit } from "../initializations/loading/SiteLoadInit.js";
+import { SiteOnLoadInit } from "../initializations/loading/SiteOnLoadInit.js";
+import { selectDomElement } from "../utils/selectDomElement.js";
+import { Events } from "../events/events.js";
 
+const siteLoader = new SiteLoadInit; const siteLoad = new SiteLoadInit;
+function siteLoad(params) {
+    siteLoader.init(indexEntry, ".")
+}
+
+// Kommentar: Events soll später teilweise, zumindest was das Auslösen angeht, hier erstzt weden.
+
+/*
 const content = selectDomElement(".content");
+const events = new Events; const siteOnLoad = new SiteLoadInit;
 
-var observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+document.addEventListener("DOMContentLoaded", function() {
+    events.createFontSize();
+    
+    siteOnLoad.init("start", "content_holder")
+    //initSite();
+    //AutoZIndex();
+    //site.init();
+    events.trigger();
+    //textCopyPaste(".start", "");
 
-    })
-})
+});
+
+window.addEventListener('resize', events.createFontSize());
+/*
+async function triggerEvents() {
+    let interval = 500;
+    //await removeFocusEvent();
+    addTransition();
+    ActiveEvent();
+}*/

@@ -1,21 +1,19 @@
-import { SiteLoadInit } from "../initializations/loading/SiteLoadInit.js";
+//import { initSite } from "../controller/loadController/initSite.js";
+//import { textCopyPaste } from "../controller/storageController/copyPasteRemoveController/textController.js"
+//import { SiteLoadInit } from "../initializations/loading/SiteLoadInit.js";
 import { SiteOnLoadInit } from "../initializations/loading/SiteOnLoadInit.js";
 import { selectDomElement } from "../utils/selectDomElement.js";
 document.addEventListener("DOMContentLoaded", function() {
     createFontSize();
     const site = new SiteOnLoadInit;
-    
     site.init("start", "content_holder")
     //initSite();
     //AutoZIndex();
     //site.init();
     triggerEvents();
     //textCopyPaste(".start", "");
-
 });
-
 window.addEventListener('resize', createFontSize);
-
 async function triggerEvents() {
     let interval = 500;
     //await removeFocusEvent();
@@ -99,9 +97,7 @@ async function createFontSize() {
         factors.unshift(0);
     }
     let fontSizes = [];
-    
     for (let i = 0; i < factors.length; i++) {
-
         if (i !== 0) {
             fontSize = fontSize + nextFontSize;
         fontSize = parseFloat(fontSize.toFixed(2));
