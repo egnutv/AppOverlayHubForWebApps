@@ -10,15 +10,25 @@ class LaterAddController extends SiteController {
         this.laterScriptName = "|||[[[---LaterAdd---]]]|||";
     }
     async getSet(indexEntry) {
-
-        await this.remove();
+        console.log(indexEntry);
+        console.log("HUI")
+        try {
+            await this.remove();
+        } catch (error) {
+            
+        }
         let value = await this.get(indexEntry);
+            
+
         try {
             await this.set(value, indexEntry);
         } catch (error) {
             
         }
-    }
+
+            console.log(value);
+        }
+
 
     async remove() {
         let elements = document.getElementsByClassName(this.laterScriptName);
@@ -30,7 +40,8 @@ class LaterAddController extends SiteController {
         }
     }
 
-    async set(value, name) {
+    async set(value) {
+        console.log(value)
         let keys = Object.keys(value);
         let numOfEntrys = keys.length;
     
@@ -51,7 +62,9 @@ class LaterAddController extends SiteController {
         }
     }
     async get(indexEntry) {
+        console.log(indexEntry)
         let valueOfEntry = await this.getIndex();
+        console.log(valueOfEntry)
         let value;
         
         if (valueOfEntry.add.hasOwnProperty(indexEntry)) {

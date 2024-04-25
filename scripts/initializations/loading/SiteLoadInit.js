@@ -94,10 +94,10 @@ class SiteLoadInit {
         console.log("TEST site");
         await this.text.getSet(indexEntry);
         console.log("TEST text");
-        try {
+        //try {
             await this.laterAdd.getSet(indexEntry);
-        } catch (error) {
-        }
+        //} catch (error) {
+        //}
 
 
     }

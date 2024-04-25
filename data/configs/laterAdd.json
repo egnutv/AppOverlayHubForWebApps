@@ -1,5 +1,8 @@
 {
   "add": {
+    "start": {
+      "head": ["scripts/utils/changer/changeTheme.js"]
+    },
     "calc": {
       "head": ["scripts/app/calc/main.js"]
     }
