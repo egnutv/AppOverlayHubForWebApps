@@ -22,7 +22,8 @@ class SiteController extends DefaultsController {
 
         for (let i = 0; i < arrayOfEntrys.length; i++) {
             let pathToFile = pathsToFiles.replace("%file%", arrayOfEntrys[i]);
-            let value = await this.storage.get(className, pathToFile);
+            //let value = await this.storage.get(className, pathToFile);
+            let value = await this.storage.fetchData(pathToFile);
             tempDiv.insertAdjacentHTML('beforeend', value);
             tempDiv.children[i].classList.add(className);
         }

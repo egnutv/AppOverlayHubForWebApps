@@ -52,11 +52,26 @@ class LaterAddController extends SiteController {
             let numOfFinalEntrys = finalKeys.length;
                 for (let j = 0; j < numOfFinalEntrys; j++) {
                     let finalDestination = finalKeys[j];
-                    let finalKeyValue = value[entry][finalDestination]; 
-                    let destiObj = document.createElement("script");
-                    destiObj.className = this.laterScriptName;
-                    destiObj.src = finalKeyValue;
-                    destiObj.defer = true;
+                    let finalKeyValue = value[entry][finalDestination];
+                    let destiObj;
+                    if ((finalKeyValue).includes(".js")) {
+                        destiObj = document.createElement("script");
+                        destiObj.className = this.laterScriptName;
+                        destiObj.type = "module"
+                        destiObj.src = finalKeyValue;
+                        destiObj.defer = true;
+                    } else if ((finalKeys).includes(".css")) {
+                        destiObj = document.createElement("link");
+                        destiObj.className = this.laterScriptName;
+                        destiObj.rel = "stylesheet"; destiObj.href = finalKeyValue;
+                    }
+                    //if (finalKeyValue.includes(".js")) {
+                        
+                    //}
+                    
+
+                    
+                    
                     destination.appendChild(destiObj);
                 }
         }

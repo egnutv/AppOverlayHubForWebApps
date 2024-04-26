@@ -91,10 +91,12 @@ class SiteLoadInit {
                 await this.adress.set(standardSite);
                 console.log("Sprache Anweisung 3 wurde erfolgreich überwunden!");
             }
+            
             indexEntry = standardSite;
+            
         }
 
-
+        
         await this.site.getSet(indexEntry, destination);
         console.log("TEST site");
         await this.text.getSet(indexEntry);
