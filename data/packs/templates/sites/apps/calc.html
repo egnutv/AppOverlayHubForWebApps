@@ -15,23 +15,20 @@
                     <div></div>
                     <div style="overflow-y: scroll; width: 100%; height: calc(100% - 1rem); grid-template-columns: 1fr; height: 100%; box-sizing: border-box;" class="text_scroll" >
                         <div class="text">
-                            
+                            <div style="min-height: 5rem; ">
+                                <h1 class="result" style="word-break: break-all;"></h2>
+                            </div>
                             
                             <div class= "calcField" style="cursor: default; user-select: none; padding: 0; gap: 0.3em; overflow: visible;">
                                 <div class="innerGridContainer">
                                     <div class="valueField" style="width: 100%; margin: 0;">
-                                        <input type="button" value="" class="result bigButton " style="">
-                                        <input type="button" class="++_$_reset_$_++ bigButton" value="">
+                                        <div></div>
+                                        <input type="button" class="++_$_reset_$_++ bigButton" value="" onclick="calc.reset()">
                                         
                                 </div> 
                                 </div>
                                 <div class="innerGridContainer">
                                     <div class="numField" style="width: 100%; margin: 0;">
-                                        <script>
-                                            function toResult() {
-                                                console.log("TEST ERGEBNIS")
-                                            }
-                                        </script> 
                                         <input type="button" class="bigButton" value="1" onclick="calc.copyToNumbar()">
                                         <input type="button" class="bigButton" value="2" onclick="calc.copyToNumbar()">
                                         <input type="button" class="bigButton" value="3" onclick="calc.copyToNumbar()">
@@ -41,6 +38,10 @@
                                         <input type="button" class="bigButton" value="7" onclick="calc.copyToNumbar()">
                                         <input type="button" class="bigButton" value="8" onclick="calc.copyToNumbar()">
                                         <input type="button" class="bigButton" value="9" onclick="calc.copyToNumbar()">
+                                        <input type="button" class="bigButton" value="0" onclick="calc.copyToNumbar()">
+                                        <input type="button" class="bigButton" value="00" onclick="calc.copyToNumbar()">
+                                        <input type="button" class="bigButton" value="." onclick="calc.copyToNumbar()">
+
                                     </div>
                                     <div class="interactionField" style="width: 100%; margin: 0;">
                                         

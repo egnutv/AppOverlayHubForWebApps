@@ -22,12 +22,12 @@ async function triggerEvents() {
 }
 var stepCounter = 0;
 async function createFontSize() {
-    let maxFontSize = 1.7;
-    let minFontSize = 1.4;
+    let maxFontSize = 1.139;
+    let minFontSize = 0.8;
     if (screen.height < screen.width) {
-        maxFontSize = 1.4;
+        maxFontSize = 1.139;
     }
-    let fontSize = 1.4;
+    let fontSize = 1.139;
     let nextFontSize = 0.2;
 
     let standardScreenSize = [

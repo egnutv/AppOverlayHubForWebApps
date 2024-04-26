@@ -6,27 +6,30 @@ class Calculator {
     }
 
     async copyToNumbar() {
-        let rawValue = this.#select(); 
+        let rawValue = this.get()
+        console.log(rawValue);
+        /* 
         rawValue = rawValue.toString();
         console.log(rawValue);
         console.log(rawValue.length)
     
-        if (rawValue.length === 1) {
+        if (rawValue.length === 1 || rawValue[0] && rawValue[1] === 0) {
             let resultBar = await selectDomElement(".result");
-            let addResultBar = resultBar.value;
+            let addResultBar = resultBar.innerHTML;
             
             console.log(resultBar)
             if (!isNaN(rawValue)) {
                 addResultBar += rawValue
-                resultBar.value = addResultBar;
+                resultBar.innerHTML = addResultBar;
             } else if (addResultBar[addResultBar.length - 1] != rawValue){
                 addResultBar += rawValue
-                resultBar.value = addResultBar;
+                resultBar.innerHTML = addResultBar;
             }
-        }
+        }*/
     }
-    #select() {
-        let valueButton = document.querySelectorAll(".hover");
+
+    get() {
+        let valueButton = document.querySelectorAll(".xxx");
         valueButton = valueButton[0]; let value = valueButton.value;
         return value;
     }
@@ -34,9 +37,12 @@ class Calculator {
 
     async result() {
         let destination = await selectDomElement(".result");
-        let rawValue = destination.value;
+        let rawValue = destination.innerHTML;
         let result = eval(rawValue);
-        destination.value = result;
+        destination.innerHTML = result;
+    } async reset(){
+        let resultBar = await selectDomElement(".result");
+        resultBar.innerHTML = "";
     }
 
     async copy() {
