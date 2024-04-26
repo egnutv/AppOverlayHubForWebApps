@@ -7,8 +7,7 @@ class Calculator {
 
     async copyToNumbar() {
         let rawValue = this.get()
-        console.log(rawValue);
-        /* 
+        console.log(rawValue); 
         rawValue = rawValue.toString();
         console.log(rawValue);
         console.log(rawValue.length)
@@ -25,12 +24,15 @@ class Calculator {
                 addResultBar += rawValue
                 resultBar.innerHTML = addResultBar;
             }
-        }*/
+        }
     }
+    async get() {
 
+    }
     get() {
-        let valueButton = document.querySelectorAll(".xxx");
+        let valueButton = document.querySelectorAll(".hover");
         valueButton = valueButton[0]; let value = valueButton.value;
+        
         return value;
     }
     

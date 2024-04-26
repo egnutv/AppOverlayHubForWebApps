@@ -10,4 +10,3 @@ window.calc.result = calc.result;
 window.calc.copy = calc.copy;
 window.calc.reset = calc.reset;
 
-window.key
