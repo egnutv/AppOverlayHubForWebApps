@@ -28,7 +28,6 @@ class SiteOnLoadInit extends SiteLoadInit {
             setTimeout(async () => { // Verwende Arrow Function
                 
                 await this.fade("In", ["content_holder", "background_holder"]);
-                backgroundHolder.style.visibility = "visible";
                 triggerEvents();
             }, 600);
             /*
