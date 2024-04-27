@@ -4,7 +4,7 @@
       "head": ["scripts/utils/changer/changeTheme.js"]
     },
     "calc": {
-      "head": ["scripts/apps/calc/index.js"],
+      "head": ["scripts/sites/apps/calc/index.js"],
       "body": ["styles/apps/calc/main.css"]
     }
   }
