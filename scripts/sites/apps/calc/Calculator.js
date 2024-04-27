@@ -1,4 +1,4 @@
-import { selectDomElement } from "../../utils/selectDomElement.js"
+import { selectDomElement } from "../../../utils/selectDomElement.js"
 
 class Calculator {
     constructor() {
@@ -41,7 +41,12 @@ class Calculator {
         let destination = await selectDomElement(".result");
         let rawValue = destination.innerHTML;
         let result = eval(rawValue);
-        destination.innerHTML = result;
+        if (isNaN(result)) {
+            destination.innerHTML = result;
+        } else {
+            this.reset();
+        }
+        
     } async reset(){
         let resultBar = await selectDomElement(".result");
         resultBar.innerHTML = "";
