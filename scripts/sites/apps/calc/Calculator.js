@@ -41,10 +41,12 @@ class Calculator {
         let destination = await selectDomElement(".result");
         let rawValue = destination.innerHTML;
         let result = eval(rawValue);
-        if (isNaN(result)) {
-            destination.innerHTML = result;
+        destination.innerHTML = result;
+        if (!isNaN(result)) {
         } else {
-            this.reset();
+            setTimeout(() => {
+                this.reset();
+            }, 2500);
         }
         
     } async reset(){
