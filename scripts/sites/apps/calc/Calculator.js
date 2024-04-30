@@ -5,10 +5,29 @@ class Calculator {
         //this.valueButton = "bigButton"
     }
 
-    async copyToNumbar() {
-        let rawValue = this.get()
-        console.log(rawValue); 
-        rawValue = rawValue.toString();
+    async anewCopyToNumbar() {
+        this.copyToNumbar("0");
+        setTimeout(() => {
+            this.copyToNumbar("0");
+        }, 1);
+    }
+    async copyToNumbar(keyBoardsKey) {
+        
+        let rawValue;
+
+        if (keyBoardsKey) {
+            console.log(keyBoardsKey);
+            let valuesArray = this.getCheckList();
+            console.log(valuesArray)
+            if(valuesArray.includes(keyBoardsKey)) {
+                console.log("YES ITS INCLUDED")
+                rawValue = keyBoardsKey;
+            }
+        } else {
+            rawValue = this.getActive()
+            
+        }
+        rawValue = rawValue.toString()
         console.log(rawValue);
         console.log(rawValue.length)
     
@@ -26,14 +45,19 @@ class Calculator {
             }
         }
     }
-    async get() {
-
-    }
-    get() {
+    
+    getActive() {
         let valueButton = document.querySelectorAll(".hover");
         valueButton = valueButton[0]; let value = valueButton.value;
         
         return value;
+    }
+    getCheckList() {
+        let elements = document.getElementsByClassName('bigButton');
+        let valuesArray = Array.from(elements)
+            .map(element => element.value)
+            .filter(value => value.length <= 1);
+        return valuesArray;
     }
     
 
