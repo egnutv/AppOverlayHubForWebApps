@@ -66,3 +66,5 @@ function readSessionStorage(AString) {
         }, 0);
     });
 }
+
+export { changeTheme };

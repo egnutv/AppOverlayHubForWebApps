@@ -2,7 +2,7 @@ import { selectDomElement } from "../../../utils/selectDomElement.js"
 
 class Calculator {
     constructor() {
-        //this.valueButton = "bigButton"
+        this.forbiddenList = ["="];
     }
 
     async anewCopyToNumbar() {
@@ -56,14 +56,21 @@ class Calculator {
         let elements = document.getElementsByClassName('bigButton');
         let valuesArray = Array.from(elements)
             .map(element => element.value)
-            .filter(value => value.length <= 1);
+            .filter(value => value.length <= 1)
+            .filter(value => !this.forbiddenList.includes(value));
+        
+        console.log(valuesArray);
         return valuesArray;
     }
+    
     
 
     async result() {
         let destination = await selectDomElement(".result");
         let rawValue = destination.innerHTML;
+        /*if (rawValue ) {
+
+        }*/
         let result = eval(rawValue);
         destination.innerHTML = result;
         if (!isNaN(result)) {

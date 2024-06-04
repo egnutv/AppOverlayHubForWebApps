@@ -12,5 +12,18 @@ window.calc.reset = calc.reset;
 window.calc.anewCopyToNumbar = calc.anewCopyToNumbar;
 
 window.addEventListener('keydown', function(event) {
-    calc.copyToNumbar(event.key);
+    let key = event.key;
+    
+    switch (key) {
+        case "=":
+            calc.result();
+            break;
+        case "Backspace":
+            calc.reset();
+        break;
+        default:
+            calc.copyToNumbar(event.key);
+            console.log(key);
+            break;
+    }
 })

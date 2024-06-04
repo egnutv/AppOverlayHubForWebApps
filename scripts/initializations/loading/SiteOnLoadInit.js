@@ -3,10 +3,10 @@ import { SiteLoadInit } from "./SiteLoadInit.js";
 
 class SiteOnLoadInit extends SiteLoadInit {
     constructor() {
-        super();  // Fügen Sie diese Zeile hinzu
+        super();
         this.applySettings = new ApplySettingsController;
     }
-    async init(/*indexEntry, destination*/) {
+    async init() {
         console.log("TEST MESSAGE")
         let settings;
         //try {
@@ -19,22 +19,13 @@ class SiteOnLoadInit extends SiteLoadInit {
                 site = "NoSite";
             }
             console.log(site);
-            //console.log("Ich Treffe ein: try")
-        /*} catch (error) {
-            console.log("Ich Treffe ein: error")*/
-            //super.init(site , "content_holder");
             await this.fade("Out", ["content_holder", "background_holder"]);
             this.builder(site , ".content_holder");
-            setTimeout(async () => { // Verwende Arrow Function
+            setTimeout(async () => {
                 
                 await this.fade("In", ["content_holder", "background_holder"]);
                 triggerEvents();
-            }, 600);
-            /*
-            
-        }*/
-        //console.log(settings);
-        //await super.init(indexEntry, destination);
+            }, 600)
     }
     
 }

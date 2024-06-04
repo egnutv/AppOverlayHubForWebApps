@@ -1,7 +1,7 @@
 {
   "add": {
     "start": {
-      "head": ["scripts/utils/changer/changeTheme.js"]
+      "head": ["scripts/sites/mainSites/start/index.js"]
     },
     "calc": {
       "head": ["scripts/sites/apps/calc/index.js"],
