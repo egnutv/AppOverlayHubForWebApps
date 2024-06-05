@@ -1,4 +1,4 @@
-# aTimeTravelSnakeGame
+# AppOverlayHubForWebApps
 
 This project primarily focuses on a web GUI with rudimentary functionalities for adding subpages or other content. It is intended to serve as a foundation for one or more games or applications that can be launched either through a menu structure or used individually.
 
