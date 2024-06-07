@@ -44,35 +44,40 @@ class LaterAddController extends SiteController {
         console.log(value)
         let keys = Object.keys(value);
         let numOfEntrys = keys.length;
-    
+        console.log(numOfEntrys);
         for (let i = 0; i < numOfEntrys; i++) {
+            console.log(keys[i]);
+            console.log(keys);
             let entry = keys[i];
-            let destination = await selectDomElement(entry);
-            let finalKeys = Object.keys(value[entry])
+            let finalKeys = Object.keys(value[entry]);
+            console.log(finalKeys);
             let numOfFinalEntrys = finalKeys.length;
-                for (let j = 0; j < numOfFinalEntrys; j++) {
+            console.log(numOfFinalEntrys);
+            let destination = await selectDomElement(entry);
+            console.log(destination);
+                for (let j = 0; j < numOfFinalEntrys; j++){
                     let finalDestination = finalKeys[j];
+                    console.log(finalDestination);
                     let finalKeyValue = value[entry][finalDestination];
+                    console.log(finalKeyValue);
                     let destiObj;
-                    if ((finalKeyValue).includes(".js")) {
+                    if (finalKeyValue.includes(".js")) {
+                        console.log("Its includes JS");
                         destiObj = document.createElement("script");
                         destiObj.className = this.laterScriptName;
                         destiObj.type = "module"
                         destiObj.src = finalKeyValue;
                         destiObj.defer = true;
-                    } else if ((finalKeys).includes(".css")) {
+                    }
+                    if (finalKeyValue.includes(".css")) {
+                        console.log("Its includes CSS");
                         destiObj = document.createElement("link");
                         destiObj.className = this.laterScriptName;
-                        destiObj.rel = "stylesheet"; destiObj.href = finalKeyValue;
+                        destiObj.rel = "stylesheet"; 
+                        destiObj.href = finalKeyValue;
                     }
-                    //if (finalKeyValue.includes(".js")) {
-                        
-                    //}
-                    
-
-                    
-                    
                     destination.appendChild(destiObj);
+                    
                 }
         }
     }
