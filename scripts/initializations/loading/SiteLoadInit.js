@@ -41,72 +41,79 @@ class SiteLoadInit {
 
         let valueOfDefaults = await this.defaults.getDefaults();
         let supportedLangs = valueOfDefaults.default["lang-support"];
-        let adressLang;
-        try {
-            adressLang = await this.adress.get(0); adressLang = adressLang.toLowerCase();
-        } catch (error) {
-            adressLang = "NoLang"
-        }
+        let adressValue = await this.tryGetAdress(0);
+        console.log(adressValue)
+        let notSupportedLang = false;
+        let standardLang; let adressLang;
         
         //await this.adressBuilder(standardValues, defaultValue, position);
-        if (supportedLangs.includes(adressLang)) {
-        } else {
-            console.log("Sprache wird versucht zu setzen.");
-            let standardLang = valueOfDefaults.default["lang"]; standardLang = standardLang[0]; standardLang = standardLang.toUpperCase();
-            try {
-                await this.adress.overwrite(0, standardLang);
-            } catch (error) {
-                await this.adress.set(standardLang);
-            }
-        }
-
-        let supportedSites = await this.site.getIndex();
-        let adressSite;
-    
-
-        try {
-            adressSite = await this.adress.get(1);
-        } catch (error) {
-            adressSite = "NoSite";
-        }
-
-        console.log(adressSite);
-
-        supportedSites = supportedSites["index"];
-        console.log(supportedSites);
-        supportedSites = Object.keys(supportedSites);
-        console.log(supportedSites);
-
-        if ((supportedSites.map(element => element.toUpperCase())).includes(adressSite.toUpperCase())) {
+        if (supportedLangs.includes(adressValue)) {
+            console.log(adressValue);
+            adressLang = adressValue;
             
         } else {
-            let standardSite = valueOfDefaults.default["site"]; 
-            console.log(standardSite);
-            standardSite = standardSite[0]; 
-            console.log(standardSite);
-            try {
-                await this.adress.overwrite(1, standardSite);
-                console.log("Sprache Anweisung 2 wurde erfolgreich überwunden!");
-            } catch (error) {
-                await this.adress.set(standardSite);
-                console.log("Sprache Anweisung 3 wurde erfolgreich überwunden!");
-            }
+            console.log(adressValue);
+            console.log("Sprache wird versucht zu setzen.");
+            standardLang = valueOfDefaults.default["lang"]; standardLang = standardLang[0]; standardLang = standardLang.toUpperCase();
+            console.log(standardLang);
+            adressLang = standardLang;
+            console.log(adressLang);
+            notSupportedLang = true;
+        }
+        console.log(adressLang);
+
+        let supportedSites = await this.site.getIndex();
+        adressValue = await this.tryGetAdress(1);
+        supportedSites = supportedSites["index"];
+        supportedSites = Object.keys(supportedSites);
+        let notSupportedSite = false;
+        let standardSite; let adressSite;
+
+        if ((supportedSites.map(element => element.toUpperCase())).includes(adressValue.toUpperCase())) {
+            adressSite = adressValue;
+        } else {
+            standardSite = valueOfDefaults.default["site"]; 
+            standardSite = standardSite[0];
+            notSupportedSite = true;
             
             indexEntry = standardSite;
             
         }
-
+        if (notSupportedLang === true && notSupportedSite === true) {
+            console.log("Case01")
+            await this.setAdress(0, standardLang + "/" + standardSite);
+        } else if (notSupportedLang === true && notSupportedSite === false) {
+            console.log("Case03")
+            await this.setAdress(0, standardLang);
+        } else if (notSupportedLang === false && notSupportedSite === true) {
+            console.log("Case02")
+            console.log(standardSite)
+            await this.setAdress(1, standardSite);
+        } 
         
+
         await this.site.getSet(indexEntry, destination);
-        console.log("TEST site");
         await this.text.getSet(indexEntry);
-        console.log("TEST text");
-        //try {
-            await this.laterAdd.getSet(indexEntry);
-        //} catch (error) {
-        //}
+        await this.laterAdd.getSet(indexEntry);
 
 
+    } async setAdress(position, value) {
+        try {
+            await this.adress.overwrite(position, value);
+        } catch (error) {
+            await this.adress.set(value);
+        }
+
+        console.log(value);
+    } async tryGetAdress(position) {
+        let value;
+        try {
+            value = await this.adress.get(position);
+        } catch (error) {
+            value = "undefinedValue";
+        }
+        console.log(value);
+        return value;
     }
     
     

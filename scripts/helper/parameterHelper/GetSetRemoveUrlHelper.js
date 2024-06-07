@@ -14,16 +14,20 @@ class GetSetRemoveUrlHelper {
         
     }
     async overwrite(position, newValue) {
-        let oldValue;
-        oldValue = await this.#getSegmentPosition(position);
+        if (newValue !== undefined) {
+            let oldValue;
+            oldValue = await this.#getSegmentPosition(position);
         if (oldValue !== undefined) {
             let arrayOfEntrys = await this.#arrayFromURL();
+        if (arrayOfEntrys && arrayOfEntrys.length > position) {
             arrayOfEntrys[position] = newValue;
             let newSegments = arrayOfEntrys.join("/");
-            await this.remove();
-
-            await this.set(newSegments)
+            let url = this.url;
+            url.search = '?' + newSegments;
+            history.pushState({}, '', url);
         }
+    }
+}
     }
     async remove() {
         let url = this.url;
