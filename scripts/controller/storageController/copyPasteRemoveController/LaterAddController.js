@@ -18,18 +18,14 @@ class LaterAddController extends SiteController {
             
         }
         let value = await this.get(indexEntry);
-            
-
+        
         try {
             await this.set(value, indexEntry);
         } catch (error) {
             
         }
-
             console.log(value);
         }
-
-
     async remove() {
         let elements = document.getElementsByClassName(this.laterScriptName);
 
