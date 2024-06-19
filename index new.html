@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="darkmode">
+<head>
+    <style>
+        :root {
+            --wide-scale: 5em;
+            --icon-scale: 1em;
+            --space-scale: 0.5em;
+            --white: #fff;
+            --white-gray: #cdcdcd;
+            --white-middle-gray: #868686;
+            --black-middle-gray: #4d4d4d;
+            --black-gray: #292929;
+            --blacker-gray: #201e1e;
+            --black: #000;
+            
+        }
+        * {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .darkmode {
+            --main: var(--black-gray);
+            --menu: var(--blacker-gray);
+        }
+        body {
+            display: grid;
+            
+            grid-template-rows: 1fr;
+            grid-template-columns: 0fr 1fr;
+        }
+        body ~ .side_menu#wide {
+            grid-template-columns: calc(3 * var(--wide-scale)) 1fr !important;
+        }
+        main {
+            height: 100% !important;
+            width: 100%;
+            background-color: var(--main);
+        }
+        main:nth-child() {
+            position: absolute;
+        }
+        header {
+            z-index: 5;
+            height: var(--wide-scale) !important;
+            background-color: var(--main);
+        }
+        .content_holder {
+            height: 100% !important;
+            z-index: 4;
+        }
+        .side_menu {
+            background-color: var(--menu);
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            toggleSideMenu();
+            //textCopyPaste(".start", "");
+        });
+        async function toggleSideMenu() {
+            let mode = "mode";
+            let body = document.getElementsByTagName("body")[0];
+            let menu = document.getElementsByClassName("side_menu")[0];
+            console.log("menu Classes: " + menu.classList);
+            
+            if (menu.classList != (mode)) {
+                menu.classList.add("mode" + "1");
+            }
+            console.log("menu Classes: " + menu.classList);
+            if (menu.classList == (mode)) {
+                console.log("menu Classes: " + menu.classList);
+            }
+            console.log(menu.classList);
+
+        }
+    </script>
+</head>
+<body>
+    <menu class="side_menu">
+
+    </menu>
+    <main>
+        <header>
+        </header>
+        <section class="content_holder">
+        </section>
+    </main>
+</body>
+</html>
