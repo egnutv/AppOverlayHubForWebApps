@@ -1,6 +1,6 @@
-// Angenommen, dass sich Ihre aktuelle Datei im Verzeichnis "controller/storageController/copyPasteRemoveController/media/" befindet
 import { SiteController } from "../SiteController.js";
 import { GetSetRemoveSessionStorageHelper } from "../../../../helper/storageHelper/clientStorage/GetSetRemoveSessionStorageHelper.js";
+import { selectDomElement } from "../../../../utils/selectDomElement.js";
 
 class NewTextController extends SiteController {
     constructor() {
@@ -8,28 +8,38 @@ class NewTextController extends SiteController {
         this.sessionValue = new GetSetRemoveSessionStorageHelper();
         //paths
         let pathToPacks = "data/packs/"; 
-        this.main = "main.json"; 
         this.pathToText = pathToPacks + "texts/%lang%/%path%/%name%";
-        this.pathToGraphics = pathToPacks + "graphics/%path%/%name%";
-        this.pathToIndex = pathToPacks + "templates/sites/index.json";
 
-
-        //marker
+        //names
+        this.langName = "lang:"
+        this.parameterName = "text:";
+        
+        //paramete
+        this.name = "%name%";
+        this.num = "%num%";
         this.endMarker = "_$_++";
         this.startMarker = "++_$_";
 
+        let parameterName = this.parameterName;
         let startMarker = this.startMarker;
         let endMarker = this.endMarker;
+        let name = this.name;
+        let num = this.num;
 
-        this.placeholder = startMarker + "%name%" + endMarker;
+        this.placeholder = startMarker + parameterName + name  + endMarker;
+        this.newPlaceholder = startMarker + parameterName + name + num + endMarker;
 
+        
     }
-    /*async get() {
-        let listOfPlaceholder = await this.getPlaceholder();
-        await this.filterListOfPlaceholder(listOfPlaceholder);
-    }*/
-        async get(indexEntry) {
-            let a = await super.get(indexEntry);
+        async getSet() {
+            let indexEntry = "start";
+            let a = await this.getIndexEntry(indexEntry);
+            console.log(a);
+            
+        }
+
+        async getIndexEntry(indexEntry) {
+            let a = await super.getIndexEntry(indexEntry);
             a = a.toString();
             if (a.includes(".html") ) {
                 return indexEntry;
@@ -37,30 +47,24 @@ class NewTextController extends SiteController {
                 return console.error(null);
             }
         }
-
-    async filterListOfPlaceholder(list) {
-
-    }
-
-    async getPlaceholder() {
-        let placeholder = this.placeholder;
-
-        const classSet = new Set();
-
-        document.querySelectorAll('*').forEach(element => {
-            element.classList.forEach(className => {
-                if (className.includes(this.startMarker) && className.includes(this.endMarker)) {
-                    classSet.add(className);
-                }
+        //async set()
+        async getPlaceholder() {
+            let placeholder = this.placeholder;
+            const classSet = new Set();
+    
+            document.querySelectorAll('*').forEach(element => {
+                element.classList.forEach(className => {
+                    if (className.includes(this.startMarker) && className.includes(this.endMarker)) {
+                        classSet.add(`.${className}`);
+                    }
+                });
             });
-        });
-
-        let listOfPlaceholders = Array.from(classSet);
-
-        console.log(listOfPlaceholders);
-        return listOfPlaceholders;
-    }
+    
+            let listOfPlaceholders = Array.from(classSet);
+    
+            console.log(listOfPlaceholders);
+            return listOfPlaceholders;
+        }
 }
 
-
-export {NewTextController };
+export { NewTextController };

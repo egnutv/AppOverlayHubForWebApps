@@ -17,7 +17,7 @@ class LaterAddController extends SiteController {
         } catch (error) {
             
         }
-        let value = await this.get(indexEntry);
+        let value = await this.getIndexEntry(indexEntry);
         
         try {
             await this.set(value, indexEntry);
@@ -77,7 +77,7 @@ class LaterAddController extends SiteController {
                 }
         }
     }
-    async get(indexEntry) {
+    async getIndexEntry(indexEntry) {
         console.log(indexEntry)
         let valueOfEntry = await this.getIndex();
         console.log(valueOfEntry)

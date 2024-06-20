@@ -8,7 +8,7 @@ class SiteController extends DefaultsController {
         this.indexName = "indexOfSites"; this.indexPath = "data/packs/templates/sites/index.json"; this.pathToFile = "data/packs/templates/sites/%file%";  
     }
     async getSet(indexEntry, destination) {
-        let arrayOfEntrys = await this.get(indexEntry);
+        let arrayOfEntrys = await this.getIndexEntry(indexEntry);
         await this.set(indexEntry, arrayOfEntrys, destination);
     }
     async set(className, arrayOfEntrys, destination) {
@@ -42,7 +42,7 @@ class SiteController extends DefaultsController {
         let value = await this.getEntryOf(this.indexName, this.indexPath);
         return value;
     }
-    async get(indexEntry) {
+    async getIndexEntry(indexEntry) {
         console.log("IndexName: " + this.indexName + " indexPath: " + this.indexPath)
         let valueOfEntry = await this.getIndex();
         //let a = await super.get(indexEntry);

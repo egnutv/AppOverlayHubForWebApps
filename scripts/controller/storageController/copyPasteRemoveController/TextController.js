@@ -9,12 +9,12 @@ class TextController extends SiteController {
         this.textParStart = "++_$_"; this.textParEnd = "_$_++"; this.count;
     }
     async getSet(indexEntry) {
-        let arrayOfEntrys = await this.get(indexEntry);
+        let arrayOfEntrys = await this.getIndexEntry(indexEntry);
         console.log("Der Eintrag : " + arrayOfEntrys);
         await this.set(arrayOfEntrys)
     }
-    async get(indexEntry) {
-        let a = await super.get(indexEntry);
+    async getIndexEntry(indexEntry) {
+        let a = await super.getIndexEntry(indexEntry);
         a = a.toString();
         if (a.includes(".html") ) {
             return indexEntry;

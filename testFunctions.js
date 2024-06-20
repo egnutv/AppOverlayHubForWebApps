@@ -96,6 +96,6 @@ async function testPlaceController() {
     
     let Placeholde = new NewTextController;
 
-    await Placeholde.get();
+    await Placeholde.getSet();
 }
 export { testPlaceController, testOverwrite, testDefaults, testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet, testLaterAddControllerGetSet}
