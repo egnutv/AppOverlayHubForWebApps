@@ -1,4 +1,4 @@
-import { testOverwrite, testDefaults, testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet, testLaterAddControllerGetSet } from "./testFunctions.js";
+import {testOverwrite, testDefaults, testGet, testSet, testRemove, testSiteControllerSet, testSiteControllerGet, testSiteControllerRemove, testSiteControllerGetSet, testTextControllerGetSet, testLaterAddControllerGetSet, testPlaceController} from "./testFunctions.js";
 
 window.testGet = testGet;
 window.testSet = testSet;
@@ -11,3 +11,4 @@ window.testTextControllerGetSet = testTextControllerGetSet;
 window.testLaterAddControllerGetSet = testLaterAddControllerGetSet;
 window.testDefaults = testDefaults;
 window.testOverwrite = testOverwrite;
+window.testPlaceController = testPlaceController;
