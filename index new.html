@@ -9,12 +9,13 @@
             --smaller-scale: 2em;
             --small-scale: 1em;
             --half-scale: 0.5em;
+            --micro-scale: 0.1em;
             --white: #fff;
             --white-gray: #cdcdcd;
             --white-middle-gray: #868686;
             --black-middle-gray: #4d4d4d;
-            --black-gray: #292929;
-            --blacker-gray: #201e1e;
+            --black-gray: #575757;
+            --blacker-gray: #484848;
             --black: #000;
         }
         * {
@@ -34,10 +35,7 @@
         body {
             display: grid;
             grid-template-rows: 1fr;
-            grid-template-columns: 0fr 1fr;
-        }
-        body ~ .side_menu#wide {
-            grid-template-columns: calc(3 * var(--large-scale)) 1fr !important;
+            grid-template-columns: auto 1fr;
         }
         main {
             height: 100% !important;
@@ -58,8 +56,13 @@
         }
         .side_menu {
             background-color: var(--menu);
-            width: 100%;
+            width: 0;
             height: 100%;
+            border-right: var(--micro-scale);
+            border-color: var(--white);
+        }
+        .side_menu.open {
+            width: calc(3 * var(--large-scale)) !important;
         }
         .menu_button {
             background: var(--white);
@@ -77,23 +80,40 @@
         .menu_button:last-child {
             margin-right: var(--smaller-scale);
         }
-        .menu_button.clicked {
-            background-color: #000 !important;
+        
+        .menu_button.hover {
+            background: #707070 !important;
+        }
+        .menu_button.click {
+            background: #000 !important;
         }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            toggleSideMenu();
-            document.querySelector('button').addEventListener('click', function() {
-                setToggleClass("clicked");
-            });
+            ActiveEvent();
         });
+        
+        function ActiveEvent() {
+            let buttons = document.querySelectorAll("input, button");
 
-        async function setToggleClass(name) {
-            this.classList.toggle(name);
-            setTimeout(() => {
-                this.classList.remove(name);
-            }, 1);
+            buttons.forEach(button => {
+                let events = [];
+                button.addEventListener('click', function() {
+                    events.push('click');
+                    this.classList.add('click');
+                    setTimeout(() => {
+                        this.classList.remove('click');
+                    }, 500);
+                });
+                button.addEventListener('mouseover', function() {
+                    events.push('mouseover');
+                    this.classList.add('hover');
+                });
+                button.addEventListener('mouseout', function() {
+                    events = [];
+                    this.classList.remove('hover');
+                });
+            });
         }
 
         async function toggleSideMenu() {
@@ -102,14 +122,39 @@
             let menu = document.getElementsByClassName("side_menu")[0];
             console.log("menu Classes: " + menu.classList);
             
-            if (menu.classList != (mode)) {
-                menu.classList.add("mode" + "1");
+            if (!menu.classList.contains(mode)) {
+                menu.classList.add(mode + "1");
             }
             console.log("menu Classes: " + menu.classList);
-            if (menu.classList == (mode)) {
+            if (menu.classList.contains(mode)) {
                 console.log("menu Classes: " + menu.classList);
             }
             console.log(menu.classList);
+        }
+        
+        function triggerOpenMenu(menu) {
+            let m = menu;
+
+            let element = document.getElementsByClassName(m)[0];
+            console.log(element);
+
+            if (element.classList.contains("open") || element.classList.contains("close")) {
+                element.classList.forEach(className => {
+                    console.log("className: " + className);
+                    switch (className) {
+                        case "open":
+                            element.classList.remove("open");
+                            element.classList.add("close");
+                            break;
+                        case "close":
+                            element.classList.remove("close");
+                            element.classList.add("open");
+                            break;
+                    }
+                });
+            } else {
+                element.classList.add("open");
+            }
         }
     </script>
 </head>
@@ -119,7 +164,7 @@
     </menu>
     <main>
         <header>
-            <button type="button" class="menu_button"></button>
+            <button type="button" class="menu_button" onclick="triggerOpenMenu('side_menu')"></button>
         </header>
         <section class="content_holder">
         </section>
