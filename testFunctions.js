@@ -8,7 +8,7 @@ import { SiteController } from "./scripts/controller/storageController/copyPaste
 import { LaterAddController } from "./scripts/controller/storageController/copyPasteRemoveController/LaterAddController.js";
 //import { SiteLoadInit } from "./scripts/initializations/loading/SiteLoadInit.js";
 import { SiteOnLoadInit } from "./scripts/initializations/loading/SiteOnLoadInit.js";
-import { NewTextController } from "./scripts/controller/storageController/copyPasteRemoveController/media/NewTextController.js";
+import { MediaController } from "./scripts/controller/storageController/copyPasteRemoveController/media/MediaController.js";
 
 function testOutput(input)  {
     let output = document.getElementById("output");
@@ -94,7 +94,7 @@ async function testDefaults() {
 }
 async function testPlaceController() {
     
-    let Placeholde = new NewTextController;
+    let Placeholde = new MediaController;
 
     await Placeholde.getSet();
 }
