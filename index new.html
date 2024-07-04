@@ -17,6 +17,9 @@
             --black-gray: #575757;
             --blacker-gray: #484848;
             --black: #000;
+            --transparency: #00000000;
+
+            --fast: 0.25s;
         }
         * {
             overflow: hidden;
@@ -32,11 +35,16 @@
             --main: var(--black-gray);
             --menu: var(--blacker-gray);
         }
+        .whitemode {
+            --main: var(--white-middle-gray);
+            --menu: var(--white-gray);
+        }
         body {
             display: grid;
             grid-template-rows: 1fr;
             grid-template-columns: auto 1fr;
         }
+        
         main {
             height: 100% !important;
             width: 100%;
@@ -46,9 +54,18 @@
             position: absolute;
         }
         header {
+            min-width: 100%;
             z-index: 5;
             height: var(--large-scale) !important;
-            background-color: var(--main);
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr 1fr;
+        }
+        header:nth-child() {
+            position: relative;
+        }
+        header:nth-last-child() {
+            right: 0%;
         }
         .content_holder {
             height: 100% !important;
@@ -60,12 +77,13 @@
             height: 100%;
             border-right: var(--micro-scale);
             border-color: var(--white);
+            transition: var(--fast) ease-in-out;
         }
         .side_menu.open {
             width: calc(3 * var(--large-scale)) !important;
         }
         .menu_button {
-            background: var(--white);
+            background: var(--transparency);
             width: var(--larger-scale);
             height: var(--larger-scale);
             margin: var(--half-scale);
@@ -74,18 +92,25 @@
             cursor: pointer;
             border: none;
         }
-        .menu_button:first-child {
-            margin-left: var(--smaller-scale);
+    
+        .icon_main_map {
+            width: 100%;
+            height: 100%;
+            background-image: url('data/packs/graphics/main/mainMap.svg');
+            background-size: 1000%;
+            position: relative;
         }
-        .menu_button:last-child {
-            margin-right: var(--smaller-scale);
+        .icon_main_map.icon_open_menu {
+            transform: rotate(270deg);
+            transition: var(--fast);
         }
-        
-        .menu_button.hover {
-            background: #707070 !important;
+        .menu_button.active .icon_main_map.icon_open_menu {
+            transform: rotate(90deg);
         }
-        .menu_button.click {
-            background: #000 !important;
+        .right {
+            display: flex;
+            justify-content: flex-end; /* Rechtsbündige Ausrichtung */
+            align-items: center; /* Vertikale Zentrierung */
         }
     </style>
     <script>
@@ -116,22 +141,6 @@
             });
         }
 
-        async function toggleSideMenu() {
-            let mode = "mode";
-            let body = document.getElementsByTagName("body")[0];
-            let menu = document.getElementsByClassName("side_menu")[0];
-            console.log("menu Classes: " + menu.classList);
-            
-            if (!menu.classList.contains(mode)) {
-                menu.classList.add(mode + "1");
-            }
-            console.log("menu Classes: " + menu.classList);
-            if (menu.classList.contains(mode)) {
-                console.log("menu Classes: " + menu.classList);
-            }
-            console.log(menu.classList);
-        }
-        
         function triggerOpenMenu(menu) {
             let m = menu;
 
@@ -155,19 +164,29 @@
             } else {
                 element.classList.add("open");
             }
+
+            // Toggle active class on button
+            let button = document.querySelector('.menu_button');
+            button.classList.toggle('active');
         }
     </script>
 </head>
 <body>
-    <menu class="side_menu">
-
-    </menu>
+    <menu class="side_menu"></menu>
     <main>
         <header>
-            <button type="button" class="menu_button" onclick="triggerOpenMenu('side_menu')"></button>
+            <div>
+                <button type="button" class="menu_button" onclick="triggerOpenMenu('side_menu')">
+                    <div class="icon_main_map icon_open_menu"></div>
+                </button>
+            </div>
+            <div class="right">
+                <button type="button" class="menu_button" style="background-color: #fff;" onclick="switchDesignMode()">
+                
+                </button>
+            </div>
         </header>
-        <section class="content_holder">
-        </section>
+        <section class="content_holder"></section>
     </main>
 </body>
 </html>
