@@ -101,12 +101,19 @@
             position: relative;
         }
         .icon_main_map.icon_open_menu {
+            background-position-x: left 0;
             transform: rotate(270deg);
             transition: var(--fast);
         }
         .menu_button.active .icon_main_map.icon_open_menu {
             transform: rotate(90deg);
+        } 
+        .icon_main_map.icon_switch_design_mode {
+            
+            background-position-x: left 88.8%;
+            
         }
+
         .right {
             display: flex;
             justify-content: flex-end; /* Rechtsbündige Ausrichtung */
@@ -176,14 +183,19 @@
     <main>
         <header>
             <div>
-                <button type="button" class="menu_button" onclick="triggerOpenMenu('side_menu')">
-                    <div class="icon_main_map icon_open_menu"></div>
-                </button>
+                <div>
+                    <button type="button" class="menu_button" onclick="triggerOpenMenu('side_menu')">
+                        <div class="icon_main_map icon_open_menu"></div>
+                    </button>
+                </div>
             </div>
             <div class="right">
-                <button type="button" class="menu_button" style="background-color: #fff;" onclick="switchDesignMode()">
+                <div>
+                    <button type="button" class="menu_button" style="background-color: #fff;" onclick="switchDesignMode()">
+                        <div class="icon_main_map icon_switch_design_mode"></div>
+                    </button>
+                </div>
                 
-                </button>
             </div>
         </header>
         <section class="content_holder"></section>
