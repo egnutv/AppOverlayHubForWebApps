@@ -20,6 +20,8 @@
             --transparency: #00000000;
 
             --fast: 0.25s;
+            --fast-middle: 0.5s;
+            --fast-long: 1s;
         }
         * {
             overflow: hidden;
@@ -76,7 +78,6 @@
             width: 0;
             height: 100%;
             border-right: var(--micro-scale);
-            border-color: var(--white);
             transition: var(--fast) ease-in-out;
         }
         .side_menu.open {
@@ -91,6 +92,10 @@
             margin-right: var(--small-scale);
             cursor: pointer;
             border: none;
+            transition: transform var(--fast) ease-in-out;
+        }
+        .menu_button.click {
+            transform: scale(0.7);
         }
     
         .icon_main_map {
@@ -101,18 +106,37 @@
             position: relative;
         }
         .icon_main_map.icon_open_menu {
-            background-position-x: left 0;
+            background-position-x: 0;
             transform: rotate(270deg);
             transition: var(--fast);
         }
         .menu_button.active .icon_main_map.icon_open_menu {
             transform: rotate(90deg);
         } 
-        .icon_main_map.icon_switch_design_mode {
-            
-            background-position-x: left 88.8%;
-            
+        .icon_main_map.icon_switch_design_mode.sun{
+            background-position-x: 88.8%;
+            background-position-y: 75%;
         }
+        
+        .menu_button.hover .icon_main_map.icon_switch_design_mode.sun{
+            background-position-x: 88.8%;
+            animation-name: animOfswitchDesignMode;
+            animation-duration: var(--fast-middle);
+            animation-timing-function: steps(1);
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes animOfswitchDesignMode {
+            0% {background-position-y: 0%;}
+            25% {background-position-y: 25%;}
+            50% {background-position-y: 50%;}
+            75% {background-position-y: 75%;}
+            100% {background-position-y: 100%;}
+        }
+
+
 
         .right {
             display: flex;
@@ -120,7 +144,9 @@
             align-items: center; /* Vertikale Zentrierung */
         }
     </style>
+    <script type="module" src="index.js" defer></script>
     <script>
+        
         document.addEventListener("DOMContentLoaded", function() {
             ActiveEvent();
         });
@@ -147,35 +173,44 @@
                 });
             });
         }
-
-        function triggerOpenMenu(menu) {
-            let m = menu;
-
-            let element = document.getElementsByClassName(m)[0];
-            console.log(element);
-
-            if (element.classList.contains("open") || element.classList.contains("close")) {
-                element.classList.forEach(className => {
-                    console.log("className: " + className);
-                    switch (className) {
-                        case "open":
-                            element.classList.remove("open");
-                            element.classList.add("close");
-                            break;
-                        case "close":
-                            element.classList.remove("close");
-                            element.classList.add("open");
-                            break;
-                    }
-                });
+        function addAndRemoveClassName(className, diffName) {
+            if ((className).includes(".")) {
             } else {
-                element.classList.add("open");
+                className = "." + className;
             }
-
-            // Toggle active class on button
-            let button = document.querySelector('.menu_button');
-            button.classList.toggle('active');
+            let buttons = document.querySelectorAll(className);
+            buttons.forEach(button => {
+                if (button.classList.contains(diffName)) {
+                    button.classList.remove(diffName);
+                } else {
+                    button.classList.add(diffName);
+                }
+            });
         }
+
+        function swapClassNames(getName, name01, name02) {
+            let element = document.getElementsByClassName(getName)[0];
+
+            if (element.classList.contains(name01)) {
+                element.classList.remove(name01);
+                element.classList.add(name02);
+            } else if (element.classList.contains(name02)) {
+                element.classList.remove(name02);
+                element.classList.add(name01);
+            } else {
+                element.classList.add(name02);
+            }
+        }
+
+        async function triggerOpenMenu(menu) {
+            addAndRemoveClassName("hover", "active");
+            swapClassNames(menu, "close", "open");
+        }
+        
+        function triggerSwitchDesignMode() {
+            swapClassNames("hover", "darkmode", "lightmode");
+        }
+
     </script>
 </head>
 <body>
@@ -191,8 +226,9 @@
             </div>
             <div class="right">
                 <div>
-                    <button type="button" class="menu_button" style="background-color: #fff;" onclick="switchDesignMode()">
-                        <div class="icon_main_map icon_switch_design_mode"></div>
+                    <button type="button" class="menu_button" style="" onclick="triggerSwitchDesignMode()">
+                        <div class="icon_main_map icon_switch_design_mode sun"></div>
+                        <div class="icon_main_map icon_switch_design_mode moon"></div>
                     </button>
                 </div>
                 
