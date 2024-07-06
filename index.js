@@ -1,3 +1,12 @@
-import { selectDomElement } from "./scripts/utils/selectDomElement.js";
+import { GUI } from "./GUI.js"; // Annahme: GUI.js liegt im gleichen Verzeichnis
 
-window.selectDomElement = selectDomElement;
+const gui = new GUI();
+
+window.gui = gui;
+
+window.gui.triggerOpenMenu = gui.triggerOpenMenu.bind(gui); // Bind für den korrekten Kontext
+window.gui.triggerSwitchDesignMode = gui.triggerSwitchDesignMode.bind(gui);
+
+document.addEventListener("DOMContentLoaded", function() {
+    gui.activeEvent();
+});

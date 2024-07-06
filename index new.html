@@ -144,97 +144,28 @@
             align-items: center; /* Vertikale Zentrierung */
         }
     </style>
-    <script type="module" src="index.js" defer></script>
-    <script>
-        
-        document.addEventListener("DOMContentLoaded", function() {
-            ActiveEvent();
-        });
-        
-        function ActiveEvent() {
-            let buttons = document.querySelectorAll("input, button");
-
-            buttons.forEach(button => {
-                let events = [];
-                button.addEventListener('click', function() {
-                    events.push('click');
-                    this.classList.add('click');
-                    setTimeout(() => {
-                        this.classList.remove('click');
-                    }, 500);
-                });
-                button.addEventListener('mouseover', function() {
-                    events.push('mouseover');
-                    this.classList.add('hover');
-                });
-                button.addEventListener('mouseout', function() {
-                    events = [];
-                    this.classList.remove('hover');
-                });
-            });
-        }
-        function addAndRemoveClassName(className, diffName) {
-            if ((className).includes(".")) {
-            } else {
-                className = "." + className;
-            }
-            let buttons = document.querySelectorAll(className);
-            buttons.forEach(button => {
-                if (button.classList.contains(diffName)) {
-                    button.classList.remove(diffName);
-                } else {
-                    button.classList.add(diffName);
-                }
-            });
-        }
-
-        function swapClassNames(getName, name01, name02) {
-            let element = document.getElementsByClassName(getName)[0];
-
-            if (element.classList.contains(name01)) {
-                element.classList.remove(name01);
-                element.classList.add(name02);
-            } else if (element.classList.contains(name02)) {
-                element.classList.remove(name02);
-                element.classList.add(name01);
-            } else {
-                element.classList.add(name02);
-            }
-        }
-
-        async function triggerOpenMenu(menu) {
-            addAndRemoveClassName("hover", "active");
-            swapClassNames(menu, "close", "open");
-        }
-        
-        function triggerSwitchDesignMode() {
-            swapClassNames("hover", "darkmode", "lightmode");
-        }
-
-    </script>
-</head>
-<body>
-    <menu class="side_menu"></menu>
-    <main>
-        <header>
-            <div>
+    <script type="module" src="./index.js" defer></script>
+    <body>
+        <menu class="side_menu"></menu>
+        <main>
+            <header>
                 <div>
-                    <button type="button" class="menu_button" onclick="triggerOpenMenu('side_menu')">
-                        <div class="icon_main_map icon_open_menu"></div>
-                    </button>
+                    <div>
+                        <button type="button" class="menu_button" onclick="gui.triggerOpenMenu('side_menu')">
+                            <div class="icon_main_map icon_open_menu"></div>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="right">
-                <div>
-                    <button type="button" class="menu_button" style="" onclick="triggerSwitchDesignMode()">
-                        <div class="icon_main_map icon_switch_design_mode sun"></div>
-                        <div class="icon_main_map icon_switch_design_mode moon"></div>
-                    </button>
+                <div class="right">
+                    <div>
+                        <button type="button" class="menu_button" onclick="gui.triggerSwitchDesignMode()">
+                            <div class="icon_main_map icon_switch_design_mode sun"></div>
+                            <div class="icon_main_map icon_switch_design_mode moon"></div>
+                        </button>
+                    </div>
                 </div>
-                
-            </div>
-        </header>
-        <section class="content_holder"></section>
-    </main>
-</body>
+            </header>
+            <section class="content_holder"></section>
+        </main>
+    </body>
 </html>
