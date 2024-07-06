@@ -1,3 +1,4 @@
+import { selectDomElement } from "./scripts/utils/selectDomElement.js";
 class GUI {
     activeEvent() {
         let buttons = document.querySelectorAll("input, button");
@@ -48,6 +49,9 @@ class GUI {
         } else {
             element.classList.add(name02);
         }
+    }
+    checkClassName(name01, name02) {
+
     }
 
     async triggerOpenMenu(menu) {

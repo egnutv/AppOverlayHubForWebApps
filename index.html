@@ -1,33 +1,226 @@
 <!DOCTYPE html>
-<html>
+<html class="darkmode">
 <head>
-    <link rel="stylesheet" href="/styles/main/main.css">
-    <link rel="stylesheet" href="/styles/main/fonts.css">
-    <link rel="stylesheet" href="styles\main\container.css">
-    <link rel="stylesheet" href="styles/input/buttons.css">
-    <script type="module" class="events" src="scripts/events/events.js" defer></script>
-    <script type="module" class="main" src="scripts/main/index.js" defer></script>
-    
-    <script>
-    </script>
-    <meta charset="UTF-8">
-    <script>
-    </script>
     <style>
+        :root {
+            --large-scale: 5em;
+            --larger-scale: 4em;
+            --middle-scale: 3em;
+            --smaller-scale: 2em;
+            --small-scale: 1em;
+            --half-scale: 0.5em;
+            --micro-scale: 0.1em;
+            --white: #fff;
+            --white-gray: #cdcdcd;
+            --white-middle-gray: #868686;
+            --black-middle-gray: #4d4d4d;
+            --black-gray: #575757;
+            --blacker-gray: #484848;
+            --black: #000;
+            --transparency: #00000000;
+
+            --fast: 0.25s;
+            --fast-middle: 0.5s;
+            --fast-long: 1s;
+        }
+        * {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .darkmode {
+            --main: var(--black-gray);
+            --menu: var(--blacker-gray);
+        }
+        .whitemode {
+            --main: var(--white-middle-gray);
+            --menu: var(--white-gray);
+        }
+        body {
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: auto 1fr;
+        }
+        
+        main {
+            height: 100% !important;
+            width: 100%;
+            background-color: var(--main);
+        }
+        main:nth-child() {
+            position: absolute;
+        }
+        header {
+            min-width: 100%;
+            z-index: 5;
+            height: var(--large-scale) !important;
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr 1fr;
+        }
+        header:nth-child() {
+            position: relative;
+        }
+        header:nth-last-child() {
+            right: 0%;
+        }
+        .content_holder {
+            height: 100% !important;
+            z-index: 4;
+        }
+        .side_menu {
+            background-color: var(--menu);
+            width: 0;
+            height: 100%;
+            border-right: var(--micro-scale);
+            transition: var(--fast) ease-in-out;
+        }
+        .side_menu.open {
+            width: calc(3 * var(--large-scale)) !important;
+        }
+        .menu_button {
+            background: var(--transparency);
+            width: var(--larger-scale);
+            height: var(--larger-scale);
+            margin: var(--half-scale);
+            margin-left: var(--small-scale);
+            margin-right: var(--small-scale);
+            cursor: pointer;
+            border: none;
+            transition: transform var(--fast) ease-in-out;
+        }
+        .menu_button.click {
+            transform: scale(0.7);
+        }
+    
+        .icon_main_map {
+            width: 100%;
+            height: 100%;
+            background-image: url('data/packs/graphics/main/mainMap.svg');
+            background-size: 1000%;
+            position: relative;
+        }
+        .icon_main_map.icon_open_menu {
+            background-position-x: 0;
+            transform: rotate(270deg);
+            transition: var(--fast);
+        }
+        .menu_button.active .icon_main_map.icon_open_menu {
+            transform: rotate(90deg);
+        } 
+        .menu_button .icon_main_map.icon_switch_design_mode, .menu_button.hover .icon_main_map.icon_open_menu {
+            transition: var(--fast) ease-in-out;
+        }
+        .menu_button .icon_main_map.icon_open_menu {
+            background-position-y: 0;
+        }
+        .menu_button.hover .icon_main_map.icon_open_menu {
+            background-position-y: -3.5%;
+        }
+        .icon_main_map.icon_switch_design_mode{
+            background-position-x: 88.8%;
+            background-position-y: 75%;
+        }
+        .icon_main_map.icon_switch_design_mode.moon{
+            transform: rotate(15deg);
+            background-position-x: 100%;
+            background-position-x: 101%
+        }
+        .menu_button.hover .icon_main_map.icon_switch_design_mode {
+            animation-duration: var(--fast-middle);
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+        
+        .menu_button.hover .icon_main_map.icon_switch_design_mode.sun{
+            animation-name: animOfswitchDesignModeSun;
+            animation-timing-function: steps(1);
+            
+        }
+        @keyframes animOfswitchDesignModeSun {
+            0% {background-position-y: 0%;}
+            25% {background-position-y: 25%;}
+            50% {background-position-y: 50%;}
+            75% {background-position-y: 75%;}
+            100% {background-position-y: 100%;}
+        }
+        .menu_button.hover .icon_main_map.icon_switch_design_mode.moon{
+            animation-name: animOfswitchDesignModeMoon;
+        }
+        @keyframes animOfswitchDesignModeMoon {
+            0% {transform: rotate(15deg);}
+            50%{transform: rotate(0deg);}
+            100%{transform: rotate(-15deg);}
+        }
+
+        .right {
+            display: flex;
+            justify-content: flex-end; /* Rechtsbündige Ausrichtung */
+            align-items: center; /* Vertikale Zentrierung */
+        }
+        .menu_button.lightmode .icon_main_map.icon_switch_design_mode.sun {
+            filter: blur(2.5px);
+            transform: scale(0);
+            opacity: 0;
+            top: 50%;
+            left: -100%;
+        }
+        .menu_button .icon_main_map.icon_switch_design_mode.sun {
+            filter: blur(0px);
+            transform: scale(1);
+            opacity: 1;
+            top: 0%;
+            left: 0%
+        }
+        
+        
+        .menu_button.lightmode .icon_main_map.icon_switch_design_mode.moon {
+            filter: blur(0px);
+            transform: scale(1);
+            opacity: 1;
+            top: -100%;
+            left: 0%;
+        }
+        .menu_button .icon_main_map.icon_switch_design_mode.moon {
+            filter: blur(2.5px);
+            transform: scale(0);
+            opacity: 0;
+            top: -50%;
+            left: 100%
+        }
+        .menu_button.lightmode .icon_main_map.icon_switch_design_mode {
+
+        }
+        
     </style>
-</head>
-<body id="darkmode">
-    <div class="load_animation" style="z-index: 0; visibility: visible;">
-        <div class="loadArea">
-            <div class="spinner" style="z-index: 1"></div>
-            <div class="spinner blurred-spinner" style="z-index: 1"></div>
-            <div class="process_representation"><h1 class="percentage_progress">0%</h1></div></div>
-    <div class="background_holder" style="z-index: 1; visibility: hidden;" ></div>
-    </div>
-    <div class="content_holder" style="z-index: 2; visibility: hidden;">
-    </div>
-    <div class="miniContent_holder" style="z-index: 3;"></div>
-    <div class="crossfade" style="z-index: 4;">
-    </div>
-</body>
+    <script type="module" src="./index.js" defer></script>
+    <body>
+        <menu class="side_menu"></menu>
+        <main>
+            <header>
+                <div>
+                    <div>
+                        <button type="button" class="menu_button" onclick="gui.triggerOpenMenu('side_menu')">
+                            <div class="icon_main_map icon_open_menu"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="right">
+                    <div>
+                        <button type="button" class="menu_button" onclick="gui.triggerSwitchDesignMode()">
+                            <div class="icon_main_map icon_switch_design_mode sun"></div>
+                            <div class="icon_main_map icon_switch_design_mode moon"></div>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <section class="content_holder"></section>
+        </main>
+    </body>
 </html>
