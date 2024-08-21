@@ -138,18 +138,21 @@
             animation-direction: alternate;
         }
         
-        .menu_button.hover .icon_main_map.icon_switch_design_mode.sun{
-            animation-name: animOfswitchDesignModeSun;
-            animation-timing-function: steps(1);
-            
-        }
-        @keyframes animOfswitchDesignModeSun {
-            0% {background-position-y: 0%;}
-            25% {background-position-y: 25%;}
-            50% {background-position-y: 50%;}
-            75% {background-position-y: 75%;}
-            100% {background-position-y: 100%;}
-        }
+        .menu_button.hover .icon_main_map.icon_switch_design_mode.sun {
+        animation-name: animOfswitchDesignModeSun;
+        animation-timing-function: steps(4); /* Teilt die Animation in 4 Schritte auf */
+        animation-duration: 0.4s; /* Dauer der Animation */
+        animation-fill-mode: forwards; /* Beibehaltung des letzten Zustands */
+        animation-iteration-count: infinite; /* Wiederholt die Animation unendlich */
+    }
+
+    @keyframes animOfswitchDesignModeSun {
+        0% {background-position-y: 0%;}
+        100% {background-position-y: 100%;}
+    }
+
+
+        
         .menu_button.hover .icon_main_map.icon_switch_design_mode.moon{
             animation-name: animOfswitchDesignModeMoon;
         }
@@ -197,7 +200,12 @@
         .menu_button.lightmode .icon_main_map.icon_switch_design_mode {
 
         }
-        
+        /* Hier wurde der Wrapper hinzugefügt, der die Divs umschließt */
+        .icon_switch_design_mode_wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
     </style>
     <script type="module" src="./index.js" defer></script>
     <body>
@@ -214,8 +222,10 @@
                 <div class="right">
                     <div>
                         <button type="button" class="menu_button" onclick="gui.triggerSwitchDesignMode()">
-                            <div class="icon_main_map icon_switch_design_mode sun"></div>
-                            <div class="icon_main_map icon_switch_design_mode moon"></div>
+                            <div class="icon_switch_design_mode_wrapper">
+                                <div class="icon_main_map icon_switch_design_mode sun"></div>
+                                <div class="icon_main_map icon_switch_design_mode moon"></div>
+                            </div>
                         </button>
                     </div>
                 </div>
